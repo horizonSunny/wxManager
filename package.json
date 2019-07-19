@@ -29,6 +29,7 @@
     "@dcloudio/uni-mp-qq": "*",
     "@dcloudio/uni-mp-toutiao": "*",
     "@dcloudio/uni-mp-weixin": "*",
+    "@dcloudio/uni-ui": "0.0.8",
     "flyio": "^0.6.2",
     "node-sass": "^4.12.0",
     "regenerator-runtime": "^0.12.1",

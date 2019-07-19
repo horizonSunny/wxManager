@@ -1,37 +1,72 @@
 <template>
   <view class="content">
     <view class="banner">
-      <swiper
-        class="swiper"
-        :indicator-dots="indicatorDots"
-        :autoplay="autoplay"
-        :interval="interval"
-        :duration="duration"
-        :circular="circular"
+      <uni-swiper-dot
+        iper-dot
+        :info="bananaList"
+        :current="current"
+        field="content"
+        :mode="mode"
+        :dotsStyles="dotsStyles"
       >
-        <swiper-item v-for="(item, index) in bananaList" :key="index">
-          <view class="swiper-item uni-bg-red">
-            <img class="bananaList" :src="item.src" alt="轮播图" />
-          </view>
-        </swiper-item>
-      </swiper>
+        <swiper
+          class="swiper"
+          :autoplay="autoplay"
+          :interval="interval"
+          :duration="duration"
+          :circular="circular"
+          @change="change"
+        >
+          <swiper-item v-for="(item, index) in bananaList" :key="index">
+            <view class="swiper-item uni-bg-red">
+              <img class="bananaList" :src="item.src" alt="轮播图" />
+            </view>
+          </swiper-item>
+        </swiper>
+      </uni-swiper-dot>
     </view>
-    <view class=""></view>
+    <view class="">
+      <uni-swipe-action :options="options">
+        <view class="cont">SwipeAction 基础使用场景</view>
+      </uni-swipe-action>
+    </view>
   </view>
 </template>
 
 <script>
+import { uniSwiperDot, uniSwipeAction } from '@dcloudio/uni-ui'
 export default {
+  components: {
+    uniSwiperDot,
+    uniSwipeAction
+  },
   data () {
     return {
       title: 'Hello',
       background: ['color1', 'color2', 'color3'],
-      indicatorDots: true,
       autoplay: true,
       interval: 2000,
       duration: 500,
       circular: true,
-      bananaList: []
+      bananaList: [],
+      mode: 'indexes',
+      current: 0,
+      dotsStyles: {
+        color: "#fff",
+        // backgroundColor: "",
+        // selectedBackgroundColor: ""
+      },
+      options: [{
+        text: '取消',
+        style: {
+          backgroundColor: '#007aff'
+        }
+      }, {
+        text: '确认',
+        style: {
+          backgroundColor: '#dd524d'
+        }
+      }]
     }
   },
   onLoad () {
@@ -42,7 +77,9 @@ export default {
     })
   },
   methods: {
-
+    change (e) {
+      this.current = e.detail.current;
+    }
   }
 }
 </script>
