@@ -25,10 +25,19 @@
         </swiper>
       </uni-swiper-dot>
     </view>
-    <view class="">
-      <uni-swipe-action :options="options">
-        <view class="cont">SwipeAction 基础使用场景</view>
-      </uni-swipe-action>
+    <view class="swipeAction">
+      <view class="translateDemo">
+        <view
+          class="translation"
+          :class="isActive ? 'active' : 'noActvie'"
+          @click="slideClick"
+        >
+        </view>
+        <Text style="position:absolute; font-size:12px;top:0px;z-index:999"
+          >外卖</Text
+        >
+        <!-- <Text>自提</Text> -->
+      </view>
     </view>
   </view>
 </template>
@@ -56,17 +65,7 @@ export default {
         // backgroundColor: "",
         // selectedBackgroundColor: ""
       },
-      options: [{
-        text: '取消',
-        style: {
-          backgroundColor: '#007aff'
-        }
-      }, {
-        text: '确认',
-        style: {
-          backgroundColor: '#dd524d'
-        }
-      }]
+      isActive: false
     }
   },
   onLoad () {
@@ -79,6 +78,10 @@ export default {
   methods: {
     change (e) {
       this.current = e.detail.current;
+    },
+    slideClick (e) {
+      console.log(e)
+      this.isActive = !this.isActive
     }
   }
 }
@@ -87,21 +90,70 @@ export default {
 <style lang="scss">
 .content {
   text-align: center;
-  height: 400upx;
+  height: 400px;
   background: #ffffff;
   .bananaList {
     width: 100%;
   }
 }
+.swipeAction {
+  width: 80%;
+  height: 100px;
+  .translateDemo {
+    background: grey;
+    height: 36px;
+    width: 90px;
+    border-radius: 19px;
+    position: relative;
+    vertical-align: middle;
+    .translation {
+      background: red;
+      height: 30px;
+      width: 44px;
+      border-radius: 15px;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .active {
+      // @include activeBase;
+      animation: myfirst 0.5s forwards;
+    }
+    .noActvie {
+      // @include activeBase;
+      animation: myfirstTwo 0.5s forwards;
+    }
+  }
+}
+@keyframes myfirst {
+  from {
+    background: red;
+    margin-left: 5%;
+  }
+  to {
+    background: yellow;
+    margin-left: 45%;
+  }
+}
+@keyframes myfirstTwo {
+  from {
+    background: yellow;
+    margin-left: 45%;
+  }
+  to {
+    background: red;
+    margin-left: 10%;
+  }
+}
 
 .logo {
-  height: 200upx;
-  width: 200upx;
-  margin-top: 200upx;
+  height: 200px;
+  width: 200px;
+  margin-top: 200px;
 }
 
 .title {
-  font-size: 36upx;
+  font-size: 36px;
   color: #8f8f94;
 }
 </style>
