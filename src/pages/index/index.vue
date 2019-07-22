@@ -49,16 +49,54 @@
         >
         <!-- <Text>自提</Text> -->
       </view>
+      <view>
+        <!-- <uni-list-sssdasdad>
+          123
+        </uni-list-sssdasdad> -->
+        <sunnyList>
+          <sunnyListItem>
+            <template v-slot:leftShow>
+              hello
+            </template>
+            <template v-slot:rightOption>
+              world
+            </template>
+          </sunnyListItem>
+          <!-- <sunnyListItem>
+            <template v-slot:leftShow>
+              hello
+            </template>
+            <template v-slot:rightOption>
+              world
+            </template>
+          </sunnyListItem>
+          <sunnyListItem>
+            <template v-slot:leftShow>
+              hello
+            </template>
+            <template v-slot:rightOption>
+              world
+            </template>
+          </sunnyListItem> -->
+        </sunnyList>
+      </view>
     </view>
   </view>
 </template>
 
 <script>
 import { uniSwiperDot, uniSwipeAction } from '@dcloudio/uni-ui'
+import { sunnyList } from '../../components/list/list'
+import { sunnyListItem } from '../../components/list/listItem'
+
 export default {
   components: {
     uniSwiperDot,
-    uniSwipeAction
+    uniSwipeAction,
+    sunnyList,
+    sunnyListItem
+    // uniList
+    // list
   },
   data () {
     return {
@@ -133,6 +171,16 @@ export default {
       // @include activeBase;
       animation: myfirstTwo 0.5s forwards;
     }
+  }
+  .noBorderTop:before {
+    background: #fff;
+  }
+  // 组件自带技能
+  .uni-list:before {
+    height: 0px;
+  }
+  .uni-list:after {
+    height: 0px;
   }
 }
 @keyframes myfirst {
