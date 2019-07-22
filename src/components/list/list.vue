@@ -11,8 +11,6 @@ export default {
   props: ['noBorder'],
   data () {
     return {
-      isActive: '412124',
-      // noBorder: true
     }
   },
   mounted () {

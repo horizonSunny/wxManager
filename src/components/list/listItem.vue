@@ -1,8 +1,8 @@
 <template>
   <view class="sunny-item-list">
     <view class="leftShow">
-      <text>12313{{ textInfo }}</text>
-      <!-- <slot name="leftShow"></slot> -->
+      <!-- <text>{{ textInfo }}</text> -->
+      <slot name="leftShow"></slot>
     </view>
     <view class="rightOption">
       <slot name="rightOption"></slot>
@@ -17,7 +17,7 @@ export default {
     }
   },
   created () {
-    console.log('1231231231312312312')
+    // console.log('1231231231312312312')
   }
 }
 </script>

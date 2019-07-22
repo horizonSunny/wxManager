@@ -30,7 +30,10 @@
         <sunny-list :no-border="listNoBorder">
           <sunny-list-item>
             <template v-slot:leftShow>
-              hello
+              <view class="test">
+                <text class="text_2950X1">青年汇店</text><br />
+                <text class="text_2949X1">距离您53m</text>
+              </view>
             </template>
             <template v-slot:rightOption>
               <view class="translateDemo" @click="slideClick">
@@ -85,7 +88,7 @@ export default {
     return {
       title: 'Hello',
       background: ['color1', 'color2', 'color3'],
-      autoplay: true,
+      autoplay: false,
       interval: 2000,
       duration: 500,
       circular: true,
@@ -98,7 +101,7 @@ export default {
         // selectedBackgroundColor: ""
       },
       isActive: false,
-      listNoBorder: false
+      listNoBorder: false,
     }
   },
   onLoad () {
@@ -159,12 +162,36 @@ export default {
   .listNoBorderTop:before {
     background: #fff;
   }
-  // 组件自带技能
-  .uni-list:before {
-    height: 0px;
+  .test {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
-  .uni-list:after {
-    height: 0px;
+  // list 列表样式
+  .text_2950X1 {
+    width: auto;
+    height: 22px;
+    left: 20px;
+    top: 221px;
+    color: rgba(56, 56, 56, 1);
+    font-size: 15px;
+    line-height: 150%;
+    text-align: left;
+  }
+  .text_2949X1 {
+    width: auto;
+    height: 17px;
+    left: 20px;
+    top: 243px;
+    color: rgba(128, 128, 128, 1);
+    font-size: 11px;
+    line-height: 150%;
+    text-align: left;
+  }
+  .leftShowIn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
 @keyframes myfirst {
