@@ -1,12 +1,23 @@
 <template>
   <view style="position:relative">
-    <view class="sunny-list">
+    <view :class="noBorder ? 'sunny-list' : ''">
       <slot></slot>
     </view>
   </view>
 </template>
 <script>
 export default {
+  name: 'sunnyList',
+  props: ['noBorder'],
+  data () {
+    return {
+      isActive: '412124',
+      // noBorder: true
+    }
+  },
+  mounted () {
+    console.log('noBorder_', typeof (this.noBorder))
+  }
 }
 </script>
 <style lang="scss">

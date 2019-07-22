@@ -50,35 +50,16 @@
         <!-- <Text>自提</Text> -->
       </view>
       <view>
-        <!-- <uni-list-sssdasdad>
-          123
-        </uni-list-sssdasdad> -->
-        <sunnyList>
-          <sunnyListItem>
+        <sunny-list :no-border="listNoBorder">
+          <sunny-list-item>
             <template v-slot:leftShow>
               hello
             </template>
             <template v-slot:rightOption>
               world
             </template>
-          </sunnyListItem>
-          <!-- <sunnyListItem>
-            <template v-slot:leftShow>
-              hello
-            </template>
-            <template v-slot:rightOption>
-              world
-            </template>
-          </sunnyListItem>
-          <sunnyListItem>
-            <template v-slot:leftShow>
-              hello
-            </template>
-            <template v-slot:rightOption>
-              world
-            </template>
-          </sunnyListItem> -->
-        </sunnyList>
+          </sunny-list-item>
+        </sunny-list>
       </view>
     </view>
   </view>
@@ -86,8 +67,8 @@
 
 <script>
 import { uniSwiperDot, uniSwipeAction } from '@dcloudio/uni-ui'
-import { sunnyList } from '../../components/list/list'
-import { sunnyListItem } from '../../components/list/listItem'
+import sunnyList from '../../components/list/list'
+import sunnyListItem from '../../components/list/listItem'
 
 export default {
   components: {
@@ -114,7 +95,8 @@ export default {
         // backgroundColor: "",
         // selectedBackgroundColor: ""
       },
-      isActive: false
+      isActive: false,
+      listNoBorder: false
     }
   },
   onLoad () {
@@ -172,7 +154,7 @@ export default {
       animation: myfirstTwo 0.5s forwards;
     }
   }
-  .noBorderTop:before {
+  .listNoBorderTop:before {
     background: #fff;
   }
   // 组件自带技能

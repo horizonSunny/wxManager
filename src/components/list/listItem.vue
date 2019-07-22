@@ -1,7 +1,8 @@
 <template>
   <view class="sunny-item-list">
     <view class="leftShow">
-      <slot name="leftShow"></slot>
+      <text>12313{{ textInfo }}</text>
+      <!-- <slot name="leftShow"></slot> -->
     </view>
     <view class="rightOption">
       <slot name="rightOption"></slot>
@@ -10,6 +11,14 @@
 </template>
 <script>
 export default {
+  data () {
+    return {
+      textInfo: "123"
+    }
+  },
+  created () {
+    console.log('1231231231312312312')
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -20,7 +29,7 @@ export default {
   border-bottom: 1px solid blue;
   justify-content: space-between;
   align-items: center;
-  height: 200px;
+  height: 100px;
   .leftShow {
     display: flex;
     flex-direction: row-reverse;
