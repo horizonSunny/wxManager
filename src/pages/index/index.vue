@@ -64,6 +64,18 @@
               </view>
             </template>
           </sunny-list-item>
+          <sunny-list-item v-for="(item, index) in menuList" :key="index">
+            <template v-slot:leftShow>
+              <view class="test">
+                <text class="text_2950X1">{{ item.title }}</text
+                ><br />
+                <text class="text_2949X1">{{ item.annotation }}</text>
+              </view>
+            </template>
+            <template v-slot:rightOption>
+              <img :src="item.src" alt="" />
+            </template>
+          </sunny-list-item>
         </sunny-list>
       </view>
     </view>
@@ -102,6 +114,13 @@ export default {
       },
       isActive: false,
       listNoBorder: false,
+      menuList: [
+        {
+          src: '../../static/homePage/图片 564.svg',
+          title: '现在下单',
+          annotation: 'ORDER NOW'
+        }
+      ]
     }
   },
   onLoad () {
