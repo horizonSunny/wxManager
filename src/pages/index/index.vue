@@ -26,29 +26,6 @@
       </uni-swiper-dot>
     </view>
     <view class="swipeAction">
-      <view class="translateDemo" @click="slideClick">
-        <view class="translation" :class="isActive ? 'active' : 'noActvie'">
-        </view>
-        <Text
-          style="position: absolute;
-              font-size: 12px;
-              top: 10px;
-              z-index: ;
-              right: 13px;
-              "
-          >外卖</Text
-        >
-        <Text
-          style="position: absolute;
-              font-size: 12px;
-              top: 10px;
-              z-index: ;
-              left: 17px;
-              "
-          >堂吃</Text
-        >
-        <!-- <Text>自提</Text> -->
-      </view>
       <view>
         <sunny-list :no-border="listNoBorder">
           <sunny-list-item>
@@ -56,7 +33,32 @@
               hello
             </template>
             <template v-slot:rightOption>
-              world
+              <view class="translateDemo" @click="slideClick">
+                <view
+                  class="translation"
+                  :class="isActive ? 'active' : 'noActvie'"
+                >
+                </view>
+                <Text
+                  style="position: absolute;
+              font-size: 12px;
+              top: 10px;
+              z-index: ;
+              right: 13px;
+              "
+                  >外卖</Text
+                >
+                <Text
+                  style="position: absolute;
+              font-size: 12px;
+              top: 10px;
+              z-index: ;
+              left: 17px;
+              "
+                  >堂吃</Text
+                >
+                <!-- <Text>自提</Text> -->
+              </view>
             </template>
           </sunny-list-item>
         </sunny-list>

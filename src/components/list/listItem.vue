@@ -26,19 +26,19 @@ export default {
   // background-color: yellow;
   display: flex;
   margin-left: 10%;
-  border-bottom: 1px solid blue;
+  border-bottom: 1px solid #f2f2f2;
   justify-content: space-between;
   align-items: center;
-  height: 100px;
+  height: 50px;
   .leftShow {
     display: flex;
     flex-direction: row-reverse;
-    background-color: red;
+    // background-color: red;
     // float: left;
   }
   .rightOption {
     display: flex;
-    background-color: green;
+    // background-color: green;
     // float: right;
   }
 }
