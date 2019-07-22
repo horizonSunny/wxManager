@@ -111,14 +111,13 @@ export default {
   width: 80%;
   height: 100px;
   .translateDemo {
-    background: grey;
+    border: 1px solid #6488afd5;
     height: 36px;
     width: 90px;
     border-radius: 19px;
     position: relative;
     vertical-align: middle;
     .translation {
-      background: red;
       height: 30px;
       width: 44px;
       border-radius: 15px;
@@ -138,21 +137,21 @@ export default {
 }
 @keyframes myfirst {
   from {
-    background: red;
+    background: #6488afd5;
     margin-left: 5%;
   }
   to {
-    background: yellow;
+    background: #88afd5;
     margin-left: 45%;
   }
 }
 @keyframes myfirstTwo {
   from {
-    background: yellow;
+    background: #88afd5;
     margin-left: 45%;
   }
   to {
-    background: red;
+    background: #88afd5;
     margin-left: 10%;
   }
 }
