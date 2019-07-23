@@ -9,7 +9,7 @@
     {
       "path": "pages/menu/menu",
       "style": {
-        "navigationBarTitleText": "菜单"
+        "navigationBarTitleText": "咖啡配单和小吃"
       }
     }
   ],

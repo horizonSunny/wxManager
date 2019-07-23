@@ -1,20 +1,71 @@
 {
   "status": "",
   "data": [{
-    "src": "../../static/homePage/图片 564.svg",
-    "title": "现在下单",
-    "annotation": "ORDER NOW"
+    "classifyName": "人气Top",
+    "paraphrase": "",
+    "category": [{
+      "img": "../../static/menu/图片 285.png",
+      "subjoin": "买2赠1",
+      "name": "榛果拿铁",
+      "default": "默认：大/无糖/热",
+      "englishName": "Hazlnut Latte",
+      "price": "¥ 27"
+    }]
   }, {
-    "src": "../../static/homePage/图片 565.svg",
-    "title": "咖啡钱包",
-    "annotation": "COFFRR WALLET"
+    "classifyName": "大师咖啡",
+    "paraphrase": "WBC（世界咖啡师大赛）冠军团队拼配",
+    "category": [{
+        "img": "../../static/menu/图片 285.png",
+        "subjoin": "买2赠1",
+        "name": "拿铁",
+        "default": "默认：大/无糖/热",
+        "englishName": "Latte",
+        "price": "¥ 24"
+      },
+      {
+        "img": "../../static/menu/图片 285.png",
+        "subjoin": "买2赠1",
+        "name": "香草拿铁",
+        "default": "默认：大/无糖/热",
+        "englishName": "Vanilla Latte",
+        "price": "¥ 27"
+      },
+      {
+        "img": "../../static/menu/图片 285.png",
+        "subjoin": "买2赠1",
+        "name": "焦糖拿铁",
+        "default": "默认：大/无糖/热",
+        "englishName": "Caramel Latte",
+        "price": "¥ 24"
+      }
+    ]
   }, {
-    "src": "../../static/homePage/图片 566.svg",
-    "title": "送Ta咖啡",
-    "annotation": "SEND COFFEE"
-  }, {
-    "src": "../../static/homePage/图片 567.svg",
-    "title": "企业账户",
-    "annotation": "ENTERPRISE ACCOUNT"
+    "classifyName": "零度拿铁",
+    "paraphrase": "",
+    "category": [{
+        "img": "../../static/menu/图片 285.png",
+        "subjoin": "买2赠1",
+        "name": "拿铁",
+        "default": "默认：大/无糖/热",
+        "englishName": "Latte",
+        "price": "¥ 24"
+      },
+      {
+        "img": "../../static/menu/图片 285.png",
+        "subjoin": "买2赠1",
+        "name": "香草拿铁",
+        "default": "默认：大/无糖/热",
+        "englishName": "Vanilla Latte",
+        "price": "¥ 27"
+      },
+      {
+        "img": "../../static/menu/图片 285.png",
+        "subjoin": "买2赠1",
+        "name": "焦糖拿铁",
+        "default": "默认：大/无糖/热",
+        "englishName": "Caramel Latte",
+        "price": "¥ 24"
+      }
+    ]
   }]
 }

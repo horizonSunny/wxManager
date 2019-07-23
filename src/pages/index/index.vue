@@ -103,8 +103,6 @@ export default {
   },
   data () {
     return {
-      title: 'Hello',
-      background: ['color1', 'color2', 'color3'],
       autoplay: false,
       interval: 2000,
       duration: 500,
@@ -113,9 +111,7 @@ export default {
       mode: 'indexes',
       current: 0,
       dotsStyles: {
-        color: "#fff",
-        // backgroundColor: "",
-        // selectedBackgroundColor: ""
+        color: "#fff"
       },
       isActive: false,
       listNoBorder: false,
@@ -133,18 +129,6 @@ export default {
       console.log('menuList_', this.menuList);
     })
     // 获取屏幕信息
-
-    uni.getSystemInfo({
-      success: function (res) {
-        console.log(res.model);
-        console.log(res.pixelRatio);
-        console.log(res.windowWidth);
-        console.log(res.windowHeight);
-        console.log(res.language);
-        console.log(res.version);
-        console.log(res.platform);
-      }
-    });
   },
   methods: {
     change (e) {
