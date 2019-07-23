@@ -132,6 +132,19 @@ export default {
       this.menuList = res.data
       console.log('menuList_', this.menuList);
     })
+    // 获取屏幕信息
+
+    uni.getSystemInfo({
+      success: function (res) {
+        console.log(res.model);
+        console.log(res.pixelRatio);
+        console.log(res.windowWidth);
+        console.log(res.windowHeight);
+        console.log(res.language);
+        console.log(res.version);
+        console.log(res.platform);
+      }
+    });
   },
   methods: {
     change (e) {
@@ -146,9 +159,12 @@ export default {
 </script>
 
 <style lang="scss">
+// @function px2upx($px) {
+//   @return $px * 2rpx;
+// }
 .content {
   text-align: center;
-  height: 400px;
+  height: px2upx(200);
   background: #ffffff;
   .bananaList {
     width: 100%;
@@ -156,18 +172,18 @@ export default {
 }
 .swipeAction {
   width: 90%;
-  height: 100px;
+  height: px2upx(100);
   .translateDemo {
     border: 1px solid #6488afd5;
-    height: 36px;
-    width: 90px;
-    border-radius: 19px;
+    height: px2upx(36);
+    width: px2upx(90);
+    border-radius: px2upx(19);
     position: relative;
     vertical-align: middle;
     .translation {
-      height: 30px;
-      width: 44px;
-      border-radius: 15px;
+      height: px2upx(30);
+      width: px2upx(44);
+      border-radius: px2upx(15);
       position: relative;
       top: 50%;
       transform: translateY(-50%);
@@ -192,21 +208,21 @@ export default {
   // list 列表样式
   .text_2950X1 {
     width: auto;
-    height: 22px;
-    left: 20px;
-    top: 221px;
+    height: px2upx(22);
+    left: px2upx(20);
+    top: px2upx(221);
     color: rgba(56, 56, 56, 1);
-    font-size: 15px;
+    font-size: px2upx(15);
     line-height: 150%;
     text-align: left;
   }
   .text_2949X1 {
     width: auto;
-    height: 17px;
-    left: 20px;
-    top: 243px;
+    height: px2upx(17);
+    left: px2upx(20);
+    top: px2upx(243);
     color: rgba(128, 128, 128, 1);
-    font-size: 11px;
+    font-size: px2upx(11);
     line-height: 150%;
     text-align: left;
   }
@@ -216,29 +232,31 @@ export default {
     justify-content: center;
   }
   .outerCircle {
-    width: 40px;
-    height: 40px;
+    // width: 80rpx;
+    // height: 80rpx;
+    width: px2upx(40);
+    height: px2upx(40);
     color: #63473a;
     border: solid 1px #63473a;
     // right: 20px;
     // position: relative;
-    border-radius: 21px;
+    border-radius: px2upx(21);
     .showImg {
-      height: 24px;
-      width: 24px;
+      height: px2upx(24);
+      width: px2upx(24);
       // right: 20px;
-      top: 8px;
+      top: px2upx(8);
       position: relative;
     }
   }
   // 底下的展示广告
   .bottomDisplay {
     width: 90%;
-    height: 55px;
+    height: px2upx(55);
     margin-left: 10%;
     img {
       width: 100%;
-      height: 55px;
+      height: px2upx(55);
     }
   }
 }
@@ -264,13 +282,13 @@ export default {
 }
 
 .logo {
-  height: 200px;
-  width: 200px;
-  margin-top: 200px;
+  height: px2upx(200);
+  width: px2upx(200);
+  margin-top: px2upx(200);
 }
 
 .title {
-  font-size: 36px;
+  font-size: px2upx(36);
   color: #8f8f94;
 }
 </style>
