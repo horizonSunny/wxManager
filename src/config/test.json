@@ -1,0 +1,20 @@
+{
+  "status": "",
+  "data": [{
+    "src": "../../static/homePage/图片 564.svg",
+    "title": "现在下单",
+    "annotation": "ORDER NOW"
+  }, {
+    "src": "../../static/homePage/图片 565.svg",
+    "title": "咖啡钱包",
+    "annotation": "COFFRR WALLET"
+  }, {
+    "src": "../../static/homePage/图片 566.svg",
+    "title": "送Ta咖啡",
+    "annotation": "SEND COFFEE"
+  }, {
+    "src": "../../static/homePage/图片 567.svg",
+    "title": "企业账户",
+    "annotation": "ENTERPRISE ACCOUNT"
+  }]
+}

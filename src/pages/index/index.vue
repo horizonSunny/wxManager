@@ -80,6 +80,9 @@
           </sunny-list-item>
         </sunny-list>
       </view>
+      <view class="bottomDisplay">
+        <img src="../../static/homePage/图片 568.png" alt="" />
+      </view>
     </view>
   </view>
 </template>
@@ -116,35 +119,18 @@ export default {
       },
       isActive: false,
       listNoBorder: false,
-      menuList: [
-        {
-          src: '../../static/homePage/图片 564.svg',
-          title: '现在下单',
-          annotation: 'ORDER NOW'
-        },
-        {
-          src: '../../static/homePage/图片 565.svg',
-          title: '咖啡钱包',
-          annotation: 'COFFRR WALLET'
-        },
-        {
-          src: '../../static/homePage/图片 566.svg',
-          title: '送Ta咖啡',
-          annotation: 'SEND COFFEE'
-        },
-        {
-          src: '../../static/homePage/图片 567.svg',
-          title: '企业账户',
-          annotation: 'ENTERPRISE ACCOUNT'
-        }
-      ]
+      menuList: []
     }
   },
   onLoad () {
     this.$api.get('luckin/slideshow').then((res) => {
-      console.log('in_index_', res)
       this.bananaList = res.data
-      console.log('bananalist_', this.bananaList);
+    })
+    // getpageList
+    this.$api.get('luckin/getPageLIst').then((res) => {
+      console.log('in_index_', res)
+      this.menuList = res.data
+      console.log('menuList_', this.menuList);
     })
   },
   methods: {
@@ -169,7 +155,7 @@ export default {
   }
 }
 .swipeAction {
-  width: 80%;
+  width: 90%;
   height: 100px;
   .translateDemo {
     border: 1px solid #6488afd5;
@@ -243,6 +229,16 @@ export default {
       // right: 20px;
       top: 8px;
       position: relative;
+    }
+  }
+  // 底下的展示广告
+  .bottomDisplay {
+    width: 90%;
+    height: 55px;
+    margin-left: 10%;
+    img {
+      width: 100%;
+      height: 55px;
     }
   }
 }
