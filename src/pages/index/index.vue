@@ -73,7 +73,9 @@
               </view>
             </template>
             <template v-slot:rightOption>
-              <img :src="item.src" alt="" />
+              <view class="outerCircle">
+                <img :src="item.src" alt="" class="showImg" />
+              </view>
             </template>
           </sunny-list-item>
         </sunny-list>
@@ -119,6 +121,21 @@ export default {
           src: '../../static/homePage/图片 564.svg',
           title: '现在下单',
           annotation: 'ORDER NOW'
+        },
+        {
+          src: '../../static/homePage/图片 565.svg',
+          title: '咖啡钱包',
+          annotation: 'COFFRR WALLET'
+        },
+        {
+          src: '../../static/homePage/图片 566.svg',
+          title: '送Ta咖啡',
+          annotation: 'SEND COFFEE'
+        },
+        {
+          src: '../../static/homePage/图片 567.svg',
+          title: '企业账户',
+          annotation: 'ENTERPRISE ACCOUNT'
         }
       ]
     }
@@ -211,6 +228,22 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+  .outerCircle {
+    width: 40px;
+    height: 40px;
+    color: #63473a;
+    border: solid 1px #63473a;
+    // right: 20px;
+    // position: relative;
+    border-radius: 21px;
+    .showImg {
+      height: 24px;
+      width: 24px;
+      // right: 20px;
+      top: 8px;
+      position: relative;
+    }
   }
 }
 @keyframes myfirst {

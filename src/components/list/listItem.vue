@@ -13,7 +13,6 @@
 export default {
   data () {
     return {
-      textInfo: "123"
     }
   },
   created () {
@@ -29,7 +28,7 @@ export default {
   border-bottom: 1px solid #f2f2f2;
   justify-content: space-between;
   align-items: center;
-  height: 50px;
+  height: 69px;
   .leftShow {
     display: flex;
     flex-direction: row-reverse;
