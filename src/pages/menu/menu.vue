@@ -38,7 +38,12 @@
           {{ item }}
         </view>
       </view>
-      <scroll-view scroll-with-animation scroll-y :scroll-top="tabScrollTop">
+      <scroll-view
+        scroll-with-animation
+        scroll-y
+        :scroll-top="tabScrollTop"
+        @scroll="scrollCategory"
+      >
         <!-- <view style=""></view> -->
         <view class="category">
           <view
@@ -166,10 +171,10 @@ export default {
     },
     menuSelect (e) {
       if (!this.sizeCalcState) {
-        this.calcSize()
+        this.calcSize()//
       }
-      console.log('activeSelected_', e)
-      setTimeout(() => {
+      this.$nextTick(function () {
+        console.log('activeSelected_', e)
         this.activeSelected = e
         // 找到对应的左侧菜单类
         const currentItem = this.categoryList.filter((item) => {
@@ -177,8 +182,9 @@ export default {
         })
         console.log('item__', currentItem[0]['top'])
         this.tabScrollTop = currentItem[0]['top'];
-      }, 0);
+      })
     },
+
     // 计算右侧每个tab高度
     calcSize () {
       let h = 0;
@@ -194,6 +200,28 @@ export default {
       })
       this.sizeCalcState = true;
     },
+    // 滚动时候左侧是否变动
+    scrollCategory (e) {
+      if (!this.sizeCalcState) {
+        this.calcSize()//
+      }
+      this.$nextTick(function () {
+        console.log('scrollCategory_', e.detail);
+        const currentTop = e.detail.scrollTop;
+        let tabs = this.categoryList.filter(item => item.top <= currentTop).reverse();
+        let tabTwo = this.categoryList.filter(item => item.top > currentTop).reverse();
+        let _that = this
+        const abc = tabTwo.some(function (item) {
+          return item['classifyName'] === _that.activeSelected
+        })
+        console.log('abc_', abc)
+        if (abc) {
+          return
+        } else {
+          this.activeSelected = tabs[0]['classifyName'];
+        }
+      })
+    }
   }
 }
 </script>
