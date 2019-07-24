@@ -47,9 +47,18 @@
               }}</text>
               <view class="lineMiddle"> </view>
             </view> -->
+            <view v-if="item['paraphrase'] !== ''" class="categoryTitle">{{
+              item["classifyName"]
+            }}</view>
             <lineThrough
-              :textInfo="item['classifyName']"
-              :styleInfo="categoryStyle"
+              :textInfo="
+                item['paraphrase'] !== ''
+                  ? item['paraphrase']
+                  : item['classifyName']
+              "
+              :styleInfo="
+                item['paraphrase'] !== '' ? categoryParStyle : categoryStyle
+              "
             ></lineThrough>
           </sunnyList>
         </view>
@@ -95,9 +104,17 @@ export default {
         color: 'rgba(56, 56, 56, 1)',
         fontSize: 13,
         fontWeight: 'bold',
-        lineColor: 'black',
+        lineColor: 'rgba(166, 166, 166, 1)',
         lineLeft: 2
-      }
+      },
+      categoryParStyle: {
+        height: 19,
+        color: 'rgba(166, 166, 166, 1)',
+        fontSize: 10,
+        fontWeight: 'normal',
+        lineColor: 'rgba(166, 166, 166, 1)',
+        lineLeft: 2
+      },
     }
   },
   onLoad () {
@@ -164,28 +181,14 @@ export default {
       background: #fff;
       padding-left: px2rpx(14);
       padding-top: px2rpx(10);
-      .categoryItem {
-        display: flex;
+      .categoryTitle {
+        width: auto;
         height: px2rpx(19);
-        .categoryTitle {
-          width: auto;
-          height: px2rpx(19);
-          color: rgba(56, 56, 56, 1);
-          font-size: px2rpx(13);
-          line-height: 150%;
-          text-align: left;
-          font-weight: bold;
-        }
-        .lineMiddle {
-          flex: 1;
-          position: relative;
-          height: 1px;
-          height: px2rpx(19);
-          border-bottom: 1px solid;
-          top: -50%;
-          margin-top: -1px;
-          left: 2px;
-        }
+        color: rgba(56, 56, 56, 1);
+        font-size: px2rpx(13);
+        line-height: 150%;
+        text-align: left;
+        font-weight: bold;
       }
     }
   }

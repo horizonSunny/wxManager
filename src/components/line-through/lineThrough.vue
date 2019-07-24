@@ -41,12 +41,8 @@ export default {
 <style lang="scss">
 .categoryItem {
   display: flex;
-  height: px2rpx(19);
   .categoryTitle {
     width: auto;
-    height: px2rpx(19);
-    color: rgba(56, 56, 56, 1);
-    font-size: px2rpx(13);
     line-height: 150%;
     text-align: left;
     font-weight: bold;
@@ -55,7 +51,6 @@ export default {
     flex: 1;
     position: relative;
     height: 1px;
-    height: px2rpx(19);
     border-bottom: 1px solid;
     top: -50%;
     margin-top: -1px;
