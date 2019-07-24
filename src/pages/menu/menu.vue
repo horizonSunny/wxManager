@@ -31,6 +31,7 @@
         <view
           v-for="(item, index) in menuList"
           :key="index"
+          class="menuItem"
           :class="activeSelected === item ? 'hasSelected' : ''"
           @click="menuSelect(item)"
         >
@@ -119,6 +120,14 @@ export default {
       width: px2rpx(90);
       background: #f8f8f8;
       overflow: scroll;
+      .menuItem {
+        width: px2rpx(90);
+        height: px2rpx(44);
+        color: rgba(80, 80, 80, 1);
+        font-size: 14px;
+        line-height: px2rpx(44);
+        text-align: center;
+      }
       .hasSelected {
         background: #fff;
         border-left: 1px solid rgb(135, 172, 235);
