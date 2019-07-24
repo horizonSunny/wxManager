@@ -39,14 +39,12 @@
         </view>
       </view>
       <view class="category">
-        <view v-for="(item, index) in categoryList" :key="index">
+        <view
+          v-for="(item, index) in categoryList"
+          :key="index"
+          class="categoryItem"
+        >
           <sunnyList>
-            <!-- <view class="categoryItem">
-              <text class="categoryTitle" :style="textStyle">{{
-                item.classifyName
-              }}</text>
-              <view class="lineMiddle"> </view>
-            </view> -->
             <view v-if="item['paraphrase'] !== ''" class="categoryTitle">{{
               item["classifyName"]
             }}</view>
@@ -60,6 +58,31 @@
                 item['paraphrase'] !== '' ? categoryParStyle : categoryStyle
               "
             ></lineThrough>
+            <view style="margin-bottom:25rpx"></view>
+            <!-- 下面是每一种菜单中的咖啡种类 -->
+            <view
+              v-for="(categoryItem, index) in item['category']"
+              :key="index"
+              class="categoryContent"
+            >
+              <view>
+                <img :src="categoryItem['img']" alt="" class="categoryImg" />
+                <view style="float:left;margin-left:22rpx">
+                  <view style="height:44rpx;font-size:30rpx;color:#383838">{{
+                    categoryItem["name"]
+                  }}</view>
+                  <view
+                    style="height:52rpx; width:176rpx;font-size:22rpx;margin-bottom:8rpx;color:#a6a6a6"
+                    >{{ categoryItem["englishName"] }}<br />
+                    {{ categoryItem["default"] }}</view
+                  >
+                  <view style="height:32rpx;font-size:30rpx;color:#383838">{{
+                    categoryItem["price"]
+                  }}</view>
+                </view>
+              </view>
+              <view></view>
+            </view>
           </sunnyList>
         </view>
       </view>
@@ -181,14 +204,27 @@ export default {
       background: #fff;
       padding-left: px2rpx(14);
       padding-top: px2rpx(10);
-      .categoryTitle {
-        width: auto;
-        height: px2rpx(19);
-        color: rgba(56, 56, 56, 1);
-        font-size: px2rpx(13);
-        line-height: 150%;
-        text-align: left;
-        font-weight: bold;
+      overflow: scroll;
+      .categoryItem {
+        .categoryTitle {
+          width: auto;
+          height: px2rpx(19);
+          color: rgba(56, 56, 56, 1);
+          font-size: px2rpx(13);
+          line-height: 150%;
+          text-align: left;
+          font-weight: bold;
+        }
+        .categoryContent {
+          width: px2rpx(255);
+          height: px2rpx(74);
+          .categoryImg {
+            float: left;
+            width: px2rpx(70);
+            height: px2rpx(70);
+            border-radius: 4px;
+          }
+        }
       }
     }
   }
