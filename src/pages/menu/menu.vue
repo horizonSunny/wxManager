@@ -72,7 +72,7 @@
               :key="index"
               class="categoryContent"
             >
-              <view>
+              <view @click="showModal(categoryItem)">
                 <img :src="categoryItem['img']" alt="" class="categoryImg" />
                 <view style="float:left;margin-left:22rpx">
                   <view style="height:44rpx;font-size:30rpx;color:#383838">{{
@@ -93,6 +93,15 @@
           </view>
         </view>
       </scroll-view>
+    </view>
+    <view v-if="openModal" class="modal">
+      <img
+        @click="closeModel"
+        class="modalClose"
+        src="../../static/menu/图标 66.svg"
+        alt=""
+      />
+      <view class="modalContent"></view>
     </view>
   </view>
 </template>
@@ -147,7 +156,9 @@ export default {
       },
       // 判断是否取到每一个节点的位置高度
       sizeCalcState: false,
-      tabScrollTop: 0
+      tabScrollTop: 0,
+      // 模态是否打开
+      openModal: true
     }
   },
   onLoad () {
@@ -221,6 +232,13 @@ export default {
           this.activeSelected = tabs[0]['classifyName'];
         }
       })
+    },
+    // 模态弹窗
+    showModal (info) {
+      this.openModal = true
+    },
+    closeModel () {
+      this.openModal = false
     }
   }
 }
@@ -233,6 +251,7 @@ export default {
   height: 100%;
   width: 100%;
   .banner {
+    z-index: 0;
     .bananaList {
       width: px2rpx(375);
       height: px2rpx(130);
@@ -286,6 +305,34 @@ export default {
           }
         }
       }
+    }
+  }
+  // 模态框代码
+  .modal {
+    width: 100%;
+    height: 100%;
+    background-color: #130b0b31;
+    position: absolute;
+    .modalClose {
+      z-index: 999;
+      position: absolute;
+      width: px2rpx(20);
+      height: px2rpx(20);
+      left: px2rpx(330);
+      top: px2rpx(59);
+      font-size: px2rpx(20);
+      color: rgba(255, 255, 255, 0.8);
+    }
+    .modalContent {
+      position: absolute;
+      background-color: red;
+      width: px2rpx(335);
+      height: px2rpx(450);
+      left: 50%;
+      top: 50%;
+      margin-top: px2rpx(-225);
+      margin-left: px2rpx(-165);
+      border-radius: px2rpx(8);
     }
   }
 }
