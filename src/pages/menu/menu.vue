@@ -26,6 +26,19 @@
         </swiper>
       </uni-swiper-dot>
     </view>
+    <view class="contentInfo">
+      <view class="classifyBar">
+        <view
+          v-for="(item, index) in menuList"
+          :key="index"
+          :class="activeSelected === item ? 'hasSelected' : ''"
+          @click="menuSelect(item)"
+        >
+          {{ item }}
+        </view>
+      </view>
+      <view class="category"></view>
+    </view>
   </view>
 </template>
 
@@ -55,12 +68,19 @@ export default {
       },
       isActive: false,
       listNoBorder: false,
-      menuList: []
+      categoryList: [],
+      menuList: [],
+      activeSelected: '',
     }
   },
   onLoad () {
     this.$api.get('luckin/getMenuList').then((res) => {
-      // this.bananaList = res.data
+      this.categoryList = res.data
+      this.menuList = res.data.map((item) => {
+        return item.classifyName
+      })
+      // this.menuList = ['12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '13']
+      this.activeSelected = this.menuList[0]
     })
     // getpageList
     this.$api.get('luckin/menuSlideshow').then((res) => {
@@ -70,6 +90,10 @@ export default {
   methods: {
     change (e) {
       this.current = e.detail.current;
+    },
+    menuSelect (e) {
+      console.log('activeSelected_', e)
+      this.activeSelected = e
     }
   }
 }
@@ -77,12 +101,34 @@ export default {
 
 <style lang="scss">
 .content {
-  text-align: center;
-  height: 400upx;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
   .banner {
     .bananaList {
-      width: px2upx(375);
-      height: px2upx(130);
+      width: px2rpx(375);
+      height: px2rpx(130);
+    }
+  }
+  .contentInfo {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    .classifyBar {
+      width: px2rpx(90);
+      background: #f8f8f8;
+      overflow: scroll;
+      .hasSelected {
+        background: #fff;
+        border-left: 1px solid rgb(135, 172, 235);
+      }
+    }
+    .category {
+      width: px2rpx(285);
+      background: #fff;
+      padding-left: px2rpx(14);
+      padding-top: px2rpx(10);
     }
   }
 }

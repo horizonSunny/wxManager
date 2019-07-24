@@ -76,6 +76,12 @@ $uni-color-paragraph: #3F536E; // 文章段落颜色
 $uni-font-size-paragraph:30upx;
 
 // px to upx
-@function px2upx($px) {
+@function px2rpx($px) {
   @return $px * 2rpx;
+}
+
+// 全局page设置
+page {
+  width: 100%;
+  height: 100%;
 }

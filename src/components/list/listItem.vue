@@ -28,7 +28,7 @@ export default {
   border-bottom: 1px solid #f2f2f2;
   justify-content: space-between;
   align-items: center;
-  height: px2upx(69);
+  height: px2rpx(69);
   .leftShow {
     display: flex;
     flex-direction: row-reverse;

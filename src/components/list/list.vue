@@ -24,7 +24,7 @@ export default {
   z-index: 10;
   right: 0;
   left: 0;
-  height: px2upx(1);
+  height: px2rpx(1);
   content: "";
   -webkit-transform: scaleY(0.5);
   -ms-transform: scaleY(0.5);
@@ -37,12 +37,12 @@ export default {
 }
 .sunny-list::before {
   @include border-style;
-  top: px2upx(0);
+  top: px2rpx(0);
   background-color: green;
 }
 .sunny-list::after {
   @include border-style;
-  bottom: px2upx(0);
+  bottom: px2rpx(0);
   background-color: red;
 }
 </style>
