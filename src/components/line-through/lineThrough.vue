@@ -1,19 +1,40 @@
 <template>
-  <view class="categoryItem">
-    <text class="categoryTitle">{{ item.classifyName }}</text>
-    <view class="lineMiddle"> </view>
+  <view
+    class="categoryItem"
+    :style="{ height: styleInfo['height'] * 2 + 'rpx' }"
+  >
+    <text
+      class="categoryTitle"
+      :style="{
+        height: styleInfo['height'] * 2 + 'rpx',
+        color: styleInfo['fontColor'],
+        fontSize: styleInfo['fontSize'] * 2 + 'rpx',
+        fontWeight: styleInfo['fontWeight']
+      }"
+      >{{ textInfo }}</text
+    >
+    <view
+      class="lineMiddle"
+      :style="{
+        height: styleInfo['height'] * 2 + 'rpx',
+        color: styleInfo['lineColor'],
+        left: styleInfo['lineLeft']
+      }"
+    >
+    </view>
   </view>
 </template>
 <script>
 export default {
   name: 'lineThrough',
-  props: ['style', 'text'],
+  props: ['styleInfo', 'textInfo'],
   data () {
     return {
     }
   },
   mounted () {
-    console.log('noBorder_', typeof (this.noBorder))
+    console.log('textInfo', this.textInfo)
+    console.log('styleInfo', this.styleInfo)
   }
 }
 </script>
@@ -28,7 +49,7 @@ export default {
     font-size: px2rpx(13);
     line-height: 150%;
     text-align: left;
-    // font-weight: bold;
+    font-weight: bold;
   }
   .lineMiddle {
     flex: 1;

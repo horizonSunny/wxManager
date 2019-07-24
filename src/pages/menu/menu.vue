@@ -41,12 +41,16 @@
       <view class="category">
         <view v-for="(item, index) in categoryList" :key="index">
           <sunnyList>
-            <view class="categoryItem">
+            <!-- <view class="categoryItem">
               <text class="categoryTitle" :style="textStyle">{{
                 item.classifyName
               }}</text>
               <view class="lineMiddle"> </view>
-            </view>
+            </view> -->
+            <lineThrough
+              :textInfo="item['classifyName']"
+              :styleInfo="categoryStyle"
+            ></lineThrough>
           </sunnyList>
         </view>
       </view>
@@ -58,13 +62,15 @@
 import { uniSwiperDot, uniSwipeAction } from '@dcloudio/uni-ui'
 import sunnyList from '../../components/list/list'
 import sunnyListItem from '../../components/list/listItem'
+import lineThrough from '../../components/line-through/lineThrough'
 
 export default {
   components: {
     uniSwiperDot,
     uniSwipeAction,
     sunnyList,
-    sunnyListItem
+    sunnyListItem,
+    lineThrough
   },
   data () {
     return {
@@ -83,6 +89,15 @@ export default {
       categoryList: [],
       menuList: [],
       activeSelected: '',
+      // 右侧菜单item style
+      categoryStyle: {
+        height: 19,
+        color: 'rgba(56, 56, 56, 1)',
+        fontSize: 13,
+        fontWeight: 'bold',
+        lineColor: 'black',
+        lineLeft: 2
+      }
     }
   },
   onLoad () {
