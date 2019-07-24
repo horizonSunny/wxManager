@@ -3,6 +3,7 @@
   "data": [{
       "classifyName": "人气Top",
       "paraphrase": "",
+      "id": 1,
       "category": [{
         "img": "../../static/menu/图片 285.png",
         "subjoin": "买2赠1",
@@ -14,6 +15,7 @@
     }, {
       "classifyName": "大师咖啡",
       "paraphrase": "WBC（世界咖啡师大赛）冠军团队拼配",
+      "id": 2,
       "category": [{
           "img": "../../static/menu/图片 285.png",
           "subjoin": "买2赠1",
@@ -41,6 +43,7 @@
       ]
     }, {
       "classifyName": "零度拿铁",
+      "id": 3,
       "paraphrase": "",
       "category": [{
           "img": "../../static/menu/图片 285.png",
@@ -70,6 +73,7 @@
     },
     {
       "classifyName": "瑞纳冰",
+      "id": 4,
       "paraphrase": "",
       "category": [{
           "img": "../../static/menu/图片 285.png",
@@ -100,6 +104,7 @@
     {
       "classifyName": "经典饮品",
       "paraphrase": "",
+      "id": 5,
       "category": [{
           "img": "../../static/menu/图片 285.png",
           "subjoin": "买2赠1",
@@ -128,7 +133,9 @@
     },
     {
       "classifyName": "健康轻食",
-      "paraphrase": "66折优惠",
+      "paraphrase": "",
+      "id": 6,
+      "label": "66折优惠",
       "category": [{
           "img": "../../static/menu/图片 285.png",
           "subjoin": "买2赠1",
@@ -157,6 +164,7 @@
     },
     {
       "classifyName": "鲜榨果蔬汁",
+      "id": 7,
       "paraphrase": "",
       "category": [{
           "img": "../../static/menu/图片 285.png",

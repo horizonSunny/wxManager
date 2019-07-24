@@ -38,13 +38,15 @@
           {{ item }}
         </view>
       </view>
-      <view class="category">
-        <view
-          v-for="(item, index) in categoryList"
-          :key="index"
-          class="categoryItem"
-        >
-          <sunnyList>
+      <scroll-view scroll-with-animation scroll-y :scroll-top="tabScrollTop">
+        <!-- <view style=""></view> -->
+        <view class="category">
+          <view
+            v-for="(item, index) in categoryList"
+            :key="index"
+            class="categoryItem"
+            :id="'main-' + item.id"
+          >
             <view v-if="item['paraphrase'] !== ''" class="categoryTitle">{{
               item["classifyName"]
             }}</view>
@@ -83,9 +85,9 @@
               </view>
               <view></view>
             </view>
-          </sunnyList>
+          </view>
         </view>
-      </view>
+      </scroll-view>
     </view>
   </view>
 </template>
@@ -138,6 +140,9 @@ export default {
         lineColor: 'rgba(166, 166, 166, 1)',
         lineLeft: 2
       },
+      // 判断是否取到每一个节点的位置高度
+      sizeCalcState: false,
+      tabScrollTop: 0
     }
   },
   onLoad () {
@@ -154,14 +159,41 @@ export default {
       this.bananaList = res.data
     })
   },
+
   methods: {
     change (e) {
       this.current = e.detail.current;
     },
     menuSelect (e) {
+      if (!this.sizeCalcState) {
+        this.calcSize()
+      }
       console.log('activeSelected_', e)
-      this.activeSelected = e
-    }
+      setTimeout(() => {
+        this.activeSelected = e
+        // 找到对应的左侧菜单类
+        const currentItem = this.categoryList.filter((item) => {
+          return item.classifyName === e;
+        })
+        console.log('item__', currentItem[0]['top'])
+        this.tabScrollTop = currentItem[0]['top'];
+      }, 0);
+    },
+    // 计算右侧每个tab高度
+    calcSize () {
+      let h = 0;
+      this.categoryList.forEach(item => {
+        let view = uni.createSelectorQuery().select("#main-" + item.id);
+        view.fields({
+          size: true
+        }, data => {
+          item.top = h;
+          h += data.height;
+          item.bottom = h;
+        }).exec();
+      })
+      this.sizeCalcState = true;
+    },
   }
 }
 </script>

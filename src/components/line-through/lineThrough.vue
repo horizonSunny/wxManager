@@ -33,8 +33,6 @@ export default {
     }
   },
   mounted () {
-    console.log('textInfo', this.textInfo)
-    console.log('styleInfo', this.styleInfo)
   }
 }
 </script>
