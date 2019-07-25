@@ -7,35 +7,37 @@
         src="../../static/menu/图标 66.svg"
         alt=""
       />
-      <view class="showImg">
-        <img src="../../static/menu/图片 303.jpg" alt="" />
-      </view>
-      <view class="modelContent">
-        <view class="optionStyle">
-          <view
-            class="options"
-            v-for="(item, index) in pitchDrink['details']['options']"
-            :key="index"
-          >
-            <text class="labelInfo">{{ item["option"] }}</text>
-            <view class="optionInfo">
-              <view
-                class="text_1323X1"
-                :class="
-                  value === item['defaultValue']
-                    ? 'buttonSelected'
-                    : 'text_1323X1'
-                "
-                v-for="(value, valueIndex) in item['value']"
-                :key="valueIndex"
-                @click="optionSelect(item, value)"
-                >{{ value }}</view
-              >
+      <view>
+        <view class="showImg">
+          <img src="../../static/menu/图片 303.jpg" alt="" />
+        </view>
+        <view class="modelContent">
+          <view class="optionStyle">
+            <view
+              class="options"
+              v-for="(item, index) in pitchDrink['details']['options']"
+              :key="index"
+            >
+              <text class="labelInfo">{{ item["option"] }}</text>
+              <view class="optionInfo">
+                <view
+                  class="text_1323X1"
+                  :class="
+                    value === item['defaultValue']
+                      ? 'buttonSelected'
+                      : 'text_1323X1'
+                  "
+                  v-for="(value, valueIndex) in item['value']"
+                  :key="valueIndex"
+                  @click="optionSelect(item, value)"
+                  >{{ value }}</view
+                >
+              </view>
             </view>
           </view>
+          <view> </view>
+          <view class="confirmSelect"> </view>
         </view>
-        <view> </view>
-        <view class="confirmSelect"> </view>
       </view>
     </view>
   </view>
@@ -98,9 +100,11 @@ export default {
       img {
         width: 100%;
         height: 100%;
+        border-radius: px2rpx(10) px2rpx(10) 0 0;
       }
     }
     .modelContent {
+      border-radius: 0 0 px2rpx(10) px2rpx(10);
       width: px2rpx(305);
       height: px2rpx(310);
       padding: px2rpx(20) px2rpx(15);
@@ -125,9 +129,7 @@ export default {
           }
           .optionInfo {
             display: flex;
-            // align-items: flex-start;
             flex-wrap: wrap;
-            // align-content: flex-start;
             justify-content: flex-start;
             width: px2rpx(330);
             .text_1323X1 {
