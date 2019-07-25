@@ -10,7 +10,30 @@
         "name": "榛果拿铁",
         "default": "默认：大/无糖/热",
         "englishName": "Hazlnut Latte",
-        "price": "¥ 27"
+        "price": "¥ 27",
+        "details": {
+          "options": [{
+              "option": "规格",
+              "value": ["大"],
+              "defaultValue": "大"
+            },
+            {
+              "option": "温度",
+              "value": ["冰", "热"],
+              "defaultValue": "热"
+            },
+            {
+              "option": "糖",
+              "value": ["无糖", "半分糖", "单份糖", "香草3元", "榛子3元"],
+              "defaultValue": "半分糖"
+            },
+            {
+              "option": "奶",
+              "value": ["无奶", "单份奶", "双份奶"],
+              "defaultValue": "无奶"
+            }
+          ]
+        }
       }]
     }, {
       "classifyName": "大师咖啡",
@@ -22,7 +45,30 @@
           "name": "拿铁",
           "default": "默认：大/无糖/热",
           "englishName": "Latte",
-          "price": "¥ 24"
+          "price": "¥ 24",
+          "details": {
+            "options": [{
+                "option": "规格",
+                "value": ["大"],
+                "defaultValue": "大"
+              },
+              {
+                "option": "温度",
+                "value": ["冰", "热"],
+                "defaultValue": "热"
+              },
+              {
+                "option": "糖",
+                "value": ["无糖", "半分糖", "单份糖", "香草3元", "榛子3元"],
+                "defaultValue": "半分糖"
+              },
+              {
+                "option": "奶",
+                "value": ["无奶", "单份奶", "双份奶"],
+                "defaultValue": "无奶"
+              }
+            ]
+          }
         },
         {
           "img": "../../static/menu/图片 285.png",
@@ -30,7 +76,30 @@
           "name": "香草拿铁",
           "default": "默认：大/无糖/热",
           "englishName": "Vanilla Latte",
-          "price": "¥ 27"
+          "price": "¥ 27",
+          "details": {
+            "options": [{
+                "option": "规格",
+                "value": ["大"],
+                "defaultValue": "大"
+              },
+              {
+                "option": "温度",
+                "value": ["冰", "热"],
+                "defaultValue": "热"
+              },
+              {
+                "option": "糖",
+                "value": ["无糖", "半分糖", "单份糖", "香草3元", "榛子3元"],
+                "defaultValue": "半分糖"
+              },
+              {
+                "option": "奶",
+                "value": ["无奶", "单份奶", "双份奶"],
+                "defaultValue": "无奶"
+              }
+            ]
+          }
         },
         {
           "img": "../../static/menu/图片 285.png",
@@ -38,7 +107,30 @@
           "name": "焦糖拿铁",
           "default": "默认：大/无糖/热",
           "englishName": "Caramel Latte",
-          "price": "¥ 24"
+          "price": "¥ 24",
+          "details": {
+            "options": [{
+                "option": "规格",
+                "value": ["大"],
+                "defaultValue": "大"
+              },
+              {
+                "option": "温度",
+                "value": ["冰", "热"],
+                "defaultValue": "热"
+              },
+              {
+                "option": "糖",
+                "value": ["无糖", "半分糖", "单份糖", "香草3元", "榛子3元"],
+                "defaultValue": "半分糖"
+              },
+              {
+                "option": "奶",
+                "value": ["无奶", "单份奶", "双份奶"],
+                "defaultValue": "无奶"
+              }
+            ]
+          }
         }
       ]
     }, {
@@ -51,7 +143,30 @@
           "name": "拿铁",
           "default": "默认：大/无糖/热",
           "englishName": "Latte",
-          "price": "¥ 24"
+          "price": "¥ 24",
+          "details": {
+            "options": [{
+                "option": "规格",
+                "value": ["大"],
+                "defaultValue": "大"
+              },
+              {
+                "option": "温度",
+                "value": ["冰", "热"],
+                "defaultValue": "热"
+              },
+              {
+                "option": "糖",
+                "value": ["无糖", "半分糖", "单份糖", "香草3元", "榛子3元"],
+                "defaultValue": "半分糖"
+              },
+              {
+                "option": "奶",
+                "value": ["无奶", "单份奶", "双份奶"],
+                "defaultValue": "无奶"
+              }
+            ]
+          }
         },
         {
           "img": "../../static/menu/图片 285.png",
@@ -59,7 +174,30 @@
           "name": "香草拿铁",
           "default": "默认：大/无糖/热",
           "englishName": "Vanilla Latte",
-          "price": "¥ 27"
+          "price": "¥ 27",
+          "details": {
+            "options": [{
+                "option": "规格",
+                "value": ["大"],
+                "defaultValue": "大"
+              },
+              {
+                "option": "温度",
+                "value": ["冰", "热"],
+                "defaultValue": "热"
+              },
+              {
+                "option": "糖",
+                "value": ["无糖", "半分糖", "单份糖", "香草3元", "榛子3元"],
+                "defaultValue": "半分糖"
+              },
+              {
+                "option": "奶",
+                "value": ["无奶", "单份奶", "双份奶"],
+                "defaultValue": "无奶"
+              }
+            ]
+          }
         },
         {
           "img": "../../static/menu/图片 285.png",
@@ -67,7 +205,30 @@
           "name": "焦糖拿铁",
           "default": "默认：大/无糖/热",
           "englishName": "Caramel Latte",
-          "price": "¥ 24"
+          "price": "¥ 24",
+          "details": {
+            "options": [{
+                "option": "规格",
+                "value": ["大"],
+                "defaultValue": "大"
+              },
+              {
+                "option": "温度",
+                "value": ["冰", "热"],
+                "defaultValue": "热"
+              },
+              {
+                "option": "糖",
+                "value": ["无糖", "半分糖", "单份糖", "香草3元", "榛子3元"],
+                "defaultValue": "半分糖"
+              },
+              {
+                "option": "奶",
+                "value": ["无奶", "单份奶", "双份奶"],
+                "defaultValue": "无奶"
+              }
+            ]
+          }
         }
       ]
     },
@@ -81,7 +242,30 @@
           "name": "拿铁",
           "default": "默认：大/无糖/热",
           "englishName": "Latte",
-          "price": "¥ 24"
+          "price": "¥ 24",
+          "details": {
+            "options": [{
+                "option": "规格",
+                "value": ["大"],
+                "defaultValue": "大"
+              },
+              {
+                "option": "温度",
+                "value": ["冰", "热"],
+                "defaultValue": "热"
+              },
+              {
+                "option": "糖",
+                "value": ["无糖", "半分糖", "单份糖", "香草3元", "榛子3元"],
+                "defaultValue": "半分糖"
+              },
+              {
+                "option": "奶",
+                "value": ["无奶", "单份奶", "双份奶"],
+                "defaultValue": "无奶"
+              }
+            ]
+          }
         },
         {
           "img": "../../static/menu/图片 285.png",
@@ -89,7 +273,30 @@
           "name": "香草拿铁",
           "default": "默认：大/无糖/热",
           "englishName": "Vanilla Latte",
-          "price": "¥ 27"
+          "price": "¥ 27",
+          "details": {
+            "options": [{
+                "option": "规格",
+                "value": ["大"],
+                "defaultValue": "大"
+              },
+              {
+                "option": "温度",
+                "value": ["冰", "热"],
+                "defaultValue": "热"
+              },
+              {
+                "option": "糖",
+                "value": ["无糖", "半分糖", "单份糖", "香草3元", "榛子3元"],
+                "defaultValue": "半分糖"
+              },
+              {
+                "option": "奶",
+                "value": ["无奶", "单份奶", "双份奶"],
+                "defaultValue": "无奶"
+              }
+            ]
+          }
         },
         {
           "img": "../../static/menu/图片 285.png",
@@ -97,7 +304,30 @@
           "name": "焦糖拿铁",
           "default": "默认：大/无糖/热",
           "englishName": "Caramel Latte",
-          "price": "¥ 24"
+          "price": "¥ 24",
+          "details": {
+            "options": [{
+                "option": "规格",
+                "value": ["大"],
+                "defaultValue": "大"
+              },
+              {
+                "option": "温度",
+                "value": ["冰", "热"],
+                "defaultValue": "热"
+              },
+              {
+                "option": "糖",
+                "value": ["无糖", "半分糖", "单份糖", "香草3元", "榛子3元"],
+                "defaultValue": "半分糖"
+              },
+              {
+                "option": "奶",
+                "value": ["无奶", "单份奶", "双份奶"],
+                "defaultValue": "无奶"
+              }
+            ]
+          }
         }
       ]
     },
@@ -111,7 +341,30 @@
           "name": "拿铁",
           "default": "默认：大/无糖/热",
           "englishName": "Latte",
-          "price": "¥ 24"
+          "price": "¥ 24",
+          "details": {
+            "options": [{
+                "option": "规格",
+                "value": ["大"],
+                "defaultValue": "大"
+              },
+              {
+                "option": "温度",
+                "value": ["冰", "热"],
+                "defaultValue": "热"
+              },
+              {
+                "option": "糖",
+                "value": ["无糖", "半分糖", "单份糖", "香草3元", "榛子3元"],
+                "defaultValue": "半分糖"
+              },
+              {
+                "option": "奶",
+                "value": ["无奶", "单份奶", "双份奶"],
+                "defaultValue": "无奶"
+              }
+            ]
+          }
         },
         {
           "img": "../../static/menu/图片 285.png",
@@ -119,7 +372,30 @@
           "name": "香草拿铁",
           "default": "默认：大/无糖/热",
           "englishName": "Vanilla Latte",
-          "price": "¥ 27"
+          "price": "¥ 27",
+          "details": {
+            "options": [{
+                "option": "规格",
+                "value": ["大"],
+                "defaultValue": "大"
+              },
+              {
+                "option": "温度",
+                "value": ["冰", "热"],
+                "defaultValue": "热"
+              },
+              {
+                "option": "糖",
+                "value": ["无糖", "半分糖", "单份糖", "香草3元", "榛子3元"],
+                "defaultValue": "半分糖"
+              },
+              {
+                "option": "奶",
+                "value": ["无奶", "单份奶", "双份奶"],
+                "defaultValue": "无奶"
+              }
+            ]
+          }
         },
         {
           "img": "../../static/menu/图片 285.png",
@@ -127,7 +403,30 @@
           "name": "焦糖拿铁",
           "default": "默认：大/无糖/热",
           "englishName": "Caramel Latte",
-          "price": "¥ 24"
+          "price": "¥ 24",
+          "details": {
+            "options": [{
+                "option": "规格",
+                "value": ["大"],
+                "defaultValue": "大"
+              },
+              {
+                "option": "温度",
+                "value": ["冰", "热"],
+                "defaultValue": "热"
+              },
+              {
+                "option": "糖",
+                "value": ["无糖", "半分糖", "单份糖", "香草3元", "榛子3元"],
+                "defaultValue": "半分糖"
+              },
+              {
+                "option": "奶",
+                "value": ["无奶", "单份奶", "双份奶"],
+                "defaultValue": "无奶"
+              }
+            ]
+          }
         }
       ]
     },
@@ -142,7 +441,30 @@
           "name": "拿铁",
           "default": "默认：大/无糖/热",
           "englishName": "Latte",
-          "price": "¥ 24"
+          "price": "¥ 24",
+          "details": {
+            "options": [{
+                "option": "规格",
+                "value": ["大"],
+                "defaultValue": "大"
+              },
+              {
+                "option": "温度",
+                "value": ["冰", "热"],
+                "defaultValue": "热"
+              },
+              {
+                "option": "糖",
+                "value": ["无糖", "半分糖", "单份糖", "香草3元", "榛子3元"],
+                "defaultValue": "半分糖"
+              },
+              {
+                "option": "奶",
+                "value": ["无奶", "单份奶", "双份奶"],
+                "defaultValue": "无奶"
+              }
+            ]
+          }
         },
         {
           "img": "../../static/menu/图片 285.png",
@@ -150,7 +472,30 @@
           "name": "香草拿铁",
           "default": "默认：大/无糖/热",
           "englishName": "Vanilla Latte",
-          "price": "¥ 27"
+          "price": "¥ 27",
+          "details": {
+            "options": [{
+                "option": "规格",
+                "value": ["大"],
+                "defaultValue": "大"
+              },
+              {
+                "option": "温度",
+                "value": ["冰", "热"],
+                "defaultValue": "热"
+              },
+              {
+                "option": "糖",
+                "value": ["无糖", "半分糖", "单份糖", "香草3元", "榛子3元"],
+                "defaultValue": "半分糖"
+              },
+              {
+                "option": "奶",
+                "value": ["无奶", "单份奶", "双份奶"],
+                "defaultValue": "无奶"
+              }
+            ]
+          }
         },
         {
           "img": "../../static/menu/图片 285.png",
@@ -158,7 +503,30 @@
           "name": "焦糖拿铁",
           "default": "默认：大/无糖/热",
           "englishName": "Caramel Latte",
-          "price": "¥ 24"
+          "price": "¥ 24",
+          "details": {
+            "options": [{
+                "option": "规格",
+                "value": ["大"],
+                "defaultValue": "大"
+              },
+              {
+                "option": "温度",
+                "value": ["冰", "热"],
+                "defaultValue": "热"
+              },
+              {
+                "option": "糖",
+                "value": ["无糖", "半分糖", "单份糖", "香草3元", "榛子3元"],
+                "defaultValue": "半分糖"
+              },
+              {
+                "option": "奶",
+                "value": ["无奶", "单份奶", "双份奶"],
+                "defaultValue": "无奶"
+              }
+            ]
+          }
         }
       ]
     },
@@ -172,7 +540,30 @@
           "name": "拿铁",
           "default": "默认：大/无糖/热",
           "englishName": "Latte",
-          "price": "¥ 24"
+          "price": "¥ 24",
+          "details": {
+            "options": [{
+                "option": "规格",
+                "value": ["大"],
+                "defaultValue": "大"
+              },
+              {
+                "option": "温度",
+                "value": ["冰", "热"],
+                "defaultValue": "热"
+              },
+              {
+                "option": "糖",
+                "value": ["无糖", "半分糖", "单份糖", "香草3元", "榛子3元"],
+                "defaultValue": "半分糖"
+              },
+              {
+                "option": "奶",
+                "value": ["无奶", "单份奶", "双份奶"],
+                "defaultValue": "无奶"
+              }
+            ]
+          }
         },
         {
           "img": "../../static/menu/图片 285.png",
@@ -180,7 +571,30 @@
           "name": "香草拿铁",
           "default": "默认：大/无糖/热",
           "englishName": "Vanilla Latte",
-          "price": "¥ 27"
+          "price": "¥ 27",
+          "details": {
+            "options": [{
+                "option": "规格",
+                "value": ["大"],
+                "defaultValue": "大"
+              },
+              {
+                "option": "温度",
+                "value": ["冰", "热"],
+                "defaultValue": "热"
+              },
+              {
+                "option": "糖",
+                "value": ["无糖", "半分糖", "单份糖", "香草3元", "榛子3元"],
+                "defaultValue": "半分糖"
+              },
+              {
+                "option": "奶",
+                "value": ["无奶", "单份奶", "双份奶"],
+                "defaultValue": "无奶"
+              }
+            ]
+          }
         },
         {
           "img": "../../static/menu/图片 285.png",
@@ -188,7 +602,30 @@
           "name": "焦糖拿铁",
           "default": "默认：大/无糖/热",
           "englishName": "Caramel Latte",
-          "price": "¥ 24"
+          "price": "¥ 24",
+          "details": {
+            "options": [{
+                "option": "规格",
+                "value": ["大"],
+                "defaultValue": "大"
+              },
+              {
+                "option": "温度",
+                "value": ["冰", "热"],
+                "defaultValue": "热"
+              },
+              {
+                "option": "糖",
+                "value": ["无糖", "半分糖", "单份糖", "香草3元", "榛子3元"],
+                "defaultValue": "半分糖"
+              },
+              {
+                "option": "奶",
+                "value": ["无奶", "单份奶", "双份奶"],
+                "defaultValue": "无奶"
+              }
+            ]
+          }
         }
       ]
     }

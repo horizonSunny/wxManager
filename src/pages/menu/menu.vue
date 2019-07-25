@@ -106,16 +106,31 @@
           <img src="../../static/menu/图片 303.jpg" alt="" />
         </view>
         <view class="modelContent">
-          <view class="options">
-            <text class="labelInfo">规格</text>
-            <view class="optionInfo">
-              <view class="text_1323X1">无糖</view>
-              <view class="text_1323X1">半分糖</view>
-              <view class="text_1323X1">单份糖</view>
-              <view class="text_1323X1">香草3元</view>
-              <view class="text_1323X1">榛子3元</view>
+          <view class="optionStyle">
+            <view
+              class="options"
+              v-for="(item, index) in pitchDrink['details']['options']"
+              :key="index"
+            >
+              <text class="labelInfo">{{ item["option"] }}</text>
+              <view class="optionInfo">
+                <view
+                  class="text_1323X1"
+                  :class="
+                    value === item['defaultValue']
+                      ? 'buttonSelected'
+                      : 'text_1323X1'
+                  "
+                  v-for="(value, valueIndex) in item['value']"
+                  :key="valueIndex"
+                  @click="optionSelect(item, value)"
+                  >{{ value }}</view
+                >
+              </view>
             </view>
           </view>
+          <view> </view>
+          <view class="confirmSelect"> </view>
         </view>
       </view>
     </view>
@@ -175,7 +190,8 @@ export default {
       sizeCalcState: false,
       tabScrollTop: 0,
       // 模态是否打开
-      openModal: true
+      openModal: false,
+      pitchDrink: {}
     }
   },
   onLoad () {
@@ -253,6 +269,8 @@ export default {
     // 模态弹窗
     showModal (info) {
       this.openModal = true
+      this.pitchDrink = info
+      console.log('this.pitchDrink_', this.pitchDrink);
     },
     closeModel () {
       this.openModal = false
@@ -260,6 +278,10 @@ export default {
     clickInner () {
 
       console.log('clickInner');
+    },
+    // option 选项选中
+    optionSelect (info, value) {
+      info['defaultValue'] = value
     }
   }
 }
@@ -366,43 +388,58 @@ export default {
         height: px2rpx(310);
         padding: px2rpx(20) px2rpx(15);
         background: #ffffff;
-        .options {
-          width: px2rpx(305);
-          margin-bottom: px2rpx(15);
-          height: px2rpx(33);
-          display: flex;
-          align-items: baseline;
-          .labelInfo {
-            width: px2rpx(37);
-            height: px2rpx(21);
-            color: rgba(56, 56, 56, 1);
-            font-size: px2rpx(14);
-            line-height: 150%;
-            text-align: left;
-            margin-right: px2rpx(20);
-          }
-          .optionInfo {
+        position: relative;
+        .optionStyle {
+          border-bottom: 1px solid #ccc0b4;
+          .options {
+            width: px2rpx(305);
+            margin-bottom: px2rpx(8);
+            height: auto;
             display: flex;
-            // align-items: flex-start;
-            flex-wrap: wrap;
-            // align-content: flex-start;
-            justify-content: flex-start;
-            width: px2rpx(330);
-            .text_1323X1 {
-              display: inline-block;
-              margin-bottom: px2rpx(10);
-              margin-left: px2rpx(5);
-              width: px2rpx(70);
-              height: px2rpx(25);
-              line-height: px2rpx(25);
-              color: rgba(204, 192, 180, 1);
-              box-shadow: rgba(204, 192, 180, 1) solid 1px;
-              border: rgba(204, 192, 180, 1) solid 1px;
-              border-radius: px2rpx(15);
+            align-items: baseline;
+            .labelInfo {
+              width: px2rpx(37);
+              height: px2rpx(21);
+              color: rgba(56, 56, 56, 1);
               font-size: px2rpx(14);
-              text-align: center;
+              line-height: 150%;
+              text-align: left;
+              margin-right: px2rpx(20);
+            }
+            .optionInfo {
+              display: flex;
+              // align-items: flex-start;
+              flex-wrap: wrap;
+              // align-content: flex-start;
+              justify-content: flex-start;
+              width: px2rpx(330);
+              .text_1323X1 {
+                display: inline-block;
+                margin-bottom: px2rpx(5);
+                margin-left: px2rpx(5);
+                width: px2rpx(70);
+                height: px2rpx(25);
+                line-height: px2rpx(25);
+                color: rgba(204, 192, 180, 1);
+                box-shadow: rgba(204, 192, 180, 1) solid 1px;
+                border: rgba(204, 192, 180, 1) solid 1px;
+                border-radius: px2rpx(15);
+                font-size: px2rpx(14);
+                text-align: center;
+              }
+              .buttonSelected {
+                background-color: rgba(204, 192, 180, 1);
+                color: #fff;
+              }
             }
           }
+        }
+        .confirmSelect {
+          position: absolute;
+          bottom: px2rpx(0);
+          width: px2rpx(305);
+          height: px2rpx(120);
+          background-color: yellow;
         }
       }
     }
