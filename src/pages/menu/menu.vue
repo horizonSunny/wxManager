@@ -94,20 +94,36 @@
         </view>
       </scroll-view>
     </view>
-    <view v-if="openModal" class="modal">
-      <img
-        @click="closeModel"
-        class="modalClose"
-        src="../../static/menu/图标 66.svg"
-        alt=""
-      />
-      <view class="modalContent"></view>
+    <view v-if="openModal" class="modal" @click="closeModel">
+      <view class="modalContent" @click.stop="clickInner">
+        <img
+          @click="closeModel"
+          class="modalClose"
+          src="../../static/menu/图标 66.svg"
+          alt=""
+        />
+        <view class="showImg">
+          <img src="../../static/menu/图片 303.jpg" alt="" />
+        </view>
+        <view class="modelContent">
+          <view class="options">
+            <text class="labelInfo">规格</text>
+            <view class="optionInfo">
+              <view class="text_1323X1">无糖</view>
+              <view class="text_1323X1">半分糖</view>
+              <view class="text_1323X1">单份糖</view>
+              <view class="text_1323X1">香草3元</view>
+              <view class="text_1323X1">榛子3元</view>
+            </view>
+          </view>
+        </view>
+      </view>
     </view>
   </view>
 </template>
 
 <script>
-import { uniSwiperDot, uniSwipeAction } from '@dcloudio/uni-ui'
+import { uniSwiperDot, uniSwipeAction, uniPopup } from '@dcloudio/uni-ui'
 import sunnyList from '../../components/list/list'
 import sunnyListItem from '../../components/list/listItem'
 import lineThrough from '../../components/line-through/lineThrough'
@@ -118,7 +134,8 @@ export default {
     uniSwipeAction,
     sunnyList,
     sunnyListItem,
-    lineThrough
+    lineThrough,
+    uniPopup
   },
   data () {
     return {
@@ -239,6 +256,10 @@ export default {
     },
     closeModel () {
       this.openModal = false
+    },
+    clickInner () {
+
+      console.log('clickInner');
     }
   }
 }
@@ -313,26 +334,77 @@ export default {
     height: 100%;
     background-color: #130b0b31;
     position: absolute;
-    .modalClose {
-      z-index: 999;
-      position: absolute;
-      width: px2rpx(20);
-      height: px2rpx(20);
-      left: px2rpx(330);
-      top: px2rpx(59);
-      font-size: px2rpx(20);
-      color: rgba(255, 255, 255, 0.8);
-    }
     .modalContent {
       position: absolute;
-      background-color: red;
       width: px2rpx(335);
-      height: px2rpx(450);
+      height: px2rpx(500);
       left: 50%;
       top: 50%;
-      margin-top: px2rpx(-225);
+      margin-top: px2rpx(-250);
       margin-left: px2rpx(-165);
       border-radius: px2rpx(8);
+      .modalClose {
+        z-index: 999;
+        position: absolute;
+        width: px2rpx(20);
+        height: px2rpx(20);
+        right: px2rpx(10);
+        top: px2rpx(10);
+        font-size: px2rpx(20);
+        color: rgba(255, 255, 255, 0.8);
+      }
+      .showImg {
+        width: px2rpx(335);
+        height: px2rpx(150);
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .modelContent {
+        width: px2rpx(305);
+        height: px2rpx(310);
+        padding: px2rpx(20) px2rpx(15);
+        background: #ffffff;
+        .options {
+          width: px2rpx(305);
+          margin-bottom: px2rpx(15);
+          height: px2rpx(33);
+          display: flex;
+          align-items: baseline;
+          .labelInfo {
+            width: px2rpx(37);
+            height: px2rpx(21);
+            color: rgba(56, 56, 56, 1);
+            font-size: px2rpx(14);
+            line-height: 150%;
+            text-align: left;
+            margin-right: px2rpx(20);
+          }
+          .optionInfo {
+            display: flex;
+            // align-items: flex-start;
+            flex-wrap: wrap;
+            // align-content: flex-start;
+            justify-content: flex-start;
+            width: px2rpx(330);
+            .text_1323X1 {
+              display: inline-block;
+              margin-bottom: px2rpx(10);
+              margin-left: px2rpx(5);
+              width: px2rpx(70);
+              height: px2rpx(25);
+              line-height: px2rpx(25);
+              color: rgba(204, 192, 180, 1);
+              box-shadow: rgba(204, 192, 180, 1) solid 1px;
+              border: rgba(204, 192, 180, 1) solid 1px;
+              border-radius: px2rpx(15);
+              font-size: px2rpx(14);
+              text-align: center;
+            }
+          }
+        }
+      }
     }
   }
 }
