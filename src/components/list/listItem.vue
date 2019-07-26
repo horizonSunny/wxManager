@@ -24,21 +24,15 @@ export default {
 .sunny-item-list {
   // background-color: yellow;
   display: flex;
-  margin-left: 10%;
   border-bottom: 1px solid #f2f2f2;
   justify-content: space-between;
   align-items: center;
   height: px2rpx(69);
   .leftShow {
     display: flex;
-    flex-direction: row-reverse;
-    // background-color: red;
-    // float: left;
   }
   .rightOption {
     display: flex;
-    // background-color: green;
-    // float: right;
   }
 }
 </style>

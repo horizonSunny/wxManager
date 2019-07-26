@@ -36,15 +36,35 @@
             </view>
           </view>
           <view> </view>
-          <view class="confirmSelect"> </view>
+          <view class="confirmSelect">
+            <sunny-list-item>
+              <template v-slot:leftShow>
+                <view class="leftShow">
+                  <view class="text_1340X1">¥21</view>
+                  <view class="text_1341X1">标准美式¥21+ 无糖¥0+ 无奶¥0</view>
+                </view>
+              </template>
+              <template v-slot:rightOption>
+                <view class="rightOperate">
+                  <view class="circleBorder">-</view>
+                  <view>1</view>
+                  <view class="circleBorder">+</view>
+                </view>
+              </template>
+            </sunny-list-item>
+          </view>
         </view>
       </view>
     </view>
   </view>
 </template>
 <script>
+import sunnyListItem from '../../components/list/listItem'
 export default {
   props: ['modalShow', 'pitch'],
+  components: {
+    sunnyListItem
+  },
   data () {
     return {
       pitchDrink: this.pitch
@@ -158,7 +178,44 @@ export default {
         bottom: px2rpx(0);
         width: px2rpx(305);
         height: px2rpx(120);
-        background-color: yellow;
+        .leftShow {
+          .text_1340X1 {
+            width: px2rpx(32);
+            height: px2rpx(27);
+            color: rgba(56, 56, 56, 1);
+            font-size: px2rpx(18);
+            line-height: px2rpx(27);
+            text-align: left;
+            font-weight: bold;
+          }
+          .text_1341X1 {
+            width: px2rpx(149);
+            height: px2rpx(15);
+            color: rgba(80, 80, 80, 1);
+            font-size: px2rpx(10);
+            line-height: px2rpx(15);
+            text-align: left;
+          }
+        }
+        .rightOperate {
+          display: flex;
+          flex-direction: row;
+          width: px2rpx(75);
+          color: rgba(136, 175, 213, 1);
+          font-size: px2rpx(14);
+          height: px2rpx(24);
+          line-height: px2rpx(24);
+          justify-content: space-around;
+          .circleBorder {
+            height: px2rpx(22);
+            line-height: px2rpx(21);
+            text-align: center;
+            width: px2rpx(22);
+            border-radius: px2rpx(11);
+            color: rgba(136, 175, 213, 1);
+            border: 1px solid rgba(136, 175, 213, 1);
+          }
+        }
       }
     }
   }

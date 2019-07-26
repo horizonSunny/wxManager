@@ -26,7 +26,7 @@
       </uni-swiper-dot>
     </view>
     <view class="swipeAction">
-      <view>
+      <view style="margin-left:10%">
         <sunny-list :no-border="listNoBorder">
           <sunny-list-item>
             <template v-slot:leftShow>
