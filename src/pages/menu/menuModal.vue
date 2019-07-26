@@ -52,6 +52,27 @@
                 </view>
               </template>
             </sunny-list-item>
+            <view class="handle">
+              <view
+                class="btn"
+                v-for="(item, index) in btn"
+                :key="index"
+                :style="{ background: item['backgroundColor'] }"
+              >
+                <luButtonRipple
+                  :rippleBackgroundColor="item.backgroundColor"
+                  :rippleOpacity="item.opacity"
+                  buttonRippleId="1"
+                  @rippleTap="operateOption"
+                >
+                  <!-- <img :src="item['img']" alt="" /> -->
+                  <view style="display:flex">
+                    <img :src="item['img']" alt="" />
+                    <view>{{ item["text"] }}</view>
+                  </view>
+                </luButtonRipple>
+              </view>
+            </view>
           </view>
         </view>
       </view>
@@ -60,14 +81,32 @@
 </template>
 <script>
 import sunnyListItem from '../../components/list/listItem'
+import luButtonRipple from '@/components/lu-button-ripple/lu-button-ripple.vue';
 export default {
   props: ['modalShow', 'pitch'],
   components: {
-    sunnyListItem
+    sunnyListItem,
+    luButtonRipple
   },
   data () {
     return {
-      pitchDrink: this.pitch
+      pitchDrink: this.pitch,
+      btn: [{
+        backgroundColor: '#ff8102',
+        opacity: 1,
+        text: '充2赠1',
+        img: '../../static/menu/图片 308.svg'
+      }, {
+        backgroundColor: '#88d4d5c2',
+        opacity: 1,
+        text: '收藏口味',
+        img: '../../static/menu/图片 308-2.svg'
+      }, {
+        backgroundColor: '#88afd5',
+        opacity: 1,
+        text: '加入购物车',
+        img: '../../static/menu/图片 308-3.svg'
+      }]
     }
   },
   methods: {
@@ -85,6 +124,10 @@ export default {
       console.log('info_', info);
       console.log('value_', value);
       info['defaultValue'] = value
+    },
+    // 选项
+    operateOption () {
+      console.log(123);
     }
   }
 }
@@ -214,6 +257,31 @@ export default {
             border-radius: px2rpx(11);
             color: rgba(136, 175, 213, 1);
             border: 1px solid rgba(136, 175, 213, 1);
+          }
+        }
+        // 下面的操作
+        .handle {
+          height: px2rpx(50);
+          width: px2rpx(260);
+          padding: 0 px2rpx(20);
+          display: flex;
+          justify-content: space-between;
+          .btn {
+            display: flex;
+            justify-content: center;
+            width: px2rpx(84);
+            height: px2rpx(32);
+            position: relative;
+            font-size: px2rpx(12);
+            text-align: center;
+            border-radius: px2rpx(4);
+            top: 50%;
+            margin-top: px2rpx(-16);
+            img {
+              width: px2rpx(16);
+              height: px2rpx(16);
+              margin-right: px2rpx(2);
+            }
           }
         }
       }
