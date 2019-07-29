@@ -25,8 +25,6 @@ export default {
     // console.log('1231231231312312312')
   },
   mounted () {
-    console.log('styleInfo_typeof_', typeof (this.styleInfo));
-    console.log('styleInfo_', this.styleInfo);
   }
 }
 </script>

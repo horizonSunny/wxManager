@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <view class="wrap">
     <view class="swiperMenu">
       <view
         :class="currentMenu === item ? 'viewItemActive' : 'viewItem'"
@@ -10,21 +10,22 @@
       >
     </view>
     <view class="swiperContent">
-      <swiper class="swiper">
-        <swiper-item v-for="(item, index) in menuList" :key="index">
-          <sunny-list-item
-            :style-info="{ height: '78rpx' }"
-            v-for="(itemInList, indexInList) in item"
-            :key="indexInList"
-          >
-            <template v-slot:leftShow>
+      <swiper class="swiper" :current="currentList" @change="swiperList">
+        <swiper-item
+          v-for="(item, index) in menuList"
+          :key="index"
+          style="width:100%;height:100%;background:#fff"
+        >
+          <view class="itemMessage">
+            <view
+              class="itemTitle"
+              v-for="(itemInList, indexInList) in item"
+              :key="indexInList"
+            >
               <view class="leftShow">
                 <view class="text_1340X1">外卖订单：23847563928174</view>
               </view>
-            </template>
-            <template v-slot:rightOption>
               <view class="rightShow">
-                <!-- 0是未完成，1是完成，2是取消 -->
                 <view class="text_1341X1" v-if="itemInList['type'] === 0">
                   待付款
                 </view>
@@ -35,8 +36,26 @@
                   已取消
                 </view>
               </view>
-            </template>
-          </sunny-list-item>
+            </view>
+            <view class="itemContent">
+              <view class="leftShow">
+                <view class="text_2481X1">北京市朝阳区青年汇佳园十号...</view>
+                <br />
+                <view class="text_2482X1">榛果拿铁 共1件商品</view>
+              </view>
+              <view class="rightShow">
+                <view class="text_2488X1">2019-01-08 08:09:05</view>
+              </view>
+            </view>
+            <view class="itemFooter">
+              <view class="leftShow">
+                <view class="text_2481X1">¥12</view>
+              </view>
+              <view class="rightShow">
+                <view class="text_2488X1"></view>
+              </view>
+            </view>
+          </view>
         </swiper-item>
       </swiper>
     </view>
@@ -57,7 +76,8 @@ export default {
         unfinished: [],
         finished: []
 
-      }
+      },
+      currentList: 0
     }
   },
   onLoad () {
@@ -79,55 +99,142 @@ export default {
   methods: {
     selectMenu (item) {
       this.currentMenu = item
+      const current = this.meunOptions.indexOf(item)
+      console.log('current_', current);
+      this.currentList = current
+    },
+    swiperList (e) {
+      console.log('event_', e);
+      const index = e.detail.current
+      console.log('index_', index);
+      const seletcName = this.meunOptions[index]
+      this.currentMenu = seletcName
+
     }
   }
 }
 </script>
 <style lang="scss">
-.swiperMenu {
+.wrap {
   display: flex;
-  width: px2rpx(375);
-  height: px2rpx(44);
-  font-size: px2rpx(14);
-  align-items: center;
-  justify-content: space-around;
-  .viewItem {
-    font-size: px2rpx(15);
-    text-align: center;
-    border-bottom: 4px solid #fff;
-  }
-  .viewItemActive {
-    color: #88afd5;
-    font-size: px2rpx(15);
-    border-bottom: 4px solid #88afd5;
-  }
-}
-.swiperContent {
-  padding: px2rpx(15);
-  .leftShow {
-    width: px2rpx(180);
-    height: px2rpx(39);
-    .text_1340X1 {
-      width: px2rpx(180);
-      height: px2rpx(19);
-      color: #a6a6a6;
-      font-size: px2rpx(13);
-      line-height: px2rpx(27);
-      text-align: left;
-      font-weight: bold;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  .swiperMenu {
+    display: flex;
+    width: px2rpx(375);
+    height: px2rpx(44);
+    font-size: px2rpx(14);
+    align-items: center;
+    justify-content: space-around;
+    .viewItem {
+      font-size: px2rpx(15);
+      text-align: center;
+      border-bottom: 4px solid #fff;
+    }
+    .viewItemActive {
+      color: #88afd5;
+      font-size: px2rpx(15);
+      border-bottom: 4px solid #88afd5;
     }
   }
-  .rightShow {
-    width: px2rpx(100);
-    height: px2rpx(39);
-    .text_1341X1 {
-      width: px2rpx(100);
-      height: px2rpx(19);
-      color: #a6a6a6;
-      font-size: px2rpx(13);
-      line-height: px2rpx(27);
-      text-align: right;
-      font-weight: bold;
+  .swiperContent {
+    padding: px2rpx(15);
+    flex: 1;
+    .swiper {
+      width: 100%;
+      height: 100%;
+      .itemTitle {
+        display: flex;
+        border-bottom: 1px solid #f2f2f2;
+        justify-content: space-between;
+        align-items: center;
+        .leftShow {
+          display: flex;
+          width: px2rpx(180);
+          height: px2rpx(39);
+          .text_1340X1 {
+            width: px2rpx(180);
+            height: px2rpx(19);
+            color: #a6a6a6;
+            font-size: px2rpx(13);
+            line-height: px2rpx(27);
+            text-align: left;
+            font-weight: bold;
+          }
+          .text_2481X1 {
+            width: px2rpx(210);
+            height: px2rpx(22);
+            color: rgba(56, 56, 56, 1);
+            font-size: px2rpx(15);
+            line-height: px2rpx(22);
+            text-align: left;
+            font-weight: bold;
+          }
+          .text_2482X1 {
+            width: px2rpx(135);
+            height: px2rpx(19);
+            color: rgba(80, 80, 80, 1);
+            font-size: px2rpx(13);
+            height: px2rpx(22);
+            text-align: left;
+          }
+        }
+        .rightShow {
+          display: flex;
+          width: px2rpx(100);
+          height: px2rpx(39);
+          margin-right: px2rpx(10);
+          .text_1341X1 {
+            width: px2rpx(100);
+            height: px2rpx(19);
+            color: #a6a6a6;
+            font-size: px2rpx(13);
+            line-height: px2rpx(27);
+            text-align: right;
+            font-weight: bold;
+          }
+        }
+      }
+      .itemContent {
+        display: flex;
+        border-bottom: 1px solid #f2f2f2;
+        justify-content: space-between;
+        align-items: center;
+        .leftShow {
+          width: px2rpx(180);
+          height: px2rpx(39);
+          .text_2481X1 {
+            width: px2rpx(210);
+            height: px2rpx(22);
+            color: rgba(56, 56, 56, 1);
+            font-size: px2rpx(15);
+            line-height: px2rpx(22);
+            text-align: left;
+            font-weight: bold;
+          }
+          .text_2482X1 {
+            width: px2rpx(135);
+            height: px2rpx(19);
+            color: rgba(80, 80, 80, 1);
+            font-size: px2rpx(13);
+            height: px2rpx(22);
+            text-align: left;
+          }
+        }
+        .rightShow {
+          display: flex;
+          width: px2rpx(130);
+          height: px2rpx(39);
+          .text_2488X1 {
+            width: px2rpx(125);
+            height: px2rpx(18);
+            color: rgba(166, 166, 166, 1);
+            font-size: px2rpx(12);
+            text-align: left;
+          }
+        }
+      }
     }
   }
 }
