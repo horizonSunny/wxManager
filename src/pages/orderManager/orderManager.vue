@@ -12,18 +12,31 @@
     <view class="swiperContent">
       <swiper class="swiper">
         <swiper-item v-for="(item, index) in menuList" :key="index">
-          <!-- <sunny-list-item :style-info="{ height: '78rpx' }">
+          <sunny-list-item
+            :style-info="{ height: '78rpx' }"
+            v-for="(itemInList, indexInList) in item"
+            :key="indexInList"
+          >
             <template v-slot:leftShow>
               <view class="leftShow">
                 <view class="text_1340X1">外卖订单：23847563928174</view>
               </view>
             </template>
             <template v-slot:rightOption>
-              <view class="rightOperate">
-                <view class="circleBorder">-</view>
+              <view class="rightShow">
+                <!-- 0是未完成，1是完成，2是取消 -->
+                <view class="text_1341X1" v-if="itemInList['type'] === 0">
+                  待付款
+                </view>
+                <view class="text_1341X1" v-else-if="itemInList['type'] === 1">
+                  已完成
+                </view>
+                <view class="text_1341X1" v-else-if="itemInList['type'] === 2">
+                  已取消
+                </view>
               </view>
             </template>
-          </sunny-list-item> -->
+          </sunny-list-item>
         </swiper-item>
       </swiper>
     </view>
@@ -90,6 +103,7 @@ export default {
   }
 }
 .swiperContent {
+  padding: px2rpx(15);
   .leftShow {
     width: px2rpx(180);
     height: px2rpx(39);
@@ -102,13 +116,18 @@ export default {
       text-align: left;
       font-weight: bold;
     }
+  }
+  .rightShow {
+    width: px2rpx(100);
+    height: px2rpx(39);
     .text_1341X1 {
-      width: px2rpx(149);
-      height: px2rpx(15);
+      width: px2rpx(100);
+      height: px2rpx(19);
       color: #a6a6a6;
       font-size: px2rpx(13);
-      line-height: px2rpx(15);
-      text-align: left;
+      line-height: px2rpx(27);
+      text-align: right;
+      font-weight: bold;
     }
   }
 }
