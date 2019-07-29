@@ -28,7 +28,7 @@
     <view class="swipeAction">
       <view style="margin-left:10%">
         <sunny-list :no-border="listNoBorder">
-          <sunny-list-item>
+          <sunny-list-item :style-info="{ height: '138rpx' }">
             <template v-slot:leftShow>
               <view class="test">
                 <text class="text_2950X1">青年汇店</text><br />
@@ -64,7 +64,11 @@
               </view>
             </template>
           </sunny-list-item>
-          <sunny-list-item v-for="(item, index) in menuList" :key="index">
+          <sunny-list-item
+            v-for="(item, index) in menuList"
+            :key="index"
+            :style-info="{ height: '138rpx' }"
+          >
             <template v-slot:leftShow>
               <view class="test">
                 <text class="text_2950X1">{{ item.title }}</text

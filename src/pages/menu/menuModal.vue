@@ -37,7 +37,7 @@
           </view>
           <view> </view>
           <view class="confirmSelect">
-            <sunny-list-item>
+            <sunny-list-item :style-info="{ height: '138rpx' }">
               <template v-slot:leftShow>
                 <view class="leftShow">
                   <view class="text_1340X1">¥21</view>

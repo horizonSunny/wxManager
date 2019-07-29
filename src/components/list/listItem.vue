@@ -1,5 +1,10 @@
 <template>
-  <view class="sunny-item-list">
+  <view
+    class="sunny-item-list"
+    :style="{
+      height: styleInfo.height
+    }"
+  >
     <view class="leftShow">
       <!-- <text>{{ textInfo }}</text> -->
       <slot name="leftShow"></slot>
@@ -11,12 +16,17 @@
 </template>
 <script>
 export default {
+  props: ['styleInfo'],
   data () {
     return {
     }
   },
   created () {
     // console.log('1231231231312312312')
+  },
+  mounted () {
+    console.log('styleInfo_typeof_', typeof (this.styleInfo));
+    console.log('styleInfo_', this.styleInfo);
   }
 }
 </script>
@@ -27,7 +37,7 @@ export default {
   border-bottom: 1px solid #f2f2f2;
   justify-content: space-between;
   align-items: center;
-  height: px2rpx(69);
+  // height: px2rpx(69);
   .leftShow {
     display: flex;
   }

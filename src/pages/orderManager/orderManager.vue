@@ -2,45 +2,70 @@
   <view>
     <view class="swiperMenu">
       <view
-        :class="
-          currentMenu === item['orderName'] ? 'viewItemActive' : 'viewItem'
-        "
-        v-for="(item, index) in menuList"
+        :class="currentMenu === item ? 'viewItemActive' : 'viewItem'"
+        v-for="(item, index) in meunOptions"
         :key="index"
         @click="selectMenu(item)"
-        >{{ item["orderName"] }}</view
+        >{{ item }}</view
       >
     </view>
-    <view class="swiperContent"></view>
-    <!-- <swiper class="swiper">
-      <swiper-item>
-        <view class="swiper-item uni-bg-red">A</view>
-      </swiper-item>
-      <swiper-item>
-        <view class="swiper-item uni-bg-green">B</view>
-      </swiper-item>
-      <swiper-item>
-        <view class="swiper-item uni-bg-blue">C</view>
-      </swiper-item>
-    </swiper> -->
+    <view class="swiperContent">
+      <swiper class="swiper">
+        <swiper-item v-for="(item, index) in menuList" :key="index">
+          <!-- <sunny-list-item :style-info="{ height: '78rpx' }">
+            <template v-slot:leftShow>
+              <view class="leftShow">
+                <view class="text_1340X1">外卖订单：23847563928174</view>
+              </view>
+            </template>
+            <template v-slot:rightOption>
+              <view class="rightOperate">
+                <view class="circleBorder">-</view>
+              </view>
+            </template>
+          </sunny-list-item> -->
+        </swiper-item>
+      </swiper>
+    </view>
   </view>
 </template>
 <script>
+import sunnyListItem from '../../components/list/listItem'
 export default {
+  components: {
+    sunnyListItem
+  },
   data: function () {
     return {
       currentMenu: '全部',
-      menuList: []
+      meunOptions: ['全部', '未完成', '已完成'],
+      menuList: {
+        all: [],
+        unfinished: [],
+        finished: []
+
+      }
     }
   },
   onLoad () {
     this.$api.get('luckin/orderManager').then((res) => {
-      this.menuList = res.data
+      this.menuList['all'] = res.data
+      for (let item = 0; item < res.data.length; item++) {
+        switch (res.data[item]['type']) {
+          case 1:
+            this.menuList['unfinished'].push(res.data[item])
+            break;
+          case 2:
+            this.menuList['finished'].push(res.data[item])
+            break;
+        }
+      }
+      console.log('this.menuList_', this.menuList)
     })
   },
   methods: {
     selectMenu (item) {
-      this.currentMenu = item['orderName']
+      this.currentMenu = item
     }
   }
 }
@@ -54,7 +79,6 @@ export default {
   align-items: center;
   justify-content: space-around;
   .viewItem {
-    // width: px2rpx(60);
     font-size: px2rpx(15);
     text-align: center;
     border-bottom: 4px solid #fff;
@@ -66,5 +90,26 @@ export default {
   }
 }
 .swiperContent {
+  .leftShow {
+    width: px2rpx(180);
+    height: px2rpx(39);
+    .text_1340X1 {
+      width: px2rpx(180);
+      height: px2rpx(19);
+      color: #a6a6a6;
+      font-size: px2rpx(13);
+      line-height: px2rpx(27);
+      text-align: left;
+      font-weight: bold;
+    }
+    .text_1341X1 {
+      width: px2rpx(149);
+      height: px2rpx(15);
+      color: #a6a6a6;
+      font-size: px2rpx(13);
+      line-height: px2rpx(15);
+      text-align: left;
+    }
+  }
 }
 </style>
