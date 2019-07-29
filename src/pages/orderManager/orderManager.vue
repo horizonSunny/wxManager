@@ -16,12 +16,12 @@
           :key="index"
           style="width:100%;height:100%;background:#fff"
         >
-          <view class="itemMessage">
-            <view
-              class="itemTitle"
-              v-for="(itemInList, indexInList) in item"
-              :key="indexInList"
-            >
+          <view
+            class="itemMessage"
+            v-for="(itemInList, indexInList) in item"
+            :key="indexInList"
+          >
+            <view class="itemTitle">
               <view class="leftShow">
                 <view class="text_1340X1">外卖订单：23847563928174</view>
               </view>
@@ -49,12 +49,23 @@
             </view>
             <view class="itemFooter">
               <view class="leftShow">
-                <view class="text_2481X1">¥12</view>
+                <view class="text_2487X1">¥12</view>
               </view>
               <view class="rightShow">
-                <view class="text_2488X1"></view>
+                <luButtonRipple
+                  rippleBackgroundColor="red"
+                  :rippleOpacity="item.opacity"
+                  buttonRippleId="1"
+                  @rippleTap="operateOption"
+                >
+                  <!-- <img :src="item['img']" alt="" /> -->
+                  <view class="text_2486X1" style="display:flex">
+                    <view>再来一单</view>
+                  </view>
+                </luButtonRipple>
               </view>
             </view>
+            <view class="itemSpt"></view>
           </view>
         </swiper-item>
       </swiper>
@@ -63,9 +74,11 @@
 </template>
 <script>
 import sunnyListItem from '../../components/list/listItem'
+import luButtonRipple from '@/components/lu-button-ripple/lu-button-ripple.vue';
 export default {
   components: {
-    sunnyListItem
+    sunnyListItem,
+    luButtonRipple
   },
   data: function () {
     return {
@@ -110,6 +123,9 @@ export default {
       const seletcName = this.meunOptions[index]
       this.currentMenu = seletcName
 
+    },
+    operateOption () {
+      console.log('123');
     }
   }
 }
@@ -139,100 +155,144 @@ export default {
     }
   }
   .swiperContent {
-    padding: px2rpx(15);
     flex: 1;
     .swiper {
       width: 100%;
       height: 100%;
-      .itemTitle {
-        display: flex;
-        border-bottom: 1px solid #f2f2f2;
-        justify-content: space-between;
-        align-items: center;
-        .leftShow {
+      .itemMessage {
+        .itemTitle {
+          padding: px2rpx(15);
           display: flex;
-          width: px2rpx(180);
-          height: px2rpx(39);
-          .text_1340X1 {
+          border-bottom: 1px solid #f2f2f2;
+          justify-content: space-between;
+          align-items: center;
+          .leftShow {
+            display: flex;
             width: px2rpx(180);
-            height: px2rpx(19);
-            color: #a6a6a6;
-            font-size: px2rpx(13);
-            line-height: px2rpx(27);
-            text-align: left;
-            font-weight: bold;
+            height: px2rpx(39);
+            .text_1340X1 {
+              width: px2rpx(180);
+              height: px2rpx(19);
+              color: #a6a6a6;
+              font-size: px2rpx(13);
+              line-height: px2rpx(27);
+              text-align: left;
+              font-weight: bold;
+            }
+            .text_2481X1 {
+              width: px2rpx(210);
+              height: px2rpx(22);
+              color: rgba(56, 56, 56, 1);
+              font-size: px2rpx(15);
+              line-height: px2rpx(22);
+              text-align: left;
+              font-weight: bold;
+            }
+            .text_2482X1 {
+              width: px2rpx(135);
+              height: px2rpx(19);
+              color: rgba(80, 80, 80, 1);
+              font-size: px2rpx(13);
+              height: px2rpx(22);
+              text-align: left;
+            }
           }
-          .text_2481X1 {
-            width: px2rpx(210);
-            height: px2rpx(22);
-            color: rgba(56, 56, 56, 1);
-            font-size: px2rpx(15);
-            line-height: px2rpx(22);
-            text-align: left;
-            font-weight: bold;
-          }
-          .text_2482X1 {
-            width: px2rpx(135);
-            height: px2rpx(19);
-            color: rgba(80, 80, 80, 1);
-            font-size: px2rpx(13);
-            height: px2rpx(22);
-            text-align: left;
-          }
-        }
-        .rightShow {
-          display: flex;
-          width: px2rpx(100);
-          height: px2rpx(39);
-          margin-right: px2rpx(10);
-          .text_1341X1 {
+          .rightShow {
+            display: flex;
             width: px2rpx(100);
-            height: px2rpx(19);
-            color: #a6a6a6;
-            font-size: px2rpx(13);
-            line-height: px2rpx(27);
-            text-align: right;
-            font-weight: bold;
+            height: px2rpx(39);
+            margin-right: px2rpx(10);
+            .text_1341X1 {
+              width: px2rpx(100);
+              height: px2rpx(19);
+              color: #a6a6a6;
+              font-size: px2rpx(13);
+              line-height: px2rpx(27);
+              text-align: right;
+              font-weight: bold;
+            }
           }
         }
-      }
-      .itemContent {
-        display: flex;
-        border-bottom: 1px solid #f2f2f2;
-        justify-content: space-between;
-        align-items: center;
-        .leftShow {
-          width: px2rpx(180);
-          height: px2rpx(39);
-          .text_2481X1 {
-            width: px2rpx(210);
-            height: px2rpx(22);
-            color: rgba(56, 56, 56, 1);
-            font-size: px2rpx(15);
-            line-height: px2rpx(22);
-            text-align: left;
-            font-weight: bold;
-          }
-          .text_2482X1 {
-            width: px2rpx(135);
-            height: px2rpx(19);
-            color: rgba(80, 80, 80, 1);
-            font-size: px2rpx(13);
-            height: px2rpx(22);
-            text-align: left;
-          }
-        }
-        .rightShow {
+        .itemContent {
+          padding: px2rpx(15);
           display: flex;
-          width: px2rpx(130);
-          height: px2rpx(39);
-          .text_2488X1 {
-            width: px2rpx(125);
-            height: px2rpx(18);
-            color: rgba(166, 166, 166, 1);
-            font-size: px2rpx(12);
-            text-align: left;
+          justify-content: space-between;
+          align-items: center;
+          .leftShow {
+            width: px2rpx(180);
+            height: px2rpx(39);
+            .text_2481X1 {
+              width: px2rpx(210);
+              height: px2rpx(22);
+              color: rgba(56, 56, 56, 1);
+              font-size: px2rpx(15);
+              line-height: px2rpx(22);
+              text-align: left;
+              font-weight: bold;
+            }
+            .text_2482X1 {
+              width: px2rpx(135);
+              height: px2rpx(19);
+              color: rgba(80, 80, 80, 1);
+              font-size: px2rpx(13);
+              height: px2rpx(22);
+              text-align: left;
+            }
           }
+          .rightShow {
+            display: flex;
+            width: px2rpx(130);
+            height: px2rpx(39);
+            .text_2488X1 {
+              width: px2rpx(125);
+              height: px2rpx(18);
+              color: rgba(166, 166, 166, 1);
+              font-size: px2rpx(12);
+              text-align: left;
+            }
+          }
+        }
+        .itemFooter {
+          padding: 0 px2rpx(15);
+          display: flex;
+          margin-top: px2rpx(26);
+          border-bottom: 1px solid #f2f2f2;
+          justify-content: space-between;
+          align-items: center;
+          .leftShow {
+            width: px2rpx(180);
+            height: px2rpx(39);
+            line-height: px2rpx(39);
+            .text_2487X1 {
+              width: px2rpx(25);
+              height: px2rpx(21);
+              color: rgba(56, 56, 56, 1);
+              font-size: px2rpx(14);
+              text-align: left;
+              font-weight: bold;
+            }
+          }
+          .rightShow {
+            display: flex;
+            position: relative;
+            // top: px2rpx(0);
+            width: px2rpx(130);
+            height: px2rpx(39);
+            .text_2486X1 {
+              width: px2rpx(74);
+              height: px2rpx(28);
+              line-height: px2rpx(28);
+              color: rgba(56, 56, 56, 1);
+              box-shadow: rgba(242, 242, 242, 1) solid 1px;
+              border-radius: px2rpx(4);
+              font-size: px2rpx(13);
+              text-align: center;
+            }
+          }
+        }
+        .itemSpt {
+          height: px2rpx(10);
+          background: #f2f2f2;
         }
       }
     }
