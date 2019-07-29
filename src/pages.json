@@ -2,6 +2,12 @@
   "pages": [
     //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
     {
+      "path": "pages/orderManager/orderManager",
+      "style": {
+        "navigationBarTitleText": "订单"
+      }
+    },
+    {
       "path": "pages/menu/menu",
       "style": {
         "navigationBarTitleText": "咖啡配单和小吃"
@@ -35,7 +41,7 @@
       "selectedIconPath": "static/bottomBar/菜单.png",
       "text": "菜单"
     }, {
-      "pagePath": "pages/index/index",
+      "pagePath": "pages/orderManager/orderManager",
       "iconPath": "static/bottomBar/订单.png",
       "selectedIconPath": "static/bottomBar/订单.png",
       "text": "订单"
