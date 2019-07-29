@@ -66,8 +66,24 @@
                     @rippleTap="operateOption"
                   >
                     <!-- <img :src="item['img']" alt="" /> -->
-                    <view class="text_2486X1" style="display:flex">
-                      <view>再来一单</view>
+                    <view
+                      style="display:flex;width:500rpx;justify-content:flex-end"
+                    >
+                      <view
+                        class="text_2486X1"
+                        style="color:rgba(56, 56, 56, 1);background:#f2f2f2;border:1px solid #f2f2f2"
+                        >再来一单</view
+                      >
+                      <view
+                        class="text_2486X1"
+                        style="color:rgba(255, 129, 2, 1);background:#fff;border:1px solid rgba(255, 129, 2, 1)"
+                        >去支付</view
+                      >
+                      <view
+                        class="text_2486X1"
+                        style="color:rgba(144, 192, 239, 1);background:#fff;border:1px solid rgba(144, 192, 239, 1)"
+                        >去评价</view
+                      >
                     </view>
                   </luButtonRipple>
                 </view>
@@ -271,7 +287,7 @@ export default {
             justify-content: space-between;
             align-items: center;
             .leftShow {
-              width: px2rpx(180);
+              width: px2rpx(50);
               height: px2rpx(39);
               line-height: px2rpx(39);
               .text_2487X1 {
@@ -287,8 +303,9 @@ export default {
               display: flex;
               position: relative;
               // top: px2rpx(0);
-              width: px2rpx(130);
+              width: px2rpx(250);
               height: px2rpx(39);
+              justify-content: space-around;
               .text_2486X1 {
                 width: px2rpx(74);
                 height: px2rpx(28);
@@ -298,6 +315,7 @@ export default {
                 border-radius: px2rpx(4);
                 font-size: px2rpx(13);
                 text-align: center;
+                margin-left: px2rpx(10);
               }
             }
           }
