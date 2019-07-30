@@ -68,20 +68,24 @@
                     <!-- <img :src="item['img']" alt="" /> -->
                     <view
                       style="display:flex;width:500rpx;justify-content:flex-end"
+                      @click="goOperate($event)"
                     >
                       <view
                         class="text_2486X1"
                         style="color:rgba(56, 56, 56, 1);background:#f2f2f2;border:1px solid #f2f2f2"
+                        id="再来一单"
                         >再来一单</view
                       >
                       <view
                         class="text_2486X1"
                         style="color:rgba(255, 129, 2, 1);background:#fff;border:1px solid rgba(255, 129, 2, 1)"
+                        id="去支付"
                         >去支付</view
                       >
                       <view
                         class="text_2486X1"
                         style="color:rgba(144, 192, 239, 1);background:#fff;border:1px solid rgba(144, 192, 239, 1)"
+                        id="去评价"
                         >去评价</view
                       >
                     </view>
@@ -150,6 +154,24 @@ export default {
     },
     operateOption () {
       console.log('123');
+    },
+    goOperate (e) {
+      console.log('goOperate_e_', e.target.id)
+      let routerPath = '';
+      switch (e.target.id) {
+        case '去评价':
+          routerPath = '/pages/orderManager/evaluation'
+          break;
+        case '去支付':
+          routerPath = '/pages/orderManager/evaluation'
+          break;
+        case '再来一单':
+          routerPath = '/pages/orderManager/evaluation'
+          break;
+      }
+      uni.navigateTo({
+        url: '/pages/orderManager/evaluation'
+      });
     }
   }
 }
