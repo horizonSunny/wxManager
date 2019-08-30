@@ -6,6 +6,7 @@ import { baseUrl } from './global'
 function _reqlog(req) {
   if (process.env.NODE_ENV === 'development') {
     console.log('请求地址：' + req.url, req.data || req.params)
+    console.log('请求信息：' + req)
   }
   //TODO 调接口异步写入日志数据库
 }
