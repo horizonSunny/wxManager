@@ -1,11 +1,14 @@
 // 异步
 let set = function(key, value) {
-  const promise = new Promise(function(resolve) {
+  const promise = new Promise(function(resolve, reject) {
     uni.setStorage({
       key: key,
       data: value,
       success: function() {
         resolve(value)
+      },
+      fail: function(err) {
+        reject(err)
       }
     })
   })
