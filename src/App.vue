@@ -4,14 +4,9 @@ export default {
   // 应用生命周期,
   // 初始化 uni-app
   onLaunch: function () {
-    storage.set('access_token', '123').then((value) => {
-      console.log('set_token_value_', value);
-    })
-    storage.get('access_token').then((value) => {
-      console.log('get_token_value_', value);
-    }).catch((error) => {
-      console.log('error_', error)
-    })
+    // storage.set('access_token', '456').then((value) => {
+    //   console.log('set_token_value_', value);
+    // })
   },
   // 从后台进入前台显示
   onShow: function () {

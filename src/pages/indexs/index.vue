@@ -102,8 +102,6 @@ export default {
     uniSwipeAction,
     sunnyList,
     sunnyListItem
-    // uniList
-    // list
   },
   data () {
     return {
