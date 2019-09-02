@@ -167,16 +167,15 @@ export default {
     }
   },
   onLoad () {
-    this.$api.get('luckin/getMenuList').then((res) => {
+    this.$http.get('luckin/getMenuList').then((res) => {
       this.categoryList = res.data
       this.menuList = res.data.map((item) => {
         return item.classifyName
       })
-      // this.menuList = ['12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '12', '13']
       this.activeSelected = this.menuList[0]
     })
     // getpageList
-    this.$api.get('luckin/menuSlideshow').then((res) => {
+    this.$http.get('luckin/menuSlideshow').then((res) => {
       this.bananaList = res.data
     })
   },

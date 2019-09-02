@@ -122,7 +122,7 @@ export default {
     }
   },
   onLoad () {
-    this.$api.get('luckin/orderManager').then((res) => {
+    this.$http.get('luckin/orderManager').then((res) => {
       this.menuList['all'] = res.data
       for (let item = 0; item < res.data.length; item++) {
         switch (res.data[item]['type']) {

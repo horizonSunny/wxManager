@@ -5,7 +5,37 @@ export default {
   // 初始化 uni-app
   onLaunch: function () {
     storage.set('access_token', '456').then((value) => {
-      console.log('set_token_value_', value);
+      // console.log('set_token_value_', value);
+    })
+    wx.checkSession({
+      success () {
+        console.log('微信登陆态成功');
+        //session_key 未过期，并且在本生命周期一直有效
+      },
+      fail () {
+        // session_key 已经失效，需要重新执行登录流程
+        // wx.login() //重新登录
+        console.log('微信登陆态失效');
+        wx.login({
+          success (res) {
+            if (res.code) {
+              //发起网络请求
+              // 这边要发送一个code值，进行后段appid+secret的保存就行
+              // this.$http.post('/user', { code: res.code })
+              //   .then(function (response) {
+              //     storage.set('access_token', response).then((value) => {
+              //     })
+              //   })
+              //   .catch(function (error) {
+              //     console.log(error);
+              //   });
+              // console.log('登录成功！')
+            } else {
+              console.log('登录失败！')
+            }
+          }
+        })
+      }
     })
   },
   // 从后台进入前台显示
