@@ -19,9 +19,9 @@ export default {
       this.loginMiss = true
     }).catch((error) => {
       console.log('error_', error)
-      uni.reLaunch({
-        url: 'menu/menu'
-      });
+      // uni.reLaunch({
+      //   url: 'menu/menu'
+      // });
     })
   }
 }
