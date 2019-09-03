@@ -2,13 +2,19 @@
   <view>
     <img src="../../static/littleFrog/frog.jpeg" />
     <button type="primary" open-type="getUserInfo" @getuserinfo="getUserInfo">
-      微信登录1
+      微信登录
     </button>
-    <button @click="sss">授权接口</button>
+    <button @click="sss">手机号登陆</button>
+    <img :src="avatarUrl" alt="暂无图片" />
   </view>
 </template>
 <script>
 export default {
+  data () {
+    return {
+      avatarUrl: ''
+    }
+  },
   onLoad () {
     uni.getLocation({
       type: 'wgs84',
@@ -22,7 +28,10 @@ export default {
     sss () {
       console.log('213')
     },
-    getUserInfo () { },
+    getUserInfo (e) {
+      console.log('e.detail.userInfo.avatarUrl_', e.detail.userInfo)
+      this.avatarUrl = e.detail.userInfo.avatarUrl
+    },
     getPhoneNumber () {
       console.log('res', e);
     }
