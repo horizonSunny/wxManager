@@ -102,11 +102,11 @@
               background-color: #130b0b31;
               position: absolute;"
     >
-      <!-- <menuModal
+      <menuModal
         :modal-show="openModal"
         :pitch="pitchDrink"
         @closeModal="closeModel"
-      ></menuModal> -->
+      ></menuModal>
       <view v-for="(item, index) in testList" :key="index">{{ item }}</view>
     </view>
   </view>
@@ -185,6 +185,17 @@ export default {
     this.$http.get('luckin/menuSlideshow').then((res) => {
       this.bananaList = res.data
     })
+    // uni.showModal({
+    //   title: '提示',
+    //   content: '这是一个模态弹窗',
+    //   success: function (res) {
+    //     if (res.confirm) {
+    //       console.log('用户点击确定');
+    //     } else if (res.cancel) {
+    //       console.log('用户点击取消');
+    //     }
+    //   }
+    // });
   },
   computed: {
     testList () {

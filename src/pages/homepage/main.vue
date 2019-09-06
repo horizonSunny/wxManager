@@ -8,7 +8,9 @@
         <img src="../../static/homePage/main/组件-线上买药背景.png" alt="" />
         <div class="text_info">
           <div class="buy_online">线上买药</div>
-          <div class="buy_confirm">点击购买<i class="arrows"></i></div>
+          <div @click="goShopping" class="buy_confirm">
+            点击购买<i class="arrows"></i>
+          </div>
         </div>
       </div>
       <div class="group_module">
@@ -36,7 +38,14 @@
 </template>
 <script>
 export default {
-
+  methods: {
+    goShopping () {
+      uni.navigateTo({
+        url: 'onlineShopping/index',
+        animationType: 'none'
+      });
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -93,7 +102,7 @@ export default {
         height: px2rpx(22);
         line-height: px2rpx(22);
         i {
-          margin-left: px2rpx(2);
+          margin-left: px2rpx(5);
         }
       }
     }
