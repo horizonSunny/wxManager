@@ -5,7 +5,7 @@
 </template>
 <script>
 import * as storage from '../config/storage'
-import login from './homePage/login'
+import login from './login/login'
 export default {
   components: { login },
   data: function () {
