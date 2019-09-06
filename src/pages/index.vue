@@ -20,7 +20,7 @@ export default {
     }).catch((error) => {
       console.log('error_', error)
       uni.reLaunch({
-        url: 'menu/menu'
+        url: 'homepage/main'
       });
     })
   }

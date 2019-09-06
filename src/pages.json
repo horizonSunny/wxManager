@@ -6,7 +6,10 @@
       "path": "pages/login/login"
     },
     {
-      "path": "pages/homePage/main"
+      "path": "pages/homepage/main",
+      "style": {
+        "navigationStyle": "custom"
+      }
     },
     {
       "path": "pages/orderManager/orderManager",
@@ -23,6 +26,7 @@
     {
       "path": "pages/menu/menu",
       "style": {
+        "navigationStyle": "custom",
         "navigationBarTitleText": "我的"
       }
     }
@@ -39,15 +43,16 @@
     "borderStyle": "black",
     "backgroundColor": "#f8f8f8",
     "list": [{
+        "pagePath": "pages/homepage/main",
+        "iconPath": "static/bottomBar/菜单.png",
+        "selectedIconPath": "static/bottomBar/菜单.png",
+        "text": "首页"
+      },
+      {
         "pagePath": "pages/menu/menu",
         "iconPath": "static/bottomBar/菜单.png",
         "selectedIconPath": "static/bottomBar/菜单.png",
         "text": "购药咨询"
-      }, {
-        "pagePath": "pages/orderManager/orderManager",
-        "iconPath": "static/bottomBar/订单.png",
-        "selectedIconPath": "static/bottomBar/订单.png",
-        "text": "疾病科普"
       },
       {
         "pagePath": "pages/orderManager/orderManager",
