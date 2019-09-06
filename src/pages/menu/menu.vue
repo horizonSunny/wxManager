@@ -95,17 +95,20 @@
       </scroll-view>
     </view>
     <view
+      @click="closeModel()"
       v-if="openModal"
       style="  width: 100%;
               height: 100%;
               background-color: #130b0b31;
               position: absolute;"
-      ><menuModal
+    >
+      <!-- <menuModal
         :modal-show="openModal"
         :pitch="pitchDrink"
         @closeModal="closeModel"
-      ></menuModal
-    ></view>
+      ></menuModal> -->
+      <view v-for="(item, index) in testList" :key="index">{{ item }}</view>
+    </view>
   </view>
 </template>
 
@@ -115,6 +118,9 @@ import sunnyList from '../../components/list/list'
 import sunnyListItem from '../../components/list/listItem'
 import lineThrough from '../../components/line-through/lineThrough'
 import menuModal from './menuModal'
+
+// 使用store
+import { mapActions } from 'vuex'
 export default {
   components: {
     uniSwiperDot,
@@ -168,6 +174,7 @@ export default {
   },
   onLoad () {
     this.$http.get('luckin/getMenuList').then((res) => {
+      console.log('luckin/getMenuList_', res.data);
       this.categoryList = res.data
       this.menuList = res.data.map((item) => {
         return item.classifyName
@@ -179,7 +186,12 @@ export default {
       this.bananaList = res.data
     })
   },
-
+  computed: {
+    testList () {
+      console.log('this.$store_', this.$store);
+      return this.$store.getters.shoppingInfo
+    }
+  },
   methods: {
     change (e) {
       this.current = e.detail.current;
@@ -233,6 +245,7 @@ export default {
       this.openModal = true
       this.pitchDrink = info
       console.log('this.pitchDrink_', this.pitchDrink);
+      this.$store.dispatch('setCommodityInfo', 2)
     },
     closeModel () {
       this.openModal = false

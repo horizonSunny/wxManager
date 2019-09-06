@@ -14,14 +14,14 @@ export default {
     }
   },
   onReady: function () {
-    storage.get('access_token').then((value) => {
+    storage.get('access_tokens').then((value) => {
       console.log('get_token_value_', value)
       this.loginMiss = true
     }).catch((error) => {
       console.log('error_', error)
-      // uni.reLaunch({
-      //   url: 'menu/menu'
-      // });
+      uni.reLaunch({
+        url: 'menu/menu'
+      });
     })
   }
 }

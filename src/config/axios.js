@@ -42,7 +42,7 @@ http.interceptors.request.use(config => {
 // 拦截器 在请求之后拦截
 http.interceptors.response.use(response => {
   // _reslog(response)
-  return response
+  return response.data
   // code...
 })
 

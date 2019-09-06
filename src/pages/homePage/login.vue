@@ -4,7 +4,13 @@
     <button type="primary" open-type="getUserInfo" @getuserinfo="getUserInfo">
       微信登录
     </button>
-    <button @click="sss">手机号登陆</button>
+    <button
+      class="phone_btn"
+      open-type="getPhoneNumber"
+      @getphonenumber="getPhoneNumber"
+    >
+      获取手机号
+    </button>
     <img :src="avatarUrl" alt="暂无图片" />
   </view>
 </template>
