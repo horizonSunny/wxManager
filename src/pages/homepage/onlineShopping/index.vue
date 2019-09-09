@@ -25,11 +25,41 @@
               v-for="(itemInList, indexInList) in item"
               :key="indexInList"
             >
+              <view class="itemImg">
+                <img src="../../../static/menu/图片 285.png" alt="" />
+              </view>
+              <view class="itemInfo">
+                <view class="name">
+                  {{ itemInList["title"] }}
+                </view>
+                <view class="specification">
+                  规格: {{ itemInList["specification"] }}
+                </view>
+                <view class="priceOperate">
+                  <view class="price">¥ {{ itemInList["price"] }}</view>
+                  <view class="operate">
+                    <view @click="operateShopping('minus', itemInList)">
+                      <uni-icon
+                        type=""
+                        class="iconfont icon-minus icon_style"
+                      ></uni-icon>
+                    </view>
+                    {{ itemInList["amount"] }}
+                    <view @click="operateShopping('add', itemInList)">
+                      <uni-icon
+                        type=""
+                        class="iconfont icon-plus icon_style"
+                      ></uni-icon>
+                    </view>
+                  </view>
+                </view>
+              </view>
             </view>
           </scroll-view>
         </swiper-item>
       </swiper>
     </view>
+    <shoppingCart :shop-info="shopInfo"></shoppingCart>
   </view>
 </template>
 <script>
@@ -37,11 +67,13 @@ import * as storage from '../../../config/storage'
 import sunnyListItem from '../../../components/list/listItem'
 import luButtonRipple from '@/components/lu-button-ripple/lu-button-ripple.vue';
 import topBar from '../../../components/topNavigation/index'
+import shoppingCart from '../../../components/shoppingCart/index'
 export default {
   components: {
     sunnyListItem,
     luButtonRipple,
-    topBar
+    topBar,
+    shoppingCart
   },
   data: function () {
     return {
@@ -56,6 +88,10 @@ export default {
       activeColor: 'red',
       fontSize: 13,
       // allHeight: 100
+      shopInfo: {
+        mount: 2,
+        totalPrice: '1000'
+      }
     }
   },
   computed: {
@@ -70,6 +106,7 @@ export default {
   onLoad () {
     this.$http.get('wxManager/getItemsList').then((res) => {
       for (let item = 0; item < res.data.length; item++) {
+        res.data[item]['amount'] = 0
         switch (res.data[item]['type']) {
           case 0:
             this.menuList['prescription'].push(res.data[item])
@@ -117,6 +154,15 @@ export default {
       uni.navigateTo({
         url: '/pages/orderManager/evaluation'
       });
+    },
+    // 下面就是操作购物车
+    operateShopping (operate, itemInfo) {
+      console.log("itemInfo['amount']_", itemInfo['amount']);
+      if (operate === 'add') {
+        itemInfo['amount'] += 1
+      } else {
+        itemInfo['amount'] !== 0 && itemInfo['amount']--;
+      }
     }
   }
 }
@@ -158,7 +204,59 @@ export default {
       .scrollView {
         width: 100%;
         height: 100%;
+        background: #f3f3f3;
         .itemMessage {
+          display: flex;
+          width: 100%;
+          height: px2rpx(96);
+          margin-bottom: px2rpx(5);
+          background: #ffffff;
+          padding: px2rpx(29) px2rpx(15);
+          .itemImg {
+            width: px2rpx(96);
+            height: px2rpx(96);
+            margin-right: px2rpx(14);
+            img {
+              background-size: cover;
+              width: 100%;
+              height: 100%;
+            }
+          }
+          .itemInfo {
+            display: flex;
+            flex: 1;
+            margin-right: px2rpx(20);
+            flex-direction: column;
+            .name {
+              font-size: px2rpx(18);
+              color: #282828;
+              letter-spacing: 0;
+            }
+            .specification {
+              font-size: px2rpx(15);
+              color: #6c6c6c;
+              letter-spacing: 0;
+              margin-bottom: px2rpx(30);
+            }
+            .priceOperate {
+              display: flex;
+              justify-content: space-between;
+              align-items: flex-end;
+              .price {
+                font-size: px2rpx(18);
+                color: #f5b11c;
+                letter-spacing: 0;
+              }
+              .operate {
+                display: flex;
+                align-items: center;
+                .icon_style {
+                  color: #4da08a;
+                  font-size: px2rpx(29);
+                }
+              }
+            }
+          }
         }
       }
     }

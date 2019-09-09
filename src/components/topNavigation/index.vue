@@ -51,6 +51,7 @@ export default {
     margin-top: px2rpx(-8);
     line-height: px2rpx(16);
     font-size: px2rpx(16);
+    margin-right: px2rpx(14);
   }
 }
 </style>
