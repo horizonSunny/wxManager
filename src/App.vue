@@ -6,11 +6,11 @@ export default {
   onLaunch: function () {
     const capsuleInfo = wx.getMenuButtonBoundingClientRect()
     const statusBarHeight = wx.getSystemInfoSync().statusBarHeight
-    console.log('statusBarHeight', statusBarHeight);
-    console.log('capsuleInfo', capsuleInfo);
-    storage.set('capsuleInfo', capsuleInfo).then((value) => {
-      console.log('胶囊信息保存成功');
-    })
+    const reduce = capsuleInfo.top - statusBarHeight
+    const allHeight = reduce + capsuleInfo.top
+    // console.log('statusBarHeight', statusBarHeight);
+    // console.log('capsuleInfo', capsuleInfo);
+    storage.setSync('capsuleInfo', allHeight)
     storage.set('access_token', '456').then((value) => {
       // console.log('set_token_value_', value);
     })

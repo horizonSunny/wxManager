@@ -36,4 +36,23 @@ let get = function(key) {
   //   }
   // })
 }
-export { set, get }
+// 同步
+let setSync = function(key, value) {
+  try {
+    uni.setStorageSync(key, value)
+  } catch (error) {
+    // error
+    console.log('setSync_', error)
+  }
+}
+let getSync = function(key, value) {
+  try {
+    const value = uni.getStorageSync(key)
+    if (value) {
+      return value
+    }
+  } catch (e) {
+    // error
+  }
+}
+export { set, get, setSync, getSync }

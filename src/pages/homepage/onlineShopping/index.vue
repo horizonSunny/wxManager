@@ -1,8 +1,6 @@
 <template>
   <view class="wrap">
-    <view class="status-contents">
-      <view class="status top-view"></view>
-    </view>
+    <topBar></topBar>
     <!-- 头部导航 -->
     <view class="swiperMenu">
       <view
@@ -105,12 +103,15 @@
   </view>
 </template>
 <script>
+import * as storage from '../../../config/storage'
 import sunnyListItem from '../../../components/list/listItem'
 import luButtonRipple from '@/components/lu-button-ripple/lu-button-ripple.vue';
+import topBar from '../../../components/topNavigation/index'
 export default {
   components: {
     sunnyListItem,
-    luButtonRipple
+    luButtonRipple,
+    topBar
   },
   data: function () {
     return {
@@ -122,7 +123,20 @@ export default {
         finished: []
 
       },
-      currentList: 0
+      currentList: 0,
+      // new 
+      activeColor: 'red',
+      fontSize: 13,
+      // allHeight: 100
+    }
+  },
+  computed: {
+    allHeight () {
+      let capsuleHeight
+      capsuleHeight = storage.getSync('capsuleInfo')
+      console.log('capsuleHeight_', capsuleHeight);
+      return capsuleHeight
+      // console.log('capsuleHeight_', capsuleHeight);
     }
   },
   onLoad () {
@@ -187,28 +201,10 @@ export default {
   width: 100%;
   height: 100%;
   .status-contents {
-    height: var(--status-bar-height);
-    .top-view {
-      width: 100%;
-      position: fixed;
-      top: 0;
-    }
-    .status {
-      height: var(--status-bar-height);
-    }
+    height: px2rpx(88);
+    width: 100%;
+    background: red;
   }
-  // .status_bar {
-  //   height: var(--status-bar-height);
-  //   width: 100%;
-  // }
-  // .header {
-  //   height: px2rpx(88);
-  //   line-height: px2rpx(88);
-  //   text-align: center;
-  //   font-size: px2rpx(18);
-  //   color: #000000;
-  //   letter-spacing: 0;
-  // }
   .swiperMenu {
     display: flex;
     width: px2rpx(375);
