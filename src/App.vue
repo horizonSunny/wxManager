@@ -56,6 +56,7 @@ export default {
 </script>
 
 <style>
+/*全局映入图标库*/
 @import "./static/icon.css";
 /*每个页面公共css */
 page {

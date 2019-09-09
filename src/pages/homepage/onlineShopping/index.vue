@@ -1,10 +1,11 @@
 <template>
   <view class="wrap">
-    <topBar></topBar>
+    <topBar page-title="线上买药"></topBar>
     <!-- 头部导航 -->
     <view class="swiperMenu">
       <view
-        :class="currentMenu === item ? 'viewItemActive' : 'viewItem'"
+        class="viewItem"
+        :class="currentMenu === item ? 'viewItemActive' : 'viewItemDeactive'"
         v-for="(item, index) in meunOptions"
         :key="index"
         @click="selectMenu(item)"
@@ -115,8 +116,8 @@ export default {
   },
   data: function () {
     return {
-      currentMenu: '全部',
-      meunOptions: ['全部', '未完成', '已完成'],
+      currentMenu: '处方药专区',
+      meunOptions: ['处方药专区', '非传方药专区'],
       menuList: {
         all: [],
         unfinished: [],
@@ -215,12 +216,17 @@ export default {
     .viewItem {
       font-size: px2rpx(15);
       text-align: center;
-      border-bottom: 4px solid #fff;
+      width: 50%;
+      height: px2rpx(44);
+      line-height: px2rpx(44);
     }
     .viewItemActive {
-      color: #88afd5;
-      font-size: px2rpx(15);
-      border-bottom: 4px solid #88afd5;
+      color: #fff;
+      background: #4da08a;
+    }
+    .viewItemDeactive {
+      color: #4da08a;
+      background: #f3f3f3;
     }
   }
   .swiperContent {
