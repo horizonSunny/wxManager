@@ -56,6 +56,7 @@ export default {
 </script>
 
 <style>
+@import "./static/icon.css";
 /*每个页面公共css */
 page {
   width: 100%;

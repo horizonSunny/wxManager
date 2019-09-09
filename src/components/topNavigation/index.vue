@@ -7,7 +7,10 @@
         background: 'red'
       }"
     ></view>
-    <view> 你好啊!!! </view>
+    <view>
+      <uni-icon type="" class="iconfont icon-rollback"></uni-icon>
+      你好啊!!!
+    </view>
   </view>
 </template>
 <script>
