@@ -61,11 +61,33 @@
             </view>
           </view>
         </view>
-        <view class="coupon"></view>
+        <view class="coupon space_between">
+          <view>
+            <img src="../../static/homePage/orderForm/优惠券@3x.png" alt="" />
+            <span> 优惠券</span>
+          </view>
+          <view>
+            <span class="icon_sel">¥50</span>
+            <uni-icon
+              type=""
+              class="iconfont  icon-more"
+              style="font-size:15px"
+            ></uni-icon>
+          </view>
+        </view>
         <view class="orderPrice">
-          <view class="itemPrice"></view>
-          <view class="itemPrice"></view>
-          <view class="itemPrice"></view>
+          <view class="itemPrice space_between">
+            <view>商品金额</view>
+            <view>¥1000.00</view>
+          </view>
+          <view class="itemPrice space_between">
+            <view>使用优惠券</view>
+            <view>¥50.00</view>
+          </view>
+          <view class="itemPrice space_between">
+            <view>总计</view>
+            <view>¥950.00</view>
+          </view>
         </view>
       </view>
     </scroll-view>
@@ -131,10 +153,6 @@ export default {
           margin-top: px2rpx(11);
           width: 100%;
         }
-        .space_between {
-          display: flex;
-          justify-content: space-between;
-        }
         .addrresInfo {
           margin-left: px2rpx(27);
         }
@@ -193,10 +211,22 @@ export default {
         }
       }
       .coupon {
-        // padding: px2rpx(0) px2rpx(11);
+        padding: px2rpx(0) px2rpx(11);
         margin: px2rpx(5) px2rpx(0);
         height: px2rpx(44);
+        // line-height: px2rpx(44);
         background: #fff;
+        font-size: px2rpx(15);
+        align-items: center;
+        img {
+          position: relative;
+          top: px2rpx(5);
+          height: px2rpx(20);
+          width: px2rpx(20);
+        }
+        span {
+          margin-left: px2rpx(8);
+        }
       }
       .orderPrice {
         width: 100%;
@@ -207,6 +237,8 @@ export default {
           line-height: px2rpx(36);
           border-bottom: px2rpx(2) solid #f3f3f3;
           padding: px2rpx(0) px2rpx(10);
+          font-size: px2rpx(15);
+          color: #282828;
         }
       }
     }
@@ -248,5 +280,9 @@ export default {
 }
 .icon_unsel {
   color: #c3c3c3;
+}
+.space_between {
+  display: flex;
+  justify-content: space-between;
 }
 </style>
