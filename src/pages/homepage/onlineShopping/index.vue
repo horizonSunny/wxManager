@@ -216,7 +216,7 @@ export default {
               font-size: px2rpx(15);
               color: #6c6c6c;
               letter-spacing: 0;
-              margin-bottom: px2rpx(20);
+              margin-bottom: px2rpx(30);
             }
             .priceOperate {
               display: flex;

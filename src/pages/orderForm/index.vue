@@ -109,7 +109,7 @@ export default {
   height: 100%;
   background: #f3f3f3;
   .scrollView {
-    margin-top: px2rpx(2);
+    margin-top: px2rpx(1);
     display: flex;
     flex: 1;
     .wrapContent {
@@ -118,16 +118,16 @@ export default {
       .address {
         width: auto;
         background: #fff;
-        height: px2rpx(219);
+        height: px2rpx(198);
         padding: px2rpx(11) px2rpx(11);
         font-size: px2rpx(16);
         .personal {
-          height: px2rpx(109);
+          height: px2rpx(99);
           width: 100%;
-          border-bottom: px2rpx(2) dashed #f3f3f3;
+          border-bottom: px2rpx(1) dashed #f3f3f3;
         }
         .drugstore {
-          height: px2rpx(109);
+          height: px2rpx(99);
           margin-top: px2rpx(11);
           width: 100%;
         }
@@ -146,7 +146,7 @@ export default {
       }
       .shoppingInfo {
         margin-top: px2rpx(5);
-        height: px2rpx(136);
+        height: px2rpx(102);
         background: #fff;
         width: auto;
         padding: px2rpx(17) px2rpx(11);
@@ -156,7 +156,6 @@ export default {
           height: px2rpx(96);
           margin-bottom: px2rpx(5);
           background: #ffffff;
-          padding: px2rpx(29) px2rpx(15);
           .itemImg {
             width: px2rpx(96);
             height: px2rpx(96);
@@ -181,7 +180,7 @@ export default {
               font-size: px2rpx(15);
               color: #6c6c6c;
               letter-spacing: 0;
-              margin-bottom: px2rpx(20);
+              margin-bottom: px2rpx(30);
             }
             .priceOperate {
               display: flex;
@@ -194,8 +193,9 @@ export default {
         }
       }
       .coupon {
-        padding: px2rpx(0) px2rpx(11);
+        // padding: px2rpx(0) px2rpx(11);
         margin: px2rpx(5) px2rpx(0);
+        height: px2rpx(44);
         background: #fff;
       }
       .orderPrice {
