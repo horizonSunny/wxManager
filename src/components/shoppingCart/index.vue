@@ -32,9 +32,6 @@ export default {
       uni.navigateTo({
         url: '/pages/orderForm/index'
       });
-      // uni.redirectTo({
-      //   url: 'pages/orderForm/index'
-      // })
     }
   },
 }
