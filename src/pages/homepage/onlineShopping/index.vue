@@ -64,14 +64,10 @@
 </template>
 <script>
 import * as storage from '../../../config/storage'
-import sunnyListItem from '../../../components/list/listItem'
-import luButtonRipple from '@/components/lu-button-ripple/lu-button-ripple.vue';
 import topBar from '../../../components/topNavigation/index'
 import shoppingCart from '../../../components/shoppingCart/index'
 export default {
   components: {
-    sunnyListItem,
-    luButtonRipple,
     topBar,
     shoppingCart
   },
