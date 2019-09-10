@@ -1,7 +1,6 @@
 {
   "pages": [{
-      "id": "orderForm",
-      "path": "pages/orderForm/index",
+      "path": "pages/homepage/onlineShopping/index",
       "style": {
         "navigationStyle": "custom"
       }
@@ -18,7 +17,8 @@
       }
     },
     {
-      "path": "pages/homepage/onlineShopping/index",
+      "id": "orderForm",
+      "path": "pages/orderForm/index",
       "style": {
         "navigationStyle": "custom"
       }

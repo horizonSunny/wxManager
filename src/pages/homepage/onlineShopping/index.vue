@@ -59,7 +59,7 @@
         </swiper-item>
       </swiper>
     </view>
-    <shoppingCart></shoppingCart>
+    <shoppingCart v-if="shoppingCartShow"></shoppingCart>
   </view>
 </template>
 <script>
@@ -79,12 +79,14 @@ export default {
         prescription: [],
         otc: []
       },
-      currentList: 0,
+      currentList: 0
       // new 
     }
   },
   computed: {
-
+    shoppingCartShow () {
+      return (this.$store.getters.shoppingInfo.length !== 0 ? true : false)
+    }
   },
   onLoad () {
     // 这边是从后台数据拿到商品列表，两次分开操作，解藕
