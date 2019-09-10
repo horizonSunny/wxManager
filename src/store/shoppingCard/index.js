@@ -5,19 +5,41 @@
 import { deepCopy } from '../../utils/index'
 const shoppingCard = {
   state: {
-    commodityInfo: []
+    commodityInfo: [],
+    totalMount: 0,
+    totalPrice: 0
   },
   mutations: {
-    // 因为是数组，所以要使用其它方法做成响应式
+    /**
+     * 因为是数组，所以要使用其它方法做成响应式，
+     * 这边的数量改变，列表里面的数量是同一个对象，也会改变
+     * */
+
     SET_COMMODITY: (state, commodity) => {
-      const index = state.commodityInfo.length
-      console.log('SET_COMMODITY_', commodity)
-      state.commodityInfo.splice(index, 0, commodity)
+      commodity['amount'] += 1
+      let contain = state.commodityInfo.some(item => {
+        if (item['name'] === commodity['name']) {
+          return true
+        }
+      })
+      if (!contain) {
+        const index = state.commodityInfo.length
+        state.commodityInfo.splice(index, 0, commodity)
+      }
+      console.log('SET_COMMODITY_commodityInfo_', state.commodityInfo)
     },
     DEL_COMMODITY: (state, commodity) => {
-      state.commodityInfo = state.commodityInfo.filter(item => {
-        return deepCopy(item) !== deepCopy(commodity)
+      state.commodityInfo.forEach((item, index) => {
+        if (item['name'] === commodity['name'] && item['amount'] > 0) {
+          item['amount'] -= 1
+        }
       })
+      // 再把amount数量为0的药品移出购物车
+      state.commodityInfo = state.commodityInfo.filter(item => {
+        return item['amount'] !== 0
+      })
+      console.log('DE_commodityInfo_', commodity)
+      console.log('DEL_COMMODITY_commodityInfo_', state.commodityInfo)
     }
   },
   actions: {

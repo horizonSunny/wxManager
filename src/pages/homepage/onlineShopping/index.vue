@@ -30,7 +30,7 @@
               </view>
               <view class="itemInfo">
                 <view class="name">
-                  {{ itemInList["title"] }}
+                  {{ itemInList["name"] }}
                 </view>
                 <view class="specification">
                   规格: {{ itemInList["specification"] }}
@@ -59,7 +59,7 @@
         </swiper-item>
       </swiper>
     </view>
-    <shoppingCart :shop-info="shopInfo"></shoppingCart>
+    <!-- <shoppingCart></shoppingCart> -->
   </view>
 </template>
 <script>
@@ -85,23 +85,10 @@ export default {
       },
       currentList: 0,
       // new 
-      activeColor: 'red',
-      fontSize: 13,
-      // allHeight: 100
-      shopInfo: {
-        mount: 2,
-        totalPrice: '1000'
-      }
     }
   },
   computed: {
-    allHeight () {
-      let capsuleHeight
-      capsuleHeight = storage.getSync('capsuleInfo')
-      console.log('capsuleHeight_', capsuleHeight);
-      return capsuleHeight
-      // console.log('capsuleHeight_', capsuleHeight);
-    }
+
   },
   onLoad () {
     this.$http.get('wxManager/getItemsList').then((res) => {
@@ -134,34 +121,17 @@ export default {
       this.currentMenu = seletcName
 
     },
-    operateOption () {
-      console.log('123');
-    },
-    goOperate (e) {
-      console.log('goOperate_e_', e.target.id)
-      let routerPath = '';
-      switch (e.target.id) {
-        case '去评价':
-          routerPath = '/pages/orderManager/evaluation'
-          break;
-        case '去支付':
-          routerPath = '/pages/orderManager/evaluation'
-          break;
-        case '再来一单':
-          routerPath = '/pages/orderManager/evaluation'
-          break;
-      }
-      uni.navigateTo({
-        url: '/pages/orderManager/evaluation'
-      });
-    },
-    // 下面就是操作购物车
+    // 下面就是操作购物车,所以列表中的数量就是购物车中的数据，数量值只保存到购物车中
     operateShopping (operate, itemInfo) {
       console.log("itemInfo['amount']_", itemInfo['amount']);
       if (operate === 'add') {
-        itemInfo['amount'] += 1
+        // 这边操作的是一个对象，所以购物车里面数量改变，对应的列表数量也改变，引用指针对象
+        this.$store.dispatch('setCommodityInfo', itemInfo).then((res) => {
+          console.log('this.$store.state.commodityInfo_', this.$store.getters.shoppingInfo)
+        })
       } else {
-        itemInfo['amount'] !== 0 && itemInfo['amount']--;
+        // 同上
+        itemInfo['amount'] !== 0 && this.$store.dispatch('delCommodityInfo', itemInfo);
       }
     }
   }
