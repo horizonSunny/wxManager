@@ -4,7 +4,7 @@
       <view class="shoppingMount">{{ amount }}</view>
     </view>
     <view class="totalPrice"> ¥ {{ totalPrice }} </view>
-    <view class="confirm">去下单</view>
+    <view class="confirm" @click="goOrderForm">去下单</view>
   </view>
 </template>
 <script>
@@ -26,7 +26,17 @@ export default {
       console.log('this.amount_card_', shoppingPrice)
       return shoppingPrice
     }
-  }
+  },
+  methods: {
+    goOrderForm () {
+      uni.navigateTo({
+        url: '/pages/orderForm/index'
+      });
+      // uni.redirectTo({
+      //   url: 'pages/orderForm/index'
+      // })
+    }
+  },
 }
 </script>
 <style lang="scss" scoped>
