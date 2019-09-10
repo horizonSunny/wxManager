@@ -1,18 +1,32 @@
 <template>
   <view class="shopCard">
     <view class="shoppingIcon">
-      <view class="shoppingMount">{{ shopInfo["mount"] }}</view>
+      <view class="shoppingMount">{{ amount }}</view>
     </view>
-    <view class="totalPrice"> ¥ {{ shopInfo["totalPrice"] }} </view>
+    <view class="totalPrice"> ¥ {{ totalPrice }} </view>
     <view class="confirm">去下单</view>
   </view>
 </template>
 <script>
 export default {
-  props: ['shopInfo'],
-  created () {
-    console.log('shopCard_加载')
+  data () {
+    return {
+    }
   },
+  created () {
+  },
+  computed: {
+    amount () {
+      const amount = this.$store.getters.shoppingMount
+      console.log('this.amount_card_', amount)
+      return amount
+    },
+    totalPrice () {
+      const shoppingPrice = this.$store.getters.shoppingPrice
+      console.log('this.amount_card_', shoppingPrice)
+      return shoppingPrice
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

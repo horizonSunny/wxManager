@@ -59,7 +59,7 @@
         </swiper-item>
       </swiper>
     </view>
-    <!-- <shoppingCart></shoppingCart> -->
+    <shoppingCart></shoppingCart>
   </view>
 </template>
 <script>
@@ -129,11 +129,9 @@ export default {
     },
     // 下面就是操作购物车,所以列表中的数量就是购物车中的数据，数量值只保存到购物车中
     operateShopping (operate, itemInfo) {
-      console.log("itemInfo['amount']_", itemInfo['amount']);
       if (operate === 'add') {
         // 这边操作的是一个对象，所以购物车里面数量改变，对应的列表数量也改变，引用指针对象
         this.$store.dispatch('setCommodityInfo', itemInfo).then((res) => {
-          console.log('this.$store.state.commodityInfo_', this.$store.getters.shoppingInfo)
         })
       } else {
         // 同上

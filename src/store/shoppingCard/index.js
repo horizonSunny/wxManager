@@ -5,9 +5,7 @@
 import { deepCopy } from '../../utils/index'
 const shoppingCard = {
   state: {
-    commodityInfo: [],
-    totalMount: 0,
-    totalPrice: 0
+    commodityInfo: []
   },
   mutations: {
     /**
@@ -38,13 +36,10 @@ const shoppingCard = {
       state.commodityInfo = state.commodityInfo.filter(item => {
         return item['amount'] !== 0
       })
-      console.log('DE_commodityInfo_', commodity)
-      console.log('DEL_COMMODITY_commodityInfo_', state.commodityInfo)
     }
   },
   actions: {
     setCommodityInfo({ commit }, commodity) {
-      console.log('setCommodityInfo_', commodity)
       commit('SET_COMMODITY', commodity)
     },
     delCommodityInfo({ commit }, commodity) {

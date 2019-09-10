@@ -6,7 +6,7 @@ const getters = {
   shoppingInfo: state => state.shoppingCard.commodityInfo,
   // 获取商品总数量
   shoppingMount: state => {
-    const mount = 0
+    let mount = 0
     state.shoppingCard.commodityInfo.forEach(item => {
       mount += item['amount']
     })
@@ -14,11 +14,15 @@ const getters = {
   },
   // 获取商品总价格
   shoppingPrice: state => {
-    const totalPrice = 0
+    let totalPrice = 0
     state.shoppingCard.commodityInfo.forEach(item => {
       totalPrice += item['amount'] * item['price']
     })
     return totalPrice
+  },
+  // test
+  testInfoMessage: state => {
+    return state.shoppingCard.test
   }
 }
 export default getters
