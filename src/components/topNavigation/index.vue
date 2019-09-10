@@ -1,5 +1,5 @@
 <template>
-  <view style="height:auto;width:100%;margin-bottom:10rpx">
+  <view style="height:auto;width:100%;padding-bottom:10rpx;background:#fff">
     <view
       :style="{
         height: allHeight + 'px',
