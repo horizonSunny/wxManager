@@ -1,11 +1,5 @@
 {
   "pages": [{
-      "path": "pages/homepage/onlineShopping/index",
-      "style": {
-        "navigationBarTitleText": "购药咨询",
-        "navigationStyle": "custom"
-      }
-    }, {
       "path": "pages/index"
     },
     {
@@ -21,6 +15,13 @@
       "path": "pages/orderManager/orderManager",
       "style": {
         "navigationBarTitleText": "购药咨询"
+      }
+    },
+    {
+      "path": "pages/homepage/onlineShopping/index",
+      "style": {
+        "navigationBarTitleText": "购药咨询",
+        "navigationStyle": "custom"
       }
     },
     {

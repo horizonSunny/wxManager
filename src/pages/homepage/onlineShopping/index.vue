@@ -91,6 +91,7 @@ export default {
 
   },
   onLoad () {
+    // 这边是从后台数据拿到商品列表，两次分开操作，解藕
     this.$http.get('wxManager/getItemsList').then((res) => {
       for (let item = 0; item < res.data.length; item++) {
         res.data[item]['amount'] = 0
@@ -104,6 +105,11 @@ export default {
         }
       }
       console.log('this.menuList_', this.menuList)
+    }).then(() => {
+      // 初始页面的时候这边要和购物车做一个比对，如果命名相同的话，将amount替换为购物车的数量
+      const shoppingCart = this.$store.getters.shoppingInfo
+      this.compareShopping(this.menuList['prescription'], shoppingCart)
+      this.compareShopping(this.menuList['otc'], shoppingCart)
     })
   },
   methods: {
@@ -132,6 +138,16 @@ export default {
       } else {
         // 同上
         itemInfo['amount'] !== 0 && this.$store.dispatch('delCommodityInfo', itemInfo);
+      }
+    },
+    // 这边是一个比对函数,用来购物车替换列表,第一个参数是列表商品，第二个是购物车商品
+    compareShopping (allCommodity, shoppingCart) {
+      for (let item = 0; item < allCommodity.length; item++) {
+        for (let commodity = 0; commodity < shoppingCart.length; commodity++) {
+          if (allCommodity[item]['name'] === shoppingCart[commodity]['name']) {
+            allCommodity.splice(item, 1, shoppingCart[commodity])
+          }
+        }
       }
     }
   }
