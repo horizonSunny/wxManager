@@ -19,10 +19,10 @@ const getters = {
       totalPrice += item['amount'] * item['price']
     })
     return totalPrice
-  },
-  // 获取用户默认地址
-  customerAddress: state => {
-    return
   }
+  // 获取用户默认地址
+  // customerAddress: state => {
+  //   return
+  // }
 }
 export default getters

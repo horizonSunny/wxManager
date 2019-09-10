@@ -1,5 +1,7 @@
 const address = {
-  state: {},
+  state: {
+    customerAddress: []
+  },
   mutations: {},
   actions: {}
 }
