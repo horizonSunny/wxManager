@@ -1,14 +1,15 @@
 {
   "pages": [{
-      "path": "pages/homepage/onlineShopping/index",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    }, {
       "path": "pages/index"
     },
     {
       "path": "pages/login/login"
+    },
+    {
+      "path": "pages/homepage/onlineShopping/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
     },
     {
       "path": "pages/homepage/main",

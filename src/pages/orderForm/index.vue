@@ -39,7 +39,7 @@
         <view class="shoppingInfo">
           <view
             class="itemMessage"
-            v-for="(itemInList, indexInList) in item"
+            v-for="(itemInList, indexInList) in shoppingCart"
             :key="indexInList"
           >
             <view class="itemImg">
@@ -78,21 +78,23 @@
         <view class="orderPrice">
           <view class="itemPrice space_between">
             <view>商品金额</view>
-            <view>¥1000.00</view>
+            <view>¥{{ shoppingPrice }}</view>
           </view>
           <view class="itemPrice space_between">
             <view>使用优惠券</view>
-            <view>¥50.00</view>
+            <view>¥{{ couponPrice }}</view>
           </view>
           <view class="itemPrice space_between">
             <view>总计</view>
-            <view>¥950.00</view>
+            <view>¥{{ totalPrice }}</view>
           </view>
         </view>
       </view>
     </scroll-view>
     <view class="confirmOrder">
-      <view class="payInfo">支付：<span>¥950</span></view>
+      <view class="payInfo"
+        >支付：<span>¥{{ totalPrice }}</span></view
+      >
       <view class="confirm">确认下单</view>
     </view>
   </view>
@@ -107,19 +109,21 @@ export default {
   data () {
     return {
       active: true,
-      item: [{
-        "type": 0,
-        "name": "GV-971甘露特纳胶囊",
-        "price": 1000,
-        "itemImg": "",
-        "specification": "100mg*1",
-        amount: 1
-      }]
+      shoppingCart: null,
+      shoppingPrice: null,
+      couponPrice: 50,
     }
   },
   onLoad () {
-    const shoppingCart = this.$store.getters.shoppingInfo
-    console.log('shoppingCart_', shoppingCart);
+    this.shoppingCart = this.$store.getters.shoppingInfo;
+    this.shoppingPrice = this.$store.getters.shoppingPrice
+  },
+  computed: {
+    totalPrice () {
+      const totalPrice = this.shoppingPrice - this.couponPrice
+      console.log('totalPrice_', totalPrice)
+      return totalPrice
+    }
   }
 }
 </script>

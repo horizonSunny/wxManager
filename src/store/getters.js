@@ -20,9 +20,9 @@ const getters = {
     })
     return totalPrice
   },
-  // test
-  testInfoMessage: state => {
-    return state.shoppingCard.test
+  // 获取用户默认地址
+  customerAddress: state => {
+    return
   }
 }
 export default getters
