@@ -1,5 +1,11 @@
 {
   "pages": [{
+      "id": "orderForm",
+      "path": "pages/orderForm/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    }, {
       "path": "pages/index"
     },
     {
@@ -13,13 +19,6 @@
     },
     {
       "path": "pages/homepage/onlineShopping/index",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "id": "orderForm",
-      "path": "pages/orderForm/index",
       "style": {
         "navigationStyle": "custom"
       }
