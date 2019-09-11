@@ -47,7 +47,10 @@
             :key="indexInList"
           >
             <view class="itemImg">
-              <img src="../../static/menu/图片 285.png" alt="" />
+              <img
+                src="../../static/homePage/main/组件-banner背景.png"
+                alt=""
+              />
             </view>
             <view class="itemInfo">
               <view class="name">

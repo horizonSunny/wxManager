@@ -12,14 +12,24 @@
       @clickNav="onClickNav"
       @clickItem="onClickItem"
     /> -->
-    <w-picker
-      mode="region"
-      :defaultVal="['浙江省', '杭州市', '滨江区']"
-      @confirm="onConfirm"
-      ref="region"
-      themeColor="#f00"
-    >
-    </w-picker>
+    <view>
+      <view
+        class="tab"
+        :class="{ active: index == tabIndex }"
+        @tap="toggleTab(item, index)"
+        v-for="(item, index) in tabList"
+        :key="index"
+        >{{ item.name }}</view
+      >
+      <w-picker
+        mode="region"
+        :defaultVal="['浙江省', '杭州市', '滨江区']"
+        @confirm="onConfirm"
+        ref="region"
+        themeColor="#f00"
+      >
+      </w-picker>
+    </view>
   </div>
 </template>
 <script>
@@ -28,7 +38,8 @@ import topBar from '../../components/topNavigation/index'
 import wPicker from "../../components/w-picker/components/w-picker/w-picker.vue";
 export default {
   components: {
-    topBar
+    topBar,
+    wPicker
   },
   data () {
     return {
@@ -90,6 +101,9 @@ export default {
       console.log('detail_', detail)
       this.activeId = activeId
     }
+  },
+  onLoad () {
+    this.$refs['region'].show();
   }
 }
 </script>
@@ -98,19 +112,19 @@ export default {
   background: #f3f3f3;
   width: 100%;
   height: 100%;
-  // display: flex;
-  // flex-direction: column;
-  // .location_select {
-  //   margin: px2rpx(1) px2rpx(0) px2rpx(5);
-  //   height: px2rpx(40);
-  //   width: 100%;
-  //   background: #fff;
-  // }
-  // .location_list {
-  //   display: flex;
-  //   flex: 1;
-  //   background: #fff;
-  // }
+  display: flex;
+  flex-direction: column;
+  /* .location_select {
+    margin: px2rpx(1) px2rpx(0) px2rpx(5);
+    height: px2rpx(40);
+    width: 100%;
+    background: #fff;
+  } */
+  /* .location_list {
+    display: flex;
+    flex: 1;
+    background: #fff;
+  } */
 }
 .mainactiveclass {
   color: #00d1a4;
@@ -126,5 +140,20 @@ export default {
   width: 3.6px;
   background-color: #00d1a4;
   content: "";
+}
+.content {
+  text-align: center;
+  height: 400upx;
+}
+.tab {
+  padding: 20upx 0;
+  font-size: 32upx;
+}
+.tab.active {
+  color: #f00;
+}
+.result {
+  margin-top: 200upx;
+  font-size: 32upx;
 }
 </style>
