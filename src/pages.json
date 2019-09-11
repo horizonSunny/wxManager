@@ -25,11 +25,11 @@
     {
       "path": "pages/selectPage/drugstore",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "usingComponents": {
+          "van-tree-select": "/wxcomponents/vant/tree-select/index"
+        }
       }
-      // "usingComponents": {
-      //   "van-tree-select": "wxcomponents/vant/dist/tree-select/index"
-      // }
     }
   ],
   "globalStyle": {

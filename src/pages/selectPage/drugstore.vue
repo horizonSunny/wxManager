@@ -1,122 +1,130 @@
 <template>
   <div class="wrap">
     <topBar page-title="选取药店"></topBar>
-    <view class="location_select content">
-      <mix-tree
-        :list="listInfo"
-        :params="treeParams"
-        @treeItemClick="treeItemClick"
-      ></mix-tree>
-    </view>
-    <view class="location_list"> </view>
+    <!--<view class="location_select"> </view>
+    <view class="location_list">  </view> -->
+    <!-- <van-tree-select
+      :items="items"
+      :main-active-index="mainActiveIndex"
+      :active-id="activeId"
+      main-active-class="mainactiveclass"
+      content-active-class="contentactiveclass"
+      @clickNav="onClickNav"
+      @clickItem="onClickItem"
+    /> -->
+    <w-picker
+      mode="region"
+      :defaultVal="['浙江省', '杭州市', '滨江区']"
+      @confirm="onConfirm"
+      ref="region"
+      themeColor="#f00"
+    >
+    </w-picker>
   </div>
 </template>
 <script>
 // van-tree-select只能用在app和小程序中
-import mixTree from '../../components/mix-tree/components/mix-tree/mix-tree'
 import topBar from '../../components/topNavigation/index'
+import wPicker from "../../components/w-picker/components/w-picker/w-picker.vue";
 export default {
   components: {
-    topBar,
-    mixTree
+    topBar
   },
   data () {
     return {
-      listInfo: [{
-        id: 1,
-        name: '题库',
-        children: [{
-          id: 11,
-          name: '语文',
-          children: [{
-            id: 111,
-            name: '高一卷',
-
-          }, {
-            id: 112,
-            name: '高二卷',
-
-          }]
-        }, {
-          id: 12,
-          name: '数学',
-
-        }]
-      },
-      {
-        id: 2,
-        name: '高考',
-        children: [{
-          id: 21,
-          name: '高考1',
-
-        }, {
-          id: 22,
-          name: '高考2',
-
-        }, {
-          id: 23,
-          name: '高考3',
-
-        },]
-      },
-      {
-        id: 3,
-        name: '课程'
-      },
-      {
-        id: 4,
-        name: '论文',
-        children: [{
-          id: 41,
-          name: '论文分享',
-
-        }]
-      }
+      items: [
+        {
+          // 导航名称
+          text: '所有城市',
+          // 禁用选项
+          disabled: false,
+          // 该导航下所有的可选项
+          children: [
+            {
+              // 名称
+              text: '温州',
+              // id，作为匹配选中状态的标识
+              id: 1,
+              // 禁用选项
+            },
+            {
+              text: '杭州',
+              id: 2
+            }
+          ]
+        },
+        {
+          // 导航名称
+          text: '城市',
+          // 禁用选项
+          disabled: false,
+          // 该导航下所有的可选项
+          children: [
+            {
+              // 名称
+              text: '温州',
+              // id，作为匹配选中状态的标识
+              id: 1,
+              // 禁用选项
+            },
+            {
+              text: '杭州',
+              id: 2
+            }
+          ]
+        }
       ],
-      treeParams: {
-        defaultIcon: '/static/i2.png', // 默认图标
-        currentIcon: '/static/i1.png', // 展开图标
-        lastIcon: '/static/i3.png', //最后一级图标
-        border: true   // 边框， 默认不显示
-      }
+      mainActiveIndex: 0,
+      activeId: null,
     }
   },
   methods: {
-    treeItemClick (item) {
-      let {
-        id,
-        name,
-        parentId
-      } = item;
-      uni.showModal({
-        content: `点击了${parentId.length + 1}级菜单, ${name}, id为${id}, 父id为${parentId.toString()}`
-      })
-      console.log(item)
+    onClickNav ({ detail = {} }) {
+      // this.setData({
+      //   mainActiveIndex: detail.index || 0
+      // });
+      this.mainActiveIndex = detail.index || 0
+    },
+    onClickItem ({ detail = {} }) {
+      const activeId = this.activeId === detail.id ? null : detail.id;
+      console.log('detail_', detail)
+      this.activeId = activeId
     }
   }
 }
 </script>
-<style lang="scss" scoped>
+<style  scoped>
 .wrap {
   background: #f3f3f3;
-  display: flex;
-  flex-direction: column;
-  .location_select {
-    margin: px2rpx(1) px2rpx(0) px2rpx(5);
-    height: px2rpx(400);
-    width: 100%;
-    background: #fff;
-  }
-  .location_list {
-    // height: 200px;
-    width: 100%;
-    background: green;
-    flex: 1;
-  }
-  .content {
-    height: 200px;
-    width: 100%;
-  }
+  width: 100%;
+  height: 100%;
+  // display: flex;
+  // flex-direction: column;
+  // .location_select {
+  //   margin: px2rpx(1) px2rpx(0) px2rpx(5);
+  //   height: px2rpx(40);
+  //   width: 100%;
+  //   background: #fff;
+  // }
+  // .location_list {
+  //   display: flex;
+  //   flex: 1;
+  //   background: #fff;
+  // }
+}
+.mainactiveclass {
+  color: #00d1a4;
+}
+.contentactiveclass {
+  color: #00d1a4;
+}
+.van-tree-select__nitem--active:after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3.6px;
+  background-color: #00d1a4;
+  content: "";
 }
 </style>
