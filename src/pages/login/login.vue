@@ -1,6 +1,6 @@
 <template>
   <view>
-    <img src="../../static/littleFrog/frog.jpeg" />
+    <!-- <img src="../../static/littleFrog/frog.jpeg" /> -->
     <button type="primary" open-type="getUserInfo" @getuserinfo="getUserInfo">
       微信登录
     </button>

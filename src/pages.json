@@ -1,5 +1,10 @@
 {
   "pages": [{
+      "path": "pages/orderForm/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    }, {
       "path": "pages/index"
     },
     {
@@ -18,11 +23,13 @@
       }
     },
     {
-      "id": "orderForm",
-      "path": "pages/orderForm/index",
+      "path": "pages/selectPage/drugstore",
       "style": {
         "navigationStyle": "custom"
       }
+      // "usingComponents": {
+      //   "van-tree-select": "wxcomponents/vant/dist/tree-select/index"
+      // }
     }
   ],
   "globalStyle": {
@@ -38,13 +45,13 @@
     "backgroundColor": "#f8f8f8",
     "list": [{
       "pagePath": "pages/homepage/main",
-      "iconPath": "static/bottomBar/菜单.png",
-      "selectedIconPath": "static/bottomBar/菜单.png",
+      "iconPath": "static/homePage/orderForm/优惠券@3x.png",
+      "selectedIconPath": "static/homePage/orderForm/优惠券@3x.png",
       "text": "首页"
     }, {
       "pagePath": "pages/homepage/main",
-      "iconPath": "static/bottomBar/菜单.png",
-      "selectedIconPath": "static/bottomBar/菜单.png",
+      "iconPath": "static/homePage/orderForm/优惠券@3x.png",
+      "selectedIconPath": "static/homePage/orderForm/优惠券@3x.png",
       "text": "首页"
     }]
   }

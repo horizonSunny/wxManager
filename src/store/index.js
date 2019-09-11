@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 import user from './user'
 import app from './app'
 import shoppingCard from './shoppingCard'
-import customerAddress from './customerAddress'
+import address from './address'
 import getters from './getters'
 
 Vue.use(Vuex)
@@ -14,7 +14,7 @@ const store = new Vuex.Store({
     user,
     app,
     shoppingCard,
-    customerAddress
+    address
   },
   getters,
   state: {},

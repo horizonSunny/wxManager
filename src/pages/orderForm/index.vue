@@ -15,7 +15,9 @@
               <view>张晓丽 13697804589</view>
               <view class="space_between">
                 <view>上海市浦东新区长泰广场E座 10楼</view>
-                <uni-icon type="" class="iconfont  icon-more"></uni-icon>
+                <view @click="selectDrug">
+                  <uni-icon type="" class="iconfont  icon-more"></uni-icon>
+                </view>
               </view>
             </view>
           </view>
@@ -31,7 +33,9 @@
               <view class="space_between">
                 <view>上海市徐汇区东安路270号</view>
                 <view>500m</view>
-                <uni-icon type="" class="iconfont  icon-more"></uni-icon>
+                <view @click="selectDrug">
+                  <uni-icon type="" class="iconfont  icon-more"></uni-icon>
+                </view>
               </view>
             </view>
           </view>
@@ -123,6 +127,14 @@ export default {
       const totalPrice = this.shoppingPrice - this.couponPrice
       console.log('totalPrice_', totalPrice)
       return totalPrice
+    }
+  },
+  methods: {
+    selectDrug () {
+      uni.navigateTo({
+        url: '/pages/selectPage/drugstore',
+        animationType: 'none'
+      });
     }
   }
 }
