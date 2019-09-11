@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap">
+  <view class="wrap">
     <topBar page-title="选取药店"></topBar>
     <!--<view class="location_select"> </view>
     <view class="location_list">  </view> -->
@@ -30,7 +30,7 @@
       >
       </w-picker>
     </view>
-  </div>
+  </view>
 </template>
 <script>
 // van-tree-select只能用在app和小程序中
@@ -100,6 +100,9 @@ export default {
       const activeId = this.activeId === detail.id ? null : detail.id;
       console.log('detail_', detail)
       this.activeId = activeId
+    },
+    onConfirm (val) {
+      console.log('val_', val)
     }
   },
   onLoad () {

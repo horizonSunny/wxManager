@@ -15,7 +15,7 @@
               <view>张晓丽 13697804589</view>
               <view class="space_between">
                 <view>上海市浦东新区长泰广场E座 10楼</view>
-                <view @click="selectDrug">
+                <view @click="operateAddress">
                   <uni-icon type="" class="iconfont  icon-more"></uni-icon>
                 </view>
               </view>
@@ -136,6 +136,12 @@ export default {
     selectDrug () {
       uni.navigateTo({
         url: '/pages/selectPage/drugstore',
+        animationType: 'none'
+      });
+    },
+    operateAddress () {
+      uni.navigateTo({
+        url: '/pages/selectPage/userAddress',
         animationType: 'none'
       });
     }

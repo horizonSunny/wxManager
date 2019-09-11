@@ -1,39 +1,55 @@
 <template>
   <div class="main-content">
     <div class="content-location" @click.stop="choseLocation">
-      <span>{{locationText}}</span>
-      <van-icon v-if="showLocation" name="arrow-up" /><van-icon v-else name="arrow-down" />
+      <span>{{ locationText }}</span>
+      <van-icon v-if="showLocation" name="arrow-up" /><van-icon
+        v-else
+        name="arrow-down"
+      />
     </div>
     <div v-show="showLocation" class="content-city">
-        <van-tree-select
-          :items="items"
-          :main-active-index="mainActiveIndex"
-          :active-id="activeId"
-          main-active-class="mainactiveclass"
-          content-active-class="contentactiveclass"
-          @clickNav="onClickNav"
-          @clickItem="onClickItem"/>
+      <van-tree-select
+        :items="items"
+        :main-active-index="mainActiveIndex"
+        :active-id="activeId"
+        main-active-class="mainactiveclass"
+        content-active-class="contentactiveclass"
+        @clickNav="onClickNav"
+        @clickItem="onClickItem"
+      />
     </div>
     <div class="content-list">
-      <div v-show="hospitalList.length<1 && !isLoadData" class="no-content">
+      <div v-show="hospitalList.length < 1 && !isLoadData" class="no-content">
         <van-icon size="240rpx" color="rgba(16, 16, 16, 0.41)" name="photo-o" />
         <p class="content-text">目前该地区暂无药房</p>
         <p class="content-text">敬请期待</p>
       </div>
-      <div class="list-main" v-for="hospital in hospitalList" :key="hospital.id">
+      <div
+        class="list-main"
+        v-for="hospital in hospitalList"
+        :key="hospital.id"
+      >
         <div class="list-item">
-          <div class="item-left"><img :src="hospital.pic?hospital.pic:defaultImg" alt="医院"></div>
+          <div class="item-left">
+            <img :src="hospital.pic ? hospital.pic : defaultImg" alt="医院" />
+          </div>
           <div class="item-center" @click="goToDetail(hospital)">
-            <div class="center-top">{{hospital.name}}</div>
-            <div class="center-mid"><div class="center-mid-item" v-if="hospital.label">{{hospital.label}}</div></div>
+            <div class="center-top">{{ hospital.name }}</div>
+            <div class="center-mid">
+              <div class="center-mid-item" v-if="hospital.label">
+                {{ hospital.label }}
+              </div>
+            </div>
             <div class="center-bot">
               <van-icon name="location" color="#C8C8C8" size="26rpx" />
-              <span class="center-address">{{hospital.address}}</span>
-              <span class="center-distance">{{ hospital.distance?hospital.distance:'未知距离' }}</span>
+              <span class="center-address">{{ hospital.address }}</span>
+              <span class="center-distance">{{
+                hospital.distance ? hospital.distance : "未知距离"
+              }}</span>
             </div>
           </div>
           <div class="item-right" @click="handleCall(hospital.phoneList)">
-            <van-icon name="phone-o" color="#fff" size="60rpx"/>
+            <van-icon name="phone-o" color="#fff" size="60rpx" />
           </div>
         </div>
       </div>
@@ -72,7 +88,7 @@ export default {
       mainActiveIndex: 0,
       phoneList: [],
       activeId: '',
-      items:[],
+      items: [],
       hospitalList: [],
       query: {
         pageNumber: 0,
@@ -81,7 +97,7 @@ export default {
       defaultImg: require('../../../static/images/yaofang.png')
     }
   },
-  mounted() {
+  mounted () {
     // 获取城市列表
     request({
       url: `/wx/provinceCity`,
@@ -102,19 +118,19 @@ export default {
       }
     )
   },
-  onReachBottom() {
+  onReachBottom () {
     // 下拉触底，先判断是否有请求正在进行中
     // 以及检查当前请求页数是不是小于数据总页数，如符合条件，则发送请求
     console.log("下拉刷新")
-    if(!this.isLastPage){
+    if (!this.isLastPage) {
       this.getList()
     }
   },
-  onUnload() {
+  onUnload () {
     this.hospitalList = []
     this.query.pageNumber = 0
   },
-  onPullDownRefresh() {
+  onPullDownRefresh () {
     // 上拉刷新
     console.log("上拉刷新")
     this.query.pageNumber = 0
@@ -129,10 +145,10 @@ export default {
   },
   methods: {
     // 获取位置权限
-    getPermission(){
+    getPermission () {
       let vm = this
       wx.getSetting({
-        success(res) {
+        success (res) {
           // scope.userLocation 为真， 代表用户已经授权
           if (res.authSetting['scope.userLocation']) {
             vm.getLocation()
@@ -140,10 +156,10 @@ export default {
             // 未授权时先自动请求权限
             wx.authorize({
               scope: 'scope.userLocation',
-              success(res) {
+              success (res) {
                 vm.getLocation()
               },
-              fail(res) {
+              fail (res) {
                 // 用户未授权时引导授权
                 wx.showModal({
                   title: '是否授权当前位置',
@@ -185,11 +201,11 @@ export default {
       })
     },
     // 使用 getlocation 获取用户 经纬度位置
-    getLocation(){
+    getLocation () {
       let vm = this
       vm.locationText = '正在定位..'
       wx.getLocation({
-        success(res) {
+        success (res) {
           vm.query.lat = res.latitude
           vm.query.lng = res.longitude
           vm.getAddress(res.latitude, res.longitude)
@@ -197,7 +213,7 @@ export default {
       })
     },
     // 获取列表数据
-    getList() {
+    getList () {
       this.isLoadData = true
       request({
         // url: `/wx/drugstore/${this.query.cityId}`,
@@ -205,17 +221,17 @@ export default {
         type: "GET",
         data: {
           cityId: this.activeId,
-          provinceId: this.items?this.items[this.mainActiveIndex].id:0,
+          provinceId: this.items ? this.items[this.mainActiveIndex].id : 0,
           ...this.query
         }
       }).then(
         (res) => {
           this.isLoadData = false
           console.log('res:', res)
-          if(res && res.status == "1"){
+          if (res && res.status == "1") {
             this.isLastPage = res.body.lastPage
             this.hospitalList.push(...res.body.pageList)
-            this.query.pageNumber = this.query.pageNumber + 1            
+            this.query.pageNumber = this.query.pageNumber + 1
             wx.stopPullDownRefresh()
           }
         },
@@ -226,10 +242,10 @@ export default {
       )
     },
     // 处理省市区数据
-    handleProvinceCity(data){
-      if(data.length>0){
+    handleProvinceCity (data) {
+      if (data.length > 0) {
         let tempItem = []
-        data.forEach((item,index) => {
+        data.forEach((item, index) => {
           let temp = {}
           temp.text = item.name
           temp.id = item.value
@@ -256,15 +272,15 @@ export default {
     },
 
     // 切换地址
-    choseLocation(e) {
+    choseLocation (e) {
       this.showLocation = !this.showLocation;
     },
     // 点击省份
-    onClickNav(event) {
+    onClickNav (event) {
       this.mainActiveIndex = event.target.index;
     },
     // 点击地区
-    onClickItem(event) {
+    onClickItem (event) {
       this.activeId = event.target.id;
       this.locationText = event.target.text;
       this.showLocation = false;
@@ -273,71 +289,71 @@ export default {
       this.getList()
     },
     // 点击内容，前往详情页
-    goToDetail(detail){
+    goToDetail (detail) {
       console.log('detail:', detail)
-      store.commit('setHospitalDetail',detail)
+      store.commit('setHospitalDetail', detail)
       const url = '/pages/hospitalDetail/main'
       wx.navigateTo({ url })
     },
     // 获取地址
-    getAddress(latitude, longitude){
+    getAddress (latitude, longitude) {
       var vm = this
       let qqmapsdk = new QQMapWX({
-          key: '7L3BZ-M7MWQ-S4V5R-GG5KR-ORGGO-HNBT4'
+        key: '7L3BZ-M7MWQ-S4V5R-GG5KR-ORGGO-HNBT4'
       })
       qqmapsdk.reverseGeocoder({
-          location: {latitude,longitude},
-          sig: 'NsXvQMibw9QqROY4Xqm5HA4CLDPzFT5r',
-          success(res) {
-              console.log('success', res)
-              if(res.status == 0){
-                let province = res.result.ad_info.province
-                let district = res.result.ad_info.district
-                let city = res.result.ad_info.city
-                // let cityId = res.result.ad_info.adcode
-                let cityId = res.result.ad_info.city_code.slice(3)
-                vm.locationText = res.result.ad_info.city
-                if (municipality.includes(province)) {
-                  province = res.result.ad_info.city
-                  city = res.result.ad_info.district
-                  cityId = res.result.ad_info.adcode
-                  vm.locationText = res.result.ad_info.district
-                }
-                let mainActiveIndex = vm.provinceInlist(province);
-                let activeId = vm.districtInlist(province, cityId)
-                if (mainActiveIndex > -1) {
-                  vm.mainActiveIndex = mainActiveIndex
-                }
-                if (activeId > -1) {
-                  vm.activeId = activeId
-                }
-                // 定位成功之后获取数据
-                this.hospitalList = []
-                vm.getList();
-              }
-          },
-          fail(res){
-            vm.locationText = '全国'
+        location: { latitude, longitude },
+        sig: 'NsXvQMibw9QqROY4Xqm5HA4CLDPzFT5r',
+        success (res) {
+          console.log('success', res)
+          if (res.status == 0) {
+            let province = res.result.ad_info.province
+            let district = res.result.ad_info.district
+            let city = res.result.ad_info.city
+            // let cityId = res.result.ad_info.adcode
+            let cityId = res.result.ad_info.city_code.slice(3)
+            vm.locationText = res.result.ad_info.city
+            if (municipality.includes(province)) {
+              province = res.result.ad_info.city
+              city = res.result.ad_info.district
+              cityId = res.result.ad_info.adcode
+              vm.locationText = res.result.ad_info.district
+            }
+            let mainActiveIndex = vm.provinceInlist(province);
+            let activeId = vm.districtInlist(province, cityId)
+            if (mainActiveIndex > -1) {
+              vm.mainActiveIndex = mainActiveIndex
+            }
+            if (activeId > -1) {
+              vm.activeId = activeId
+            }
+            // 定位成功之后获取数据
+            this.hospitalList = []
+            vm.getList();
           }
+        },
+        fail (res) {
+          vm.locationText = '全国'
+        }
       })
     },
     // 判断自动定位省份是否在级联菜单内
-    provinceInlist(province){
+    provinceInlist (province) {
       let _index = -1;
-      this.items.forEach((element,index) => {
-        if(element.text == province){
+      this.items.forEach((element, index) => {
+        if (element.text == province) {
           _index = index
         }
       });
       return _index
     },
     // 判断自动定位区是否在级联菜单内
-    districtInlist(province,cityId){
+    districtInlist (province, cityId) {
       let _index = -1;
-      this.items.forEach((element,index) => {
-        if(element.text == province){
+      this.items.forEach((element, index) => {
+        if (element.text == province) {
           element.children.forEach(elementSe => {
-            if(elementSe.id == cityId){
+            if (elementSe.id == cityId) {
               _index = elementSe.id
             }
           })
@@ -346,7 +362,7 @@ export default {
       return _index
     },
     // 点击打电话图标
-    handleCall(phoneList){
+    handleCall (phoneList) {
       // TODO 将电话号码push到phoneList中
       console.log('phoneList:', phoneList)
       if (!phoneList) {
@@ -359,25 +375,25 @@ export default {
       } else {
         let tempPhoneList = phoneList.split(',')
         console.log('tempPhoneList:', tempPhoneList)
-        if(tempPhoneList.length>0){
+        if (tempPhoneList.length > 0) {
           this.phoneList = []
-          for (let i = 0;i < tempPhoneList.length; i++) {
+          for (let i = 0; i < tempPhoneList.length; i++) {
             this.phoneList.push({ name: tempPhoneList[i] })
           }
-        } 
+        }
       }
       this.showPhoneNo = true;
     },
     // 关闭电话列表
-    onNoCancel(){
+    onNoCancel () {
       this.showPhoneNo = false
     },
     // 关闭
-    onNoClose(){
+    onNoClose () {
       this.showPhoneNo = false
     },
     // 点击电话列表
-    onNoSelect(event){
+    onNoSelect (event) {
       wx.makePhoneCall({
         phoneNumber: event.target.name // 仅为示例，并非真实的电话号码
       })
@@ -387,19 +403,20 @@ export default {
 </script>
 
 <style scoped>
-.main-content >>> .mainactiveclass{
-  color: #00D1A4;
+.main-content >>> .mainactiveclass {
+  color: #00d1a4;
 }
-.main-content >>> .contentactiveclass{
-  color: #00D1A4;  
+.main-content >>> .contentactiveclass {
+  color: #00d1a4;
 }
-.main-content >>> .van-tree-select__nitem--active:after{
-  position:absolute;
-  top:0;bottom:0;
-  left:0;
-  width:3.6px;
-  background-color:#00D1A4;
-  content:""
+.main-content >>> .van-tree-select__nitem--active:after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3.6px;
+  background-color: #00d1a4;
+  content: "";
 }
 .main-content {
   background-color: #f0f0f2;
@@ -419,7 +436,7 @@ export default {
   padding: 14rpx;
   background-color: #fff;
 }
-.content-location span{
+.content-location span {
   display: inline-block;
   margin-right: 10rpx;
 }
@@ -429,7 +446,7 @@ export default {
   z-index: 10;
   top: 80rpx;
   height: 100%;
-  background-color:rgba(240, 240, 242, 0.6);
+  background-color: rgba(240, 240, 242, 0.6);
 }
 .content-list {
   position: relative;
@@ -437,7 +454,7 @@ export default {
   /* margin-top:16rpx; */
   flex: 1;
 }
-.no-content{
+.no-content {
   position: absolute;
   left: 0;
   right: 0;
@@ -445,13 +462,13 @@ export default {
   bottom: 0;
   text-align: center;
 }
-.content-text{
+.content-text {
   color: rgba(16, 16, 16, 0.78);
   font-size: 28rpx;
   text-align: center;
   font-family: PingFangSC-regular;
 }
-.bottom-loading{
+.bottom-loading {
   text-align: center;
   font-size: 24rpx;
 }
@@ -469,22 +486,22 @@ export default {
   flex-flow: row nowrap;
   align-items: center;
 }
-.item-left{
+.item-left {
   width: 120rpx;
   height: 120rpx;
 }
-.item-left img{
+.item-left img {
   width: 120rpx;
   height: 120rpx;
 }
-.item-center{
+.item-center {
   flex: 1;
   height: 100%;
   box-sizing: border-box;
   padding-left: 22rpx;
   padding-right: 22rpx;
 }
-.center-top{
+.center-top {
   font-size: 34rpx;
   color: #303030;
   height: 42rpx;
@@ -492,33 +509,33 @@ export default {
   text-align: left;
   font-family: PingFang-SC-Bold;
   margin-bottom: 8rpx;
-  overflow : hidden;
+  overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 1; /* 限制在一个块元素显示的文本的行数 */
   -webkit-box-orient: vertical; /* 垂直排列 */
-  word-break: break-all;  /* 内容自动换行 */
+  word-break: break-all; /* 内容自动换行 */
 }
-.center-mid{
+.center-mid {
   height: 36rpx;
   width: 136rpx;
   /* color: rgba(37, 155, 36, 1); */
-  color: #FEB753;
-  font-size:24rpx;
+  color: #feb753;
+  font-size: 24rpx;
   border-radius: 4px;
   text-align: center;
   font-family: PingFang-SC-Medium;
   margin-bottom: 16rpx;
 }
-.center-mid-item{
+.center-mid-item {
   border-radius: 8rpx;
-  border: 2px solid #FEB753;
+  border: 2px solid #feb753;
 }
-.center-distance{
+.center-distance {
   right: 4rpx;
   position: absolute;
 }
-.center-bot{
+.center-bot {
   font-size: 26rpx;
   height: 37rpx;
   line-height: 37rpx;
@@ -526,43 +543,43 @@ export default {
   text-align: left;
   font-family: PingFang-SC-Bold;
   position: relative;
-  display:flex;
+  display: flex;
   flex-direction: row;
 }
-.center-address{
+.center-address {
   display: inline-block;
-  overflow : hidden;
+  overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 1; /* 限制在一个块元素显示的文本的行数 */
   -webkit-box-orient: vertical; /* 垂直排列 */
-  word-break: break-all;  /* 内容自动换行 */
-  width:320rpx;
+  word-break: break-all; /* 内容自动换行 */
+  width: 320rpx;
   margin-left: 8rpx;
   font-family: PingFang-SC-Medium;
   font-size: 26rpx;
   color: #969696;
 }
-.item-right{
+.item-right {
   display: flex;
   flex-flow: column;
   align-items: center;
   justify-content: center;
   width: 80rpx;
   height: 80rpx;
-  background: #00D1A4;
+  background: #00d1a4;
   border-radius: 8px;
   font-size: 28rpx;
-  color: #FFFFFF;
+  color: #ffffff;
   font-family: PingFangSC-regular;
-  padding-top:12rpx;
-  box-sizing:border-box;
+  padding-top: 12rpx;
+  box-sizing: border-box;
 }
-.item-right-icon{
+.item-right-icon {
   width: 80rpx;
   height: 80rpx;
 }
-.item-right-text{
+.item-right-text {
   color: rgba(51, 49, 49, 0.84);
   font-size: 24rpx;
   text-align: left;

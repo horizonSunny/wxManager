@@ -30,6 +30,12 @@
           "van-tree-select": "/wxcomponents/vant/tree-select/index"
         }
       }
+    },
+    {
+      "path": "pages/selectPage/userAddress",
+      "style": {
+        "navigationStyle": "custom"
+      }
     }
   ],
   "globalStyle": {
