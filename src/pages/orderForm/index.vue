@@ -69,6 +69,7 @@
           </view>
         </view>
         <view class="coupon space_between">
+          <!-- 优惠券如果没有的话要隐藏 -->
           <view>
             <img src="../../static/homePage/orderForm/优惠券@3x.png" alt="" />
             <span> 优惠券</span>

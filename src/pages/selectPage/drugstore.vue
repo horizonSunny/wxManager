@@ -62,11 +62,13 @@ export default {
               text: '温州1',
               // id，作为匹配选中状态的标识
               id: 1,
+              message: 'dadad'
               // 禁用选项
             },
             {
               text: '杭州1',
-              id: 2
+              id: 2,
+              message: 'dadad'
             }
           ]
         },
@@ -93,19 +95,122 @@ export default {
       ],
       mainActiveIndex: 0,
       activeId: null,
-      selectArea: false
+      selectArea: false,
+      query: {
+        pageNumber: 0,
+        pageSize: 10
+      },
     }
   },
   methods: {
+    // 点击首选项
     onClickNav ({ detail = {} }) {
       this.mainActiveIndex = detail.index || 0
       console.log('detail_onClickNav_', detail)
     },
+    // 点击城市选项
     onClickItem ({ detail = {} }) {
       const activeId = this.activeId === detail.id ? null : detail.id;
       console.log('detail_', detail)
       this.activeId = activeId;
       console.log('detail_onClickItem_', detail)
+    },
+    // 获取位置权限
+    getPermission () {
+      let vm = this
+      wx.getSetting({
+        success (res) {
+          // scope.userLocation 为真， 代表用户已经授权
+          if (res.authSetting['scope.userLocation']) {
+            vm.getLocation()
+          } else {
+            // 未授权时先自动请求权限
+            wx.authorize({
+              scope: 'scope.userLocation',
+              success (res) {
+                vm.getLocation()
+              },
+              fail (res) {
+                // 用户未授权时引导授权
+                wx.showModal({
+                  title: '是否授权当前位置',
+                  content: '需要获取您的地理位置，请确认授权，否则地图功能将无法使用',
+                  success: function (tip) {
+                    if (tip.confirm) {
+                      wx.openSetting({
+                        success: function (data) {
+                          if (data.authSetting["scope.userLocation"] === true) {
+                            wx.showToast({
+                              title: '授权成功',
+                              icon: 'success',
+                              duration: 1000
+                            })
+                            vm.getLocation()
+                          } else {
+                            wx.showToast({
+                              title: '授权失败',
+                              icon: 'success',
+                              duration: 1000
+                            })
+                            vm.locationText = '全国'
+                          }
+
+                        }
+                      })
+                    }
+                    if (tip.cancel) {
+                      console.log("run fail", tip)
+                      vm.locationText = '全国'
+                    }
+                  }
+                })
+              }
+            })
+
+          }
+        }
+      })
+    },
+    // 使用 getlocation 获取用户 经纬度位置
+    getLocation () {
+      let vm = this
+      vm.locationText = '正在定位..'
+      wx.getLocation({
+        success (res) {
+          vm.query.lat = res.latitude
+          vm.query.lng = res.longitude
+          vm.getAddress(res.latitude, res.longitude)
+        }
+      })
+    },
+    // 获取列表数据
+    getList () {
+      this.isLoadData = true
+      request({
+        // url: `/wx/drugstore/${this.query.cityId}`,
+        url: `/wx/drugstore`,
+        type: "GET",
+        data: {
+          cityId: this.activeId,
+          provinceId: this.items ? this.items[this.mainActiveIndex].id : 0,
+          ...this.query
+        }
+      }).then(
+        (res) => {
+          this.isLoadData = false
+          console.log('res:', res)
+          if (res && res.status == "1") {
+            this.isLastPage = res.body.lastPage
+            this.hospitalList.push(...res.body.pageList)
+            this.query.pageNumber = this.query.pageNumber + 1
+            wx.stopPullDownRefresh()
+          }
+        },
+        (err) => {
+          this.isLoadData = false
+          console.log("请求错误:", err)
+        }
+      )
     }
   },
   computed: {
