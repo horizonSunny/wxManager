@@ -4,20 +4,31 @@
     <form class="form">
       <view class="labelInfo">
         <span>收货人</span>
-        <input type="text" placeholder="请填写真实姓名" v-model="userName" />
+        <input
+          name="userName"
+          type="text"
+          placeholder="请填写真实姓名"
+          v-model="userInfo['userName']"
+        />
       </view>
       <view class="labelInfo">
         <span>手机号码</span>
-        <input type="text" placeholder="请填写手机号码" v-model="userPhone" />
+        <input
+          name="userPhone"
+          type="text"
+          placeholder="请填写手机号码"
+          v-model="userInfo['userPhone']"
+        />
       </view>
       <view class="labelInfo">
         <span>所在地区</span>
         <input
           type="text"
+          name="userAddress"
           placeholder="点击选择地区"
           placeholder-class="placeholder-class"
           disabled
-          :value="userAddress"
+          :value="userInfo['userAddress']"
           @click="selectArea"
         />
       </view>
@@ -25,16 +36,21 @@
         <span class="textarea_span">详细地址</span>
         <textarea
           type="text"
+          name="addressDetail"
           placeholder="如道路、门牌号、小区"
           rows="3"
           cols="4"
-          v-modal="addressDetail"
+          :value="userInfo['addressDetail']"
+          @input="inputAreaDetail"
         />
       </view>
       <view class="labelInfo default">
         <span>设置为默认地址</span>
         <view class="uni-list-cell uni-list-cell-pd">
-          <switch :checked="defaultInfo" @change="changeDefaultInfo" />
+          <switch
+            :checked="userInfo['defaultInfo']"
+            @change="changeDefaultInfo"
+          />
         </view>
       </view>
     </form>
@@ -57,6 +73,7 @@
 <script>
 import wPicker from "../../components/w-picker/components/w-picker/w-picker.vue";
 import topBar from '../../components/topNavigation/index';
+import validate from '../../utils/validate'
 export default {
   components: {
     topBar,
@@ -64,16 +81,34 @@ export default {
   },
   data () {
     return {
-      userName: '张三',
-      userPhone: '17717928787',
-      userAddress: '',
-      addressDetail: '',
-      defaultInfo: false
+      userInfo: {
+        userName: '',
+        userPhone: '',
+        userAddress: '',
+        addressDetail: '',
+        defaultInfo: false
+      }
     }
   },
   computed: {},
   methods: {
     submit () {
+      console.log('addressDetail_', this.userInfo.addressDetail);
+      let formRules = [
+        { name: 'userName', type: 'required', errmsg: '请填写用户名' },
+        { name: 'userPhone', required: true, type: 'phone', errmsg: '请输入正确的手机号' },
+        { name: 'userAddress', type: 'required', errmsg: '请选择地址' },
+        { name: 'addressDetail', type: 'required', errmsg: '请填写详细地址信息' }
+
+      ]
+      let valLoginRes = validate.validate(this.userInfo, formRules)
+      if (!valLoginRes.isOk) {
+        uni.showToast({
+          icon: 'none',
+          title: valLoginRes.errmsg
+        })
+        return false
+      }
     },
     delete () {
 
@@ -81,13 +116,16 @@ export default {
     selectArea () {
       this.$refs['region'].show();
     },
+    inputAreaDetail (event) {
+      setTimeout(() => { this.userInfo.addressDetail = event.detail.value }, 0)
+    },
     onConfirmArea (val) {
-      this.userAddress = val.result
+      this.userInfo.userAddress = val.result
       console.log('val_', val);
     },
     changeDefaultInfo (event) {
       console.log('event.detail.value_', event.detail.value)
-      this.defaultInfo = event.detail.value
+      this.userInfo.defaultInfo = event.detail.value
     }
   }
 }
