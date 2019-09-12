@@ -1,5 +1,13 @@
 {
   "pages": [{
+      "path": "pages/selectPage/drugstore",
+      "style": {
+        "navigationStyle": "custom",
+        "usingComponents": {
+          "van-tree-select": "/wxcomponents/vant/tree-select/index"
+        }
+      }
+    }, {
       "path": "pages/orderForm/index",
       "style": {
         "navigationStyle": "custom"
@@ -20,15 +28,6 @@
       "path": "pages/homepage/main",
       "style": {
         "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/selectPage/drugstore",
-      "style": {
-        "navigationStyle": "custom",
-        "usingComponents": {
-          "van-tree-select": "/wxcomponents/vant/tree-select/index"
-        }
       }
     },
     {

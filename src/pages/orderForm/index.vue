@@ -11,17 +11,17 @@
               :class="[true ? 'icon_sel' : 'icon_unsel']"
             ></uni-icon>
             <span>快递配送</span>
-            <view class="addrresInfo">
+            <view class="addrresInfo" @click="operateAddress">
               <view>张晓丽 13697804589</view>
               <view class="space_between">
                 <view>上海市浦东新区长泰广场E座 10楼</view>
-                <view @click="operateAddress">
+                <view>
                   <uni-icon type="" class="iconfont  icon-more"></uni-icon>
                 </view>
               </view>
             </view>
           </view>
-          <view class="drugstore">
+          <view class="drugstore" @click="selectDrug">
             <uni-icon
               type=""
               class="iconfont icon-unselected icon_style"
@@ -33,7 +33,7 @@
               <view class="space_between">
                 <view>上海市徐汇区东安路270号</view>
                 <view>500m</view>
-                <view @click="selectDrug">
+                <view>
                   <uni-icon type="" class="iconfont  icon-more"></uni-icon>
                 </view>
               </view>
