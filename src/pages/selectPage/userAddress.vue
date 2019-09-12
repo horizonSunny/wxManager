@@ -1,7 +1,7 @@
 <template>
   <view class="wrap">
     <topBar page-title="添加收货地址"></topBar>
-    <form @submit="submit" class="form">
+    <form class="form">
       <view class="labelInfo">
         <span>收货人</span>
         <input type="text" placeholder="请填写真实姓名" />
@@ -20,11 +20,6 @@
       </view>
       <view class="labelInfo textarea">
         <span class="textarea_span">详细地址</span>
-        <!-- <input
-          type="text"
-          placeholder="点击选择地区"
-          placeholder-class="placeholder-class"
-        /> -->
         <textarea
           type="text"
           placeholder="如道路、门牌号、小区"
@@ -32,7 +27,17 @@
           cols="4"
         />
       </view>
+      <view class="labelInfo default">
+        <span>设置为默认地址</span>
+        <view class="uni-list-cell uni-list-cell-pd">
+          <switch :checked="indicatorDots" @change="changeIndicatorDots" />
+        </view>
+      </view>
     </form>
+    <view class="confirm">
+      <button type="primary" class="save">保存收货信息</button>
+      <button type="primary" class="delete">删除收货信息</button>
+    </view>
   </view>
 </template>
 <script>
@@ -109,6 +114,31 @@ export default {
 
         // vertical-align: middle;
       }
+    }
+    .default {
+      display: flex;
+      border-bottom: px2rpx(0);
+      justify-content: space-between;
+      span {
+        width: px2rpx(150);
+      }
+    }
+  }
+  .confirm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    button {
+      height: px2rpx(47);
+      width: px2rpx(355);
+    }
+    .save {
+      background: #4da08a;
+    }
+    .delete {
+      margin-top: px2rpx(13);
+      background: #c0c0c0;
     }
   }
 }
