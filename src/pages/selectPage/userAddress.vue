@@ -124,7 +124,7 @@ export default {
       console.log('val_', val);
     },
     changeDefaultInfo (event) {
-      console.log('event.detail.value_', event.detail.value)
+      console.log('event.detail.value_', event.detail.value);
       this.userInfo.defaultInfo = event.detail.value
     }
   }
