@@ -19,11 +19,17 @@
         />
       </view>
       <view class="labelInfo textarea">
-        <span>详细地址</span>
+        <span class="textarea_span">详细地址</span>
+        <!-- <input
+          type="text"
+          placeholder="点击选择地区"
+          placeholder-class="placeholder-class"
+        /> -->
         <textarea
           type="text"
-          placeholder="如道路、门牌号、小区、楼栋号、单元室等"
-          placeholder-style="height:50px;line-height:50px"
+          placeholder="如道路、门牌号、小区"
+          rows="3"
+          cols="4"
         />
       </view>
     </form>
@@ -57,19 +63,18 @@ export default {
   background: #f3f3f3;
   .form {
     height: px2rpx(380);
-    width: 100%;
     border: px2rpx(1) solid #f3f3f3;
     border-style: solid none;
     background: #fff;
     padding: px2rpx(0) px2rpx(10);
     .labelInfo {
-      width: 100%;
+      width: auto;
       height: px2rpx(57);
       line-height: px2rpx(57);
       border-bottom: px2rpx(1) solid #f3f3f3;
       display: flex;
       span {
-        width: px2rpx(102);
+        width: px2rpx(105);
         font-size: 18px;
         color: #282828;
         letter-spacing: 0;
@@ -85,8 +90,24 @@ export default {
     }
     .textarea {
       height: px2rpx(127);
+      display: flex;
+      .textarea_span {
+        width: px2rpx(105);
+        font-size: 18px;
+        color: #282828;
+        letter-spacing: 0;
+        // display: inline-block;
+        // vertical-align: middle;
+      }
       textarea {
-        height: px2rpx(127);
+        flex: 1;
+        resize: none;
+        line-height: px2rpx(25);
+        overflow: scroll;
+        height: px2rpx(109);
+        padding-top: px2rpx(18);
+
+        // vertical-align: middle;
       }
     }
   }
