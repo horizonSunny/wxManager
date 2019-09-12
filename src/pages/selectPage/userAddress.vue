@@ -4,11 +4,11 @@
     <form class="form">
       <view class="labelInfo">
         <span>收货人</span>
-        <input type="text" placeholder="请填写真实姓名" />
+        <input type="text" placeholder="请填写真实姓名" v-model="userName" />
       </view>
       <view class="labelInfo">
         <span>手机号码</span>
-        <input type="text" placeholder="请填写手机号码" />
+        <input type="text" placeholder="请填写手机号码" v-model="userPhone" />
       </view>
       <view class="labelInfo">
         <span>所在地区</span>
@@ -16,6 +16,9 @@
           type="text"
           placeholder="点击选择地区"
           placeholder-class="placeholder-class"
+          disabled
+          :value="userAddress"
+          @click="selectArea"
         />
       </view>
       <view class="labelInfo textarea">
@@ -25,36 +28,66 @@
           placeholder="如道路、门牌号、小区"
           rows="3"
           cols="4"
+          v-modal="addressDetail"
         />
       </view>
       <view class="labelInfo default">
         <span>设置为默认地址</span>
         <view class="uni-list-cell uni-list-cell-pd">
-          <switch :checked="indicatorDots" @change="changeIndicatorDots" />
+          <switch :checked="defaultInfo" @change="changeDefaultInfo" />
         </view>
       </view>
     </form>
     <view class="confirm">
-      <button type="primary" class="save">保存收货信息</button>
-      <button type="primary" class="delete">删除收货信息</button>
+      <button type="primary" class="save" @click="submit">保存收货信息</button>
+      <button type="primary" class="delete" @click="submit">
+        删除收货信息
+      </button>
     </view>
+    <w-picker
+      mode="region"
+      :defaultVal="['浙江省', '杭州市', '滨江区']"
+      @confirm="onConfirmArea"
+      ref="region"
+      themeColor="#f00"
+    >
+    </w-picker>
   </view>
 </template>
 <script>
-import topBar from '../../components/topNavigation/index'
 import wPicker from "../../components/w-picker/components/w-picker/w-picker.vue";
-// import validate from '../../utils/validate'
+import topBar from '../../components/topNavigation/index';
 export default {
   components: {
     topBar,
     wPicker
   },
   data () {
-    return {}
+    return {
+      userName: '张三',
+      userPhone: '17717928787',
+      userAddress: '',
+      addressDetail: '',
+      defaultInfo: false
+    }
   },
   computed: {},
   methods: {
     submit () {
+    },
+    delete () {
+
+    },
+    selectArea () {
+      this.$refs['region'].show();
+    },
+    onConfirmArea (val) {
+      this.userAddress = val.result
+      console.log('val_', val);
+    },
+    changeDefaultInfo (event) {
+      console.log('event.detail.value_', event.detail.value)
+      this.defaultInfo = event.detail.value
     }
   }
 }
