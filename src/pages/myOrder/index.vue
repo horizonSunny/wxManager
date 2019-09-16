@@ -25,37 +25,45 @@
               v-for="(itemInList, indexInList) in item"
               :key="indexInList"
             >
-              <view class="itemImg">
-                <img
-                  src="../../static/homePage/main/组件-banner背景.png"
-                  alt=""
-                />
+              <view class="orderInfoHeader">
+                <view>思派大药房</view>
+                <view>待取药</view>
               </view>
-              <view class="itemInfo">
-                <view class="name">
-                  {{ itemInList["name"] }}
+              <view class="orderInfoContent">
+                <view class="itemImg">
+                  <img
+                    src="../../static/homePage/main/组件-banner背景.png"
+                    alt=""
+                  />
                 </view>
-                <view class="specification">
-                  规格: {{ itemInList["specification"] }}
-                </view>
-                <view class="priceOperate">
+                <view class="itemInfo">
+                  <view class="name">
+                    {{ itemInList["name"] }}
+                  </view>
+                  <view class="specification">
+                    <view> ¥ {{ itemInList["price"] }} </view>
+                    <view> X3 </view>
+                  </view>
+                  <!-- <view class="priceOperate">
                   <view class="price">¥ {{ itemInList["price"] }}</view>
                   <view class="operate">
-                    <view @click="operateShopping('minus', itemInList)">
-                      <uni-icon
-                        type=""
-                        class="iconfont icon-minus icon_style"
-                      ></uni-icon>
-                    </view>
-                    {{ itemInList["amount"] }}
-                    <view @click="operateShopping('add', itemInList)">
-                      <uni-icon
-                        type=""
-                        class="iconfont icon-plus icon_style"
-                      ></uni-icon>
-                    </view>
+                    X3
                   </view>
+                </view> -->
                 </view>
+              </view>
+              <view class="orderInfoFoot">
+                <view>2019-09-05</view>
+                <view> <button>取消订单</button></view>
+                <view
+                  ><button class="drugstore">
+                    <uni-icon
+                      type=""
+                      class="iconfont icon-locate icon_style"
+                    ></uni-icon
+                    >药店
+                  </button></view
+                >
               </view>
             </view>
           </scroll-view>
@@ -77,7 +85,7 @@ export default {
   data: function () {
     return {
       currentMenu: '全部',
-      meunOptions: ['全部', '待取药', '已接单', '未完成'],
+      meunOptions: ['全部', '待取药', '已接单', '已完成'],
       menuList: {
         allList: [],
         medicineList: [],
@@ -193,54 +201,77 @@ export default {
         background: #f3f3f3;
         .itemMessage {
           display: flex;
-          width: 100%;
-          height: px2rpx(96);
+          flex-direction: column;
+          height: px2rpx(192);
           margin-bottom: px2rpx(5);
           background: #ffffff;
-          padding: px2rpx(29) px2rpx(15);
-          .itemImg {
-            width: px2rpx(96);
-            height: px2rpx(96);
-            margin-right: px2rpx(14);
-            img {
-              background-size: cover;
-              width: 100%;
-              height: 100%;
-            }
-          }
-          .itemInfo {
+          padding: px2rpx(0) px2rpx(15);
+          .orderInfoHeader {
+            height: px2rpx(46);
+            line-height: px2rpx(46);
             display: flex;
-            flex: 1;
-            margin-right: px2rpx(20);
-            flex-direction: column;
-            .name {
-              font-size: px2rpx(18);
-              color: #282828;
-              letter-spacing: 0;
+            font-size: px2rpx(15);
+            color: #282828;
+            border-bottom: px2rpx(1) solid #e5e5e5;
+            justify-content: space-between;
+          }
+          .orderInfoContent {
+            display: flex;
+            padding: px2rpx(9) px2rpx(2);
+            height: 89px;
+            align-items: center;
+            border-bottom: px2rpx(1) solid #e5e5e5;
+            .itemImg {
+              width: px2rpx(68);
+              height: px2rpx(68);
+              margin-right: px2rpx(14);
+              img {
+                background-size: cover;
+                width: 100%;
+                height: 100%;
+              }
             }
-            .specification {
-              font-size: px2rpx(15);
-              color: #6c6c6c;
-              letter-spacing: 0;
-              margin-bottom: px2rpx(30);
-            }
-            .priceOperate {
+            .itemInfo {
               display: flex;
-              justify-content: space-between;
-              align-items: flex-end;
-              .price {
+              flex: 1;
+              margin-right: px2rpx(16);
+              flex-direction: column;
+              .name {
                 font-size: px2rpx(18);
-                color: #f5b11c;
+                color: #282828;
                 letter-spacing: 0;
               }
-              .operate {
+              .specification {
                 display: flex;
-                align-items: center;
-                .icon_style {
-                  color: #4da08a;
-                  font-size: px2rpx(29);
-                }
+                justify-content: space-between;
+                font-size: px2rpx(16);
+                color: #6c6c6c;
+                letter-spacing: 0;
+                margin-top: px2rpx(9);
               }
+            }
+          }
+          .orderInfoFoot {
+            height: px2rpx(55);
+            line-height: px2rpx(55);
+            display: flex;
+            font-size: 15px;
+            color: #6c6c6c;
+            align-items: center;
+            button {
+              font-size: px2rpx(15);
+              height: px2rpx(28);
+              line-height: px2rpx(28);
+              width: px2rpx(90);
+              margin-left: px2rpx(33);
+            }
+            .drugstore {
+              background: #4da08a;
+              color: #fff;
+            }
+            .icon_style {
+              font-size: px2rpx(15);
+              color: #fff;
             }
           }
         }
