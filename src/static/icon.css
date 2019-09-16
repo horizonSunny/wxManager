@@ -1,12 +1,12 @@
 @font-face {
   font-family: 'iconfont';
   /* project id 1397838 */
-  src: url('//at.alicdn.com/t/font_1397838_9ddr1ykmane.eot');
-  src: url('//at.alicdn.com/t/font_1397838_9ddr1ykmane.eot?#iefix') format('embedded-opentype'),
-    url('//at.alicdn.com/t/font_1397838_9ddr1ykmane.woff2') format('woff2'),
-    url('//at.alicdn.com/t/font_1397838_9ddr1ykmane.woff') format('woff'),
-    url('//at.alicdn.com/t/font_1397838_9ddr1ykmane.ttf') format('truetype'),
-    url('//at.alicdn.com/t/font_1397838_9ddr1ykmane.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_1397838_nwrfw3gen4k.eot');
+  src: url('//at.alicdn.com/t/font_1397838_nwrfw3gen4k.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_1397838_nwrfw3gen4k.woff2') format('woff2'),
+    url('//at.alicdn.com/t/font_1397838_nwrfw3gen4k.woff') format('woff'),
+    url('//at.alicdn.com/t/font_1397838_nwrfw3gen4k.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_1397838_nwrfw3gen4k.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -88,4 +88,8 @@
 
 .icon-edit:before {
   content: "\e60a"
+}
+
+.icon-couponSelected:before {
+  content: "\e623"
 }
