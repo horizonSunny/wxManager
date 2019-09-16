@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <view class="page">
     <topBar
       page-title="个人中心"
       style="position:fixed;width:100%"
@@ -7,41 +7,18 @@
       :back-info="false"
       font-color="#fff"
     ></topBar>
-    <div class="header">
+    <view class="header">
       <img src="../../static/homePage/main/组件-banner背景.png" />
-    </div>
-    <div class="content">
-      <div class="buy">
-        <img src="../../static/homePage/main/组件-线上买药背景.png" alt="" />
-        <div class="text_info">
-          <div class="buy_online">线上买药</div>
-          <div @click="goShopping" class="buy_confirm">
-            点击购买<i class="arrows"></i>
-          </div>
-        </div>
-      </div>
-      <div class="group_module">
-        <div class="module">
-          <img src="../../static/homePage/main/组件-团购买药背景.png" alt="" />
-          <div>团购买药</div>
-        </div>
-        <div class="module">
-          <img src="../../static/homePage/main/组件-就医指引背景.png" alt="" />
-          <div>就医指引</div>
-        </div>
-      </div>
-      <div class="group_module">
-        <div class="module">
-          <img src="../../static/homePage/main/组件-咨询医生背景.png" alt="" />
-          <div>咨询医生</div>
-        </div>
-        <div class="module">
-          <img src="../../static/homePage/main/组件-附近药店背景.png" alt="" />
-          <div>附近药店</div>
-        </div>
-      </div>
-    </div>
-  </div>
+      <view class="userInfo">
+        <img />
+        <view class="name">
+          <view>王弥茗</view>
+          <view>13689076890</view>
+        </view>
+      </view>
+    </view>
+    <view class="content"> </view>
+  </view>
 </template>
 <script>
 import topBar from '../../components/topNavigation/index'
@@ -69,9 +46,30 @@ export default {
 .header {
   width: 100%;
   height: px2rpx(174);
+  position: relative;
   img {
     width: 100%;
     height: px2rpx(174);
+  }
+  .userInfo {
+    position: absolute;
+    left: px2rpx(12);
+    top: px2rpx(76);
+    height: px2rpx(66);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    img {
+      height: px2rpx(66);
+      width: px2rpx(66);
+      border-radius: px2rpx(33);
+      background: #ffda39;
+    }
+    .name {
+      margin-left: px2rpx(16);
+      font-size: px2rpx(18);
+      color: #ffffff;
+    }
   }
 }
 .content {
@@ -131,7 +129,7 @@ export default {
         width: 100%;
         height: 100%;
       }
-      div {
+      view {
         position: absolute;
         width: px2rpx(72);
         height: px2rpx(25);

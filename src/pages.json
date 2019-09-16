@@ -59,10 +59,10 @@
     "borderStyle": "black",
     "backgroundColor": "#f8f8f8",
     "list": [{
-      "pagePath": "pages/homepage/main",
+      "pagePath": "pages/mine/index",
       "iconPath": "static/homePage/orderForm/优惠券@3x.png",
       "selectedIconPath": "static/homePage/orderForm/优惠券@3x.png",
-      "text": "首页"
+      "text": "我的"
     }, {
       "pagePath": "pages/homepage/main",
       "iconPath": "static/homePage/orderForm/优惠券@3x.png",

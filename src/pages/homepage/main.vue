@@ -1,40 +1,40 @@
 <template>
-  <div class="page">
-    <div class="header">
+  <view class="page">
+    <view class="header">
       <img src="../../static/homePage/main/组件-banner背景.png" />
-    </div>
-    <div class="content">
-      <div class="buy">
+    </view>
+    <view class="content">
+      <view class="buy">
         <img src="../../static/homePage/main/组件-线上买药背景.png" alt="" />
-        <div class="text_info">
-          <div class="buy_online">线上买药</div>
-          <div @click="goShopping" class="buy_confirm">
+        <view class="text_info">
+          <view class="buy_online">线上买药</view>
+          <view @click="goShopping" class="buy_confirm">
             点击购买<i class="arrows"></i>
-          </div>
-        </div>
-      </div>
-      <div class="group_module">
-        <div class="module">
+          </view>
+        </view>
+      </view>
+      <view class="group_module">
+        <view class="module">
           <img src="../../static/homePage/main/组件-团购买药背景.png" alt="" />
-          <div>团购买药</div>
-        </div>
-        <div class="module">
+          <view>团购买药</view>
+        </view>
+        <view class="module">
           <img src="../../static/homePage/main/组件-就医指引背景.png" alt="" />
-          <div>就医指引</div>
-        </div>
-      </div>
-      <div class="group_module">
-        <div class="module">
+          <view>就医指引</view>
+        </view>
+      </view>
+      <view class="group_module">
+        <view class="module">
           <img src="../../static/homePage/main/组件-咨询医生背景.png" alt="" />
-          <div>咨询医生</div>
-        </div>
-        <div class="module">
+          <view>咨询医生</view>
+        </view>
+        <view class="module">
           <img src="../../static/homePage/main/组件-附近药店背景.png" alt="" />
-          <div>附近药店</div>
-        </div>
-      </div>
-    </div>
-  </div>
+          <view>附近药店</view>
+        </view>
+      </view>
+    </view>
+  </view>
 </template>
 <script>
 export default {
@@ -120,7 +120,7 @@ export default {
         width: 100%;
         height: 100%;
       }
-      div {
+      view {
         position: absolute;
         width: px2rpx(72);
         height: px2rpx(25);
