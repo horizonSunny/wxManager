@@ -1,5 +1,10 @@
 <template>
-  <view style="height:auto;width:100%;padding-bottom:10rpx;background:#fff">
+  <view
+    style="height:auto;width:100%;padding-bottom:10rpx;"
+    :style="{
+      background: backgroundColorInfo
+    }"
+  >
     <view
       :style="{
         height: allHeight + 'px',
@@ -10,14 +15,19 @@
       <view @click="rollback" v-if="backShow">
         <uni-icon type="" class="iconfont icon-rollback icon_style"></uni-icon>
       </view>
-      <span>{{ pageTitle }}</span>
+      <span
+        :style="{
+          color: fontColor
+        }"
+        >{{ pageTitle }}</span
+      >
     </view>
   </view>
 </template>
 <script>
 import * as storage from '../../config/storage'
 export default {
-  props: ['pageTitle', 'backInfo'],
+  props: ['pageTitle', 'backInfo', 'backgroundInfo', 'fontColor'],
   data () {
     return {
       activeColor: "red",
@@ -39,6 +49,15 @@ export default {
       }
       else {
         return true
+      }
+    },
+    backgroundColorInfo () {
+      console.log('this.backgroundInfo_', this.backgroundInfo);
+      if (this.backgroundInfo === '') {
+        return ''
+      }
+      else {
+        return this.backgroundInfo
       }
     }
   },

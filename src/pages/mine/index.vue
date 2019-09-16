@@ -1,5 +1,12 @@
 <template>
   <div class="page">
+    <topBar
+      page-title="个人中心"
+      style="position:fixed;width:100%"
+      background-info=""
+      :back-info="false"
+      font-color="#fff"
+    ></topBar>
     <div class="header">
       <img src="../../static/homePage/main/组件-banner背景.png" />
     </div>
@@ -37,7 +44,11 @@
   </div>
 </template>
 <script>
+import topBar from '../../components/topNavigation/index'
 export default {
+  components: {
+    topBar,
+  },
   methods: {
     goShopping () {
       uni.navigateTo({
