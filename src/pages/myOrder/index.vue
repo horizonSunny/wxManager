@@ -169,19 +169,20 @@ export default {
     align-items: center;
     justify-content: space-around;
     .viewItem {
-      font-size: px2rpx(15);
+      font-size: px2rpx(16);
       text-align: center;
-      border-bottom: 4px solid #fff;
+      height: px2rpx(39);
+      line-height: px2rpx(43);
+      border-bottom: px2rpx(4) solid #fff;
     }
     .viewItemActive {
-      color: #88afd5;
-      font-size: px2rpx(15);
-      border-bottom: 4px solid #88afd5;
+      color: #4da08a;
+      font-size: px2rpx(16);
+      border-bottom: 4px solid #4da08a;
     }
   }
   .swiperContent {
     flex: 1;
-    margin-top: px2rpx(5);
     .swiper {
       width: 100%;
       height: 100%;
