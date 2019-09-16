@@ -54,7 +54,7 @@
               </view>
               <view class="orderInfoFoot">
                 <view>2019-09-05</view>
-                <view> <button>取消订单</button></view>
+                <view @click="cancelOrder"> <button>取消订单</button></view>
                 <view
                   ><button class="drugstore">
                     <uni-icon
@@ -119,8 +119,6 @@ export default {
     }).then(() => {
       // 初始页面的时候这边要和购物车做一个比对，如果命名相同的话，将amount替换为购物车的数量
       const shoppingCart = this.$store.getters.shoppingInfo
-      this.compareShopping(this.menuList['prescription'], shoppingCart)
-      this.compareShopping(this.menuList['otc'], shoppingCart)
     })
   },
   methods: {
@@ -138,27 +136,23 @@ export default {
       this.currentMenu = seletcName
 
     },
-    // 下面就是操作购物车,所以列表中的数量就是购物车中的数据，数量值只保存到购物车中
-    operateShopping (operate, itemInfo) {
-      if (operate === 'add') {
-        // 这边操作的是一个对象，所以购物车里面数量改变，对应的列表数量也改变，引用指针对象
-        this.$store.dispatch('setCommodityInfo', itemInfo).then((res) => {
-        })
-      } else {
-        // 同上
-        itemInfo['amount'] !== 0 && this.$store.dispatch('delCommodityInfo', itemInfo);
-      }
-    },
-    // 这边是一个比对函数,用来购物车替换列表,第一个参数是列表商品，第二个是购物车商品
-    compareShopping (allCommodity, shoppingCart) {
-      for (let item = 0; item < allCommodity.length; item++) {
-        for (let commodity = 0; commodity < shoppingCart.length; commodity++) {
-          if (allCommodity[item]['name'] === shoppingCart[commodity]['name']) {
-            allCommodity.splice(item, 1, shoppingCart[commodity])
+    cancelOrder () {
+      uni.showModal({
+        title: '',
+        content: '确定取消订单',
+        cancelText: '是',
+        confirmText: '否',
+        success: function (res) {
+          if (res.confirm) {
+            console.log('用户点击不取消订单');
+          } else if (res.cancel) {
+            console.log('用户点击取消订单');
           }
         }
-      }
+      });
+
     }
+
   }
 }
 </script>
