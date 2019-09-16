@@ -5,6 +5,11 @@
         "navigationStyle": "custom"
       }
     }, {
+      "path": "pages/mine/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    }, {
       "path": "pages/index"
     }, {
       "path": "pages/selectPage/drugstore",

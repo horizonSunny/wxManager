@@ -7,7 +7,7 @@
       }"
     ></view>
     <view class="titleMessage">
-      <view @click="rollback">
+      <view @click="rollback" v-if="backShow">
         <uni-icon type="" class="iconfont icon-rollback icon_style"></uni-icon>
       </view>
       <span>{{ pageTitle }}</span>
@@ -17,7 +17,7 @@
 <script>
 import * as storage from '../../config/storage'
 export default {
-  props: ['pageTitle'],
+  props: ['pageTitle', 'backInfo'],
   data () {
     return {
       activeColor: "red",
@@ -30,6 +30,16 @@ export default {
       capsuleHeight = storage.getSync('capsuleInfo')
       console.log('capsuleHeight_', capsuleHeight);
       return capsuleHeight
+    },
+    backShow () {
+      console.log('this.backInfo_', typeof (this.backInfo))
+      console.log('this.backInfo_', this.backInfo)
+      if (this.backInfo === false) {
+        return false
+      }
+      else {
+        return true
+      }
     }
   },
   methods: {
