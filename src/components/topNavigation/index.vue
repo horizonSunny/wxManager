@@ -8,7 +8,8 @@
     <view
       :style="{
         height: allHeight + 'px',
-        width: 100 + '%'
+        width: 100 + '%',
+        fontSize: fontSize + 'px'
       }"
     ></view>
     <view class="titleMessage">
