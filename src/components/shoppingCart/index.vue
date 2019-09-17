@@ -57,7 +57,6 @@ export default {
     height: px2rpx(52);
     width: px2rpx(52);
     border-radius: px2rpx(26);
-    background-size: cover;
     padding: px2rpx(5);
     .shoppingMount {
       font-size: px2rpx(12);
@@ -73,9 +72,11 @@ export default {
   }
   .pixelRatioTwo {
     background: url("../../static/main/shoppingCart@3x.png");
+    background-size: cover;
   }
   .pixelRatioThree {
     background: url("../../static/main/shoppingCart@3x.png");
+    background-size: cover;
   }
   .totalPrice {
     font-size: px2rpx(18);

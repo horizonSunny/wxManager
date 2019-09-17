@@ -43,8 +43,6 @@ export default {
       return capsuleHeight
     },
     backShow () {
-      console.log('this.backInfo_', typeof (this.backInfo))
-      console.log('this.backInfo_', this.backInfo)
       if (this.backInfo === false) {
         return false
       }
@@ -53,7 +51,6 @@ export default {
       }
     },
     backgroundColorInfo () {
-      console.log('this.backgroundInfo_', this.backgroundInfo);
       if (this.backgroundInfo === '') {
         return ''
       }

@@ -13,7 +13,13 @@
       >
     </view>
     <view class="swiperContent">
-      <swiper class="swiper" :current="currentList" @change="swiperList">
+      <swiper
+        v-if="swiperShow"
+        class="swiper"
+        :current="testIndex"
+        @change="swiperList"
+        :disable-programmatic-animation="true"
+      >
         <swiper-item
           v-for="(item, index) in menuList"
           :key="index"
@@ -67,7 +73,6 @@
         </swiper-item>
       </swiper>
     </view>
-    <shoppingCart v-if="shoppingCartShow"></shoppingCart>
   </view>
 </template>
 <script>
@@ -81,7 +86,7 @@ export default {
   },
   data: function () {
     return {
-      currentMenu: '全部',
+      currentMenu: '',
       meunOptions: ['全部', '已接单', '待取药', '待配送'],
       menuList: {
         allList: [],
@@ -89,16 +94,20 @@ export default {
         orderList: [],
         unfinishedList: []
       },
-      currentList: 0
       // new 
+      currentIndex: '',
+      swiperShow: false
     }
   },
   computed: {
     shoppingCartShow () {
       return (this.$store.getters.shoppingInfo.length !== 0 ? true : false)
+    },
+    testIndex () {
+      return this.currentIndex
     }
   },
-  onLoad () {
+  onLoad (option) {
     // 这边是从后台数据拿到商品列表，两次分开操作，解藕
     this.$http.get('wxManager/getItemsList').then((res) => {
       for (let item = 0; item < res.data.length; item++) {
@@ -116,14 +125,38 @@ export default {
     }).then(() => {
       // 初始页面的时候这边要和购物车做一个比对，如果命名相同的话，将amount替换为购物车的数量
       const shoppingCart = this.$store.getters.shoppingInfo
+      // 这边进行跳转操作
+      console.log('option.currentMenu_', option.currentMenu);
+      this.currentMenu = option.currentMenu
+      switch (this.currentMenu) {
+        case '全部':
+          this.currentIndex = 0
+          break;
+        case '已接单':
+          this.currentIndex = 1
+          break;
+        case '待取药':
+          this.currentIndex = 2
+          break;
+        case '待配送':
+          this.currentIndex = 3
+          break;
+
+        default:
+          break;
+      }
+      this.swiperShow = true
     })
+  },
+  onShow () {
+    console.log('onShow_');
   },
   methods: {
     selectMenu (item) {
       this.currentMenu = item
       const current = this.meunOptions.indexOf(item)
       console.log('current_', current);
-      this.currentList = current
+      this.currentIndex = current
     },
     swiperList (e) {
       console.log('event_', e);

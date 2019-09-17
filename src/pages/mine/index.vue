@@ -18,7 +18,7 @@
       </view>
     </view>
     <view class="content">
-      <view class="myOrder">
+      <view class="myOrder" @click="goOrder('全部')">
         <view>我的订单</view>
         <view class="lookAll"
           >查看全部
@@ -26,16 +26,16 @@
         </view>
       </view>
       <view class="orderDivide">
-        <view class="orderItem">
+        <view class="orderItem" @click="goOrder('待配送')">
           <view>
             <uni-icon
               type=""
               class="iconfont icon-tuangou icon_label_style"
             ></uni-icon>
           </view>
-          <view>待成团</view>
+          <view>待配送</view>
         </view>
-        <view class="orderItem">
+        <view class="orderItem" @click="goOrder('待取药')">
           <view>
             <uni-icon
               type=""
@@ -44,14 +44,14 @@
           </view>
           <view>待取药</view>
         </view>
-        <view class="orderItem">
+        <view class="orderItem" @click="goOrder('已接单')">
           <view>
             <uni-icon
               type=""
               class="iconfont icon-yiwancheng icon_label_style"
             ></uni-icon>
           </view>
-          <view>已完成</view>
+          <view>已接单</view>
         </view>
       </view>
       <view class="myOperate">
@@ -117,10 +117,16 @@ export default {
     }
   },
   methods: {
-    goShopping () {
+    goShopping (info) {
       uni.navigateTo({
         url: 'onlineShopping/index',
         animationType: 'none'
+      });
+    },
+    goOrder (info) {
+      let url = '/pages/myOrder/index?currentMenu=' + info
+      uni.navigateTo({
+        url: url
       });
     }
   }
@@ -193,7 +199,7 @@ export default {
     justify-content: space-between;
     .orderItem {
       height: px2rpx(61);
-      width: px2rpx(51);
+      width: 30%;
       font-size: px2rpx(17);
       color: #282828;
       display: flex;

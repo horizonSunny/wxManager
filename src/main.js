@@ -7,7 +7,6 @@ Vue.config.productionTip = false
 // 共享数据Vue
 uni.getSystemInfo({
   success: function(res) {
-    console.log('res.pixelRatio_', res.pixelRatio)
     Vue.prototype.$pixelRatio = '@' + res.pixelRatio + 'x.png'
   }
 })
