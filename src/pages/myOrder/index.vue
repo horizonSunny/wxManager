@@ -85,7 +85,7 @@ export default {
   data: function () {
     return {
       currentMenu: '全部',
-      meunOptions: ['全部', '待取药', '已接单', '已完成'],
+      meunOptions: ['全部', '已接单', '待取药', '待配送'],
       menuList: {
         allList: [],
         medicineList: [],

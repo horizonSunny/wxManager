@@ -1,5 +1,18 @@
 {
   "pages": [{
+      "path": "pages/selectPage/drugstore",
+      "style": {
+        "navigationStyle": "custom",
+        "usingComponents": {
+          "van-tree-select": "/wxcomponents/vant/tree-select/index"
+        }
+      }
+    }, {
+      "path": "pages/myOrder/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    }, {
       "path": "pages/mine/myCoupon/index",
       "style": {
         "navigationStyle": "custom"
@@ -16,25 +29,12 @@
         "navigationStyle": "custom"
       }
     }, {
-      "path": "pages/myOrder/index",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    }, {
       "path": "pages/mine/index",
       "style": {
         "navigationStyle": "custom"
       }
     }, {
       "path": "pages/index"
-    }, {
-      "path": "pages/selectPage/drugstore",
-      "style": {
-        "navigationStyle": "custom",
-        "usingComponents": {
-          "van-tree-select": "/wxcomponents/vant/tree-select/index"
-        }
-      }
     }, {
       "path": "pages/orderForm/index",
       "style": {

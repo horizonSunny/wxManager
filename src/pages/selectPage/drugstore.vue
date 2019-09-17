@@ -17,7 +17,70 @@
         ></uni-icon>
       </view>
     </view>
-    <view class="location_list"> </view>
+    <view class="location_list">
+      <scroll-view scroll-y class="scrollView">
+        <view class="itemMessage">
+          <view class="orderInfoHeader">
+            <view>上海重协药店有限公司浦东店</view>
+            <view>
+              <uni-icon
+                type=""
+                class="iconfont icon-couponSelected icon_style"
+                :class="false ? 'activeLabel' : 'deactiveLabel'"
+              ></uni-icon
+            ></view>
+          </view>
+          <view class="orderInfoContent">
+            <view class="itemImg">
+              <img
+                src="../../static/homePage/main/组件-banner背景.png"
+                alt=""
+              />
+            </view>
+            <view class="itemInfo">
+              <view class="name">
+                <view>营业时间：8:00-18:00</view>
+                <view>电话：024-3527654</view>
+              </view>
+              <view class="specification">
+                <view> 上海市徐汇区东安路270号</view>
+                <view> 500m </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="itemMessage">
+          <view class="orderInfoHeader">
+            <view>上海重协药店有限公司浦东店</view>
+            <view>
+              <uni-icon
+                type=""
+                class="iconfont icon-couponSelected icon_style"
+                :class="false ? 'activeLabel' : 'deactiveLabel'"
+              ></uni-icon
+            ></view>
+          </view>
+          <view class="orderInfoContent">
+            <view class="itemImg">
+              <img
+                src="../../static/homePage/main/组件-banner背景.png"
+                alt=""
+              />
+            </view>
+            <view class="itemInfo">
+              <view class="name">
+                <view>营业时间：8:00-18:00</view>
+                <view>电话：024-3527654</view>
+              </view>
+              <view class="specification">
+                <view> 上海市徐汇区东安路270号</view>
+                <view> 500m </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
     <view
       v-show="selectArea"
       :style="{
@@ -227,19 +290,21 @@ export default {
 </script>
 <style  lang='scss' scoped>
 .wrap {
-  background: #f3f3f3;
+  background: #fff;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   .location_select {
-    margin: px2rpx(1) px2rpx(0) px2rpx(5);
+    margin: px2rpx(1) px2rpx(0);
     height: px2rpx(40);
     line-height: px2rpx(40);
     width: 100%;
     background: #fff;
     display: flex;
+    border-top: px2rpx(1) solid #f3f3f3;
     align-items: center;
+    font-size: px2rpx(16);
     img {
       width: px2rpx(22);
       height: px2rpx(22);
@@ -252,21 +317,82 @@ export default {
       font-size: px2rpx(12);
       color: #757575;
     }
-    .icon_styleTwo {
-      font-size: px2rpx(20);
-      color: #757575;
-    }
   }
   .location_list {
-    display: flex;
     flex: 1;
-    background: #fff;
+    padding-top: px2rpx(5);
+    background: #f3f3f3;
+    .scrollView {
+      .itemMessage {
+        display: flex;
+        flex-direction: column;
+        height: px2rpx(171);
+        margin-top: px2rpx(5);
+        background: #ffffff;
+        padding: px2rpx(0) px2rpx(10);
+        .orderInfoHeader {
+          height: px2rpx(55);
+          line-height: px2rpx(55);
+          display: flex;
+          font-size: px2rpx(18);
+          color: #282828;
+          justify-content: space-between;
+        }
+        .orderInfoContent {
+          display: flex;
+          height: px2rpx(96);
+          align-items: center;
+          .itemImg {
+            width: px2rpx(96);
+            height: px2rpx(96);
+            margin-right: px2rpx(7);
+            img {
+              background-size: cover;
+              width: 100%;
+              height: 100%;
+            }
+          }
+          .itemInfo {
+            display: flex;
+            flex: 1;
+            height: px2rpx(96);
+            justify-content: space-between;
+            flex-direction: column;
+            .name {
+              font-size: px2rpx(16);
+              color: #6c6c6c;
+              height: px2rpx(49);
+              line-height: px2rpx(22);
+              letter-spacing: 0;
+              view {
+                height: px2rpx(22);
+                line-height: px2rpx(22);
+                margin-bottom: px2rpx(5);
+              }
+            }
+            .specification {
+              display: flex;
+              justify-content: space-between;
+              font-size: px2rpx(16);
+              color: #6c6c6c;
+              letter-spacing: 0;
+            }
+          }
+        }
+      }
+    }
   }
   .areaShow {
     position: fixed;
     top: px2rpx(1);
     height: px2rpx(150);
     overflow: scroll;
+  }
+  .activeLabel {
+    color: #4da08a;
+  }
+  .deactiveLabel {
+    color: rgb(200, 200, 200);
   }
 }
 .wrap /deep/ .van-tree-select__nitem--active:after {
