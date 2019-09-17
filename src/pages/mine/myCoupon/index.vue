@@ -4,12 +4,24 @@
     <view class="content">
       <scroll-view scroll-y class="scrollView">
         <view class="addressItem">
-          <view class="couponPrice">
+          <view
+            class="couponPrice"
+            :class="
+              false
+                ? ['activeBack', 'activeLabel']
+                : ['deactiveBack', 'deactiveLabel']
+            "
+          >
             <view class="price">¥ <span>50</span></view>
             <view class="status">满0.01使用</view>
           </view>
-          <view class="couponLine"></view>
-          <view class="couponLimit">
+          <view
+            :class="false ? ['couponLineActive'] : ['couponLineDeactive']"
+          ></view>
+          <view
+            class="couponLimit"
+            :class="false ? ['activeBack'] : ['deactiveBack']"
+          >
             <view class="time">
               <view>有效日期:</view>
               <view>2019.09.02-2019.09.30</view>
@@ -18,6 +30,7 @@
               <uni-icon
                 type=""
                 class="iconfont icon-couponSelected icon_style"
+                :class="false ? ['activeLabel'] : ['deactiveLabel']"
               ></uni-icon>
             </view>
           </view>
@@ -60,9 +73,7 @@ export default {
           height: px2rpx(90);
           border-radius: px2rpx(6);
           border: px2rpx(6);
-          background: #fff5de;
           text-align: center;
-          color: #f5b11c;
           .price {
             height: px2rpx(50);
             line-height: px2rpx(50);
@@ -77,18 +88,12 @@ export default {
             line-height: px2rpx(40);
           }
         }
-        .couponLine {
-          width: px2rpx(1);
-          height: px2rpx(90);
-          border-left: px2rpx(1) dashed #f5b11c;
-        }
         .couponLimit {
           width: px2rpx(249);
           height: px2rpx(90);
           border-radius: px2rpx(6);
           border-style: none dashed;
           border: px2rpx(6);
-          background: #fff5de;
           display: flex;
           align-items: center;
           .time {
@@ -102,7 +107,6 @@ export default {
       }
       .icon_style {
         font-size: px2rpx(25);
-        color: #4da08a;
       }
     }
   }
@@ -116,6 +120,28 @@ export default {
       height: px2rpx(51);
       font-size: px2rpx(18);
     }
+  }
+  .activeBack {
+    background: #fff5de;
+  }
+  .activeLabel {
+    color: #f58d1c;
+  }
+  .deactiveBack {
+    background: #f3f3f3;
+  }
+  .deactiveLabel {
+    color: #6c6c6c;
+  }
+  .couponLineActive {
+    width: px2rpx(1);
+    height: px2rpx(90);
+    border-left: px2rpx(1) dashed #f5b11c;
+  }
+  .couponLineDeactive {
+    width: px2rpx(1);
+    height: px2rpx(90);
+    border-left: px2rpx(1) dashed #c5c5c5;
   }
 }
 </style>
