@@ -8,9 +8,9 @@
       font-color="#fff"
     ></topBar>
     <view class="header">
-      <img :src="'../../static/main/headPortrait' + pixelRatio" />
+      <img :src="'../../static/main/bannerBack' + pixelRatio" />
       <view class="userInfo">
-        <img />
+        <img :src="'../../static/main/headPortrait' + pixelRatio" />
         <view class="name">
           <view>王弥茗</view>
           <view>13689076890</view>
