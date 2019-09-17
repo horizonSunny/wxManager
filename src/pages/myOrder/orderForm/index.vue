@@ -47,7 +47,7 @@
             :key="indexInList"
           >
             <view class="itemImg">
-              <img src="../../static/main/bannerBack@3x.png" alt="" />
+              <img src="../../../static/main/bannerBack@3x.png" alt="" />
             </view>
             <view class="itemInfo">
               <view class="name">
@@ -68,7 +68,7 @@
         <view class="coupon space_between">
           <!-- 优惠券如果没有的话要隐藏 -->
           <view>
-            <img :src="'../../static/main/coupon' + pixelRatio" alt="" />
+            <img :src="'../../../static/main/coupon' + pixelRatio" alt="" />
             <span> 优惠券</span>
           </view>
           <view>
@@ -105,8 +105,8 @@
   </view>
 </template>
 <script>
-import * as storage from '../../config/storage'
-import topBar from '../../components/topNavigation/index'
+import * as storage from '../../../config/storage'
+import topBar from '../../../components/topNavigation/index'
 export default {
   components: {
     topBar
@@ -134,13 +134,13 @@ export default {
   methods: {
     selectDrug () {
       uni.navigateTo({
-        url: '/pages/selectPage/drugstore',
+        url: '/pages/myOrder/selectPage/drugstore',
         animationType: 'none'
       });
     },
     operateAddress () {
       uni.navigateTo({
-        url: '/pages/selectPage/userAddress',
+        url: '/pages/myOrder/selectPage/userAddress',
         animationType: 'none'
       });
     }

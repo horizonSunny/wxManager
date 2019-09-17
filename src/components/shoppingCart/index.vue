@@ -34,7 +34,7 @@ export default {
   methods: {
     goOrderForm () {
       uni.navigateTo({
-        url: '/pages/orderForm/index'
+        url: '/pages/myOrder/orderForm/index'
       });
     }
   },

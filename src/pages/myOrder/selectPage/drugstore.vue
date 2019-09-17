@@ -2,7 +2,7 @@
   <view class="wrap">
     <topBar page-title="选取药店"></topBar>
     <view class="location_select" @click="selectArea = !selectArea">
-      <img :src="'../../static/main/dingwei' + pixelRatio" alt="" />
+      <img :src="'../../../static/main/dingwei' + pixelRatio" alt="" />
       <span>上海</span>
       <view v-if="!selectArea">
         <uni-icon
@@ -32,7 +32,7 @@
           </view>
           <view class="orderInfoContent">
             <view class="itemImg">
-              <img src="../../static/main/bannerBack@3x.png" alt="" />
+              <img src="../../../static/main/bannerBack@3x.png" alt="" />
             </view>
             <view class="itemInfo">
               <view class="name">
@@ -59,7 +59,7 @@
           </view>
           <view class="orderInfoContent">
             <view class="itemImg">
-              <img src="../../static/main/bannerBack@3x.png" alt="" />
+              <img src="../../../static/main/bannerBack@3x.png" alt="" />
             </view>
             <view class="itemInfo">
               <view class="name">
@@ -98,8 +98,8 @@
 </template>
 <script>
 // van-tree-select只能用在app和小程序中
-import topBar from '../../components/topNavigation/index'
-import * as storage from '../.../../../config/storage'
+import topBar from '../../../components/topNavigation/index'
+import * as storage from '../../../config/storage'
 export default {
   components: {
     topBar,

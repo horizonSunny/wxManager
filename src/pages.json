@@ -5,7 +5,7 @@
         "navigationStyle": "custom"
       }
     }, {
-      "path": "pages/orderForm/index",
+      "path": "pages/myOrder/orderForm/index",
       "style": {
         "navigationStyle": "custom"
       }
@@ -15,7 +15,7 @@
         "navigationStyle": "custom"
       }
     }, {
-      "path": "pages/selectPage/drugstore",
+      "path": "pages/myOrder/selectPage/drugstore",
       "style": {
         "navigationStyle": "custom",
         "usingComponents": {
@@ -56,7 +56,7 @@
       }
     },
     {
-      "path": "pages/selectPage/userAddress",
+      "path": "pages/myOrder/selectPage/userAddress",
       "style": {
         "navigationStyle": "custom"
       }

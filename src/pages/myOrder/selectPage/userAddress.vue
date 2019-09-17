@@ -71,9 +71,9 @@
   </view>
 </template>
 <script>
-import wPicker from "../../components/w-picker/components/w-picker/w-picker.vue";
-import topBar from '../../components/topNavigation/index';
-import validate from '../../utils/validate'
+import wPicker from "../../../components/w-picker/components/w-picker/w-picker.vue";
+import topBar from '../../../components/topNavigation/index';
+import validate from '../../../utils/validate'
 export default {
   components: {
     topBar,
