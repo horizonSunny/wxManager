@@ -1,5 +1,12 @@
 <template>
   <view class="page">
+    <topBar
+      page-title="即药"
+      style="position:fixed;width:100%;z-index:999"
+      background-info=""
+      :back-info="false"
+      font-color="#fff"
+    ></topBar>
     <view class="header">
       <img :src="'../../static/main/bannerBack' + pixelRatio" />
     </view>
@@ -40,7 +47,11 @@
   </view>
 </template>
 <script>
+import topBar from '../../components/topNavigation/index'
 export default {
+  components: {
+    topBar
+  },
   onLoad () {
     console.log('this.pixelRatio_', this.pixelRatio)
   },

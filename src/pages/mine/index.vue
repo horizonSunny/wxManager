@@ -2,7 +2,7 @@
   <view class="page">
     <topBar
       page-title="个人中心"
-      style="position:fixed;width:100%"
+      style="position:fixed;width:100%;z-index:999"
       background-info=""
       :back-info="false"
       font-color="#fff"
