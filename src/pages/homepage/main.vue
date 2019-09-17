@@ -15,7 +15,10 @@
       </view>
       <view class="group_module">
         <view class="module">
-          <img src="../../static/homePage/main/组件-团购买药背景.png" alt="" />
+          <img
+            :src="'../../static/homePage/main/' + '组件-团购买药背景.png'"
+            alt=""
+          />
           <view>团购买药</view>
         </view>
         <view class="module">
@@ -38,6 +41,9 @@
 </template>
 <script>
 export default {
+  onLoad () {
+    console.log('this.pixelRatio_', this.pixelRatio)
+  },
   methods: {
     goShopping () {
       uni.navigateTo({

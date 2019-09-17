@@ -1,5 +1,10 @@
 {
   "pages": [{
+      "path": "pages/mine/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    }, {
       "path": "pages/selectPage/drugstore",
       "style": {
         "navigationStyle": "custom",
@@ -7,6 +12,8 @@
           "van-tree-select": "/wxcomponents/vant/tree-select/index"
         }
       }
+    }, {
+      "path": "pages/index"
     }, {
       "path": "pages/myOrder/index",
       "style": {
@@ -28,13 +35,6 @@
       "style": {
         "navigationStyle": "custom"
       }
-    }, {
-      "path": "pages/mine/index",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    }, {
-      "path": "pages/index"
     }, {
       "path": "pages/orderForm/index",
       "style": {
@@ -70,20 +70,20 @@
     "backgroundColor": "#F8F8F8"
   },
   "tabBar": {
-    "color": "#C0C4CC",
-    "selectedColor": "#2b4c7e",
+    "color": "rgb(149,149,149)",
+    "selectedColor": "#4DA08A",
     "borderStyle": "black",
     "backgroundColor": "#f8f8f8",
     "list": [{
-      "pagePath": "pages/mine/index",
-      "iconPath": "static/homePage/orderForm/优惠券@3x.png",
-      "selectedIconPath": "static/homePage/orderForm/优惠券@3x.png",
-      "text": "我的"
-    }, {
       "pagePath": "pages/homepage/main",
-      "iconPath": "static/homePage/orderForm/优惠券@3x.png",
-      "selectedIconPath": "static/homePage/orderForm/优惠券@3x.png",
+      "iconPath": "static/bottomIcon/首页灰色icon@3x.png",
+      "selectedIconPath": "static/bottomIcon/首页icon@3x.png",
       "text": "首页"
+    }, {
+      "pagePath": "pages/mine/index",
+      "iconPath": "static/bottomIcon/我的灰色icon@3x.png",
+      "selectedIconPath": "static/bottomIcon/我的icon@3x.png",
+      "text": "我的"
     }]
   }
 }

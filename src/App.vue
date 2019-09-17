@@ -8,11 +8,9 @@ export default {
     const statusBarHeight = wx.getSystemInfoSync().statusBarHeight
     const reduce = capsuleInfo.top - statusBarHeight
     const allHeight = reduce + capsuleInfo.top
-    // console.log('statusBarHeight', statusBarHeight);
-    // console.log('capsuleInfo', capsuleInfo);
     storage.setSync('capsuleInfo', allHeight)
     storage.set('access_token', '456').then((value) => {
-      // console.log('set_token_value_', value);
+
     })
     wx.checkSession({
       success () {

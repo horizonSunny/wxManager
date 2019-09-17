@@ -2,7 +2,7 @@
   <view class="wrap">
     <topBar page-title="选取药店"></topBar>
     <view class="location_select" @click="selectArea = !selectArea">
-      <img src="../../static/homePage/icon/dingwei@2x.png" alt="" />
+      <img :src="'../../static/homePage/icon/dingwei' + pixelRatio" alt="" />
       <span>上海</span>
       <view v-if="!selectArea">
         <uni-icon
@@ -112,6 +112,7 @@ export default {
   },
   data () {
     return {
+      pixelRatio: this.$pixelRatio,
       items: [
         {
           // 导航名称
@@ -162,7 +163,7 @@ export default {
       query: {
         pageNumber: 0,
         pageSize: 10
-      },
+      }
     }
   },
   methods: {
@@ -285,6 +286,7 @@ export default {
     }
   },
   onLoad () {
+    console.log('this.pixelRatio_drug_', this.pixelRatio);
   }
 }
 </script>
