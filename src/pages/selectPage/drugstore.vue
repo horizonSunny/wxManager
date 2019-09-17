@@ -32,10 +32,7 @@
           </view>
           <view class="orderInfoContent">
             <view class="itemImg">
-              <img
-                src="../../static/homePage/main/组件-banner背景.png"
-                alt=""
-              />
+              <img src="../../static/main/bannerBack@3x.png" alt="" />
             </view>
             <view class="itemInfo">
               <view class="name">
@@ -62,10 +59,7 @@
           </view>
           <view class="orderInfoContent">
             <view class="itemImg">
-              <img
-                src="../../static/homePage/main/组件-banner背景.png"
-                alt=""
-              />
+              <img src="../../static/main/bannerBack@3x.png" alt="" />
             </view>
             <view class="itemInfo">
               <view class="name">

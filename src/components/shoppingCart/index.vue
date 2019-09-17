@@ -1,6 +1,9 @@
 <template>
   <view class="shopCard">
-    <view class="shoppingIcon">
+    <view
+      class="shoppingIcon"
+      :class="pixelRatio === 2 ? 'pixelRatioTwo' : 'pixelRatioThree'"
+    >
       <view class="shoppingMount">{{ amount }}</view>
     </view>
     <view class="totalPrice"> ¥ {{ totalPrice }} </view>
@@ -11,6 +14,7 @@
 export default {
   data () {
     return {
+      pixelRatio: this.$pixelRatio,
     }
   },
   created () {
@@ -53,7 +57,6 @@ export default {
     height: px2rpx(52);
     width: px2rpx(52);
     border-radius: px2rpx(26);
-    background: url("../../static/homePage/shoppingLine/购物车@3x.png");
     background-size: cover;
     padding: px2rpx(5);
     .shoppingMount {
@@ -67,6 +70,12 @@ export default {
       background: red;
       float: right;
     }
+  }
+  .pixelRatioTwo {
+    background: url("../../static/main/shoppingCart@3x.png");
+  }
+  .pixelRatioThree {
+    background: url("../../static/main/shoppingCart@3x.png");
   }
   .totalPrice {
     font-size: px2rpx(18);
