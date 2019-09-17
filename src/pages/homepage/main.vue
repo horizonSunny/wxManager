@@ -1,11 +1,11 @@
 <template>
   <view class="page">
     <view class="header">
-      <img src="../../static/homePage/main/组件-banner背景.png" />
+      <img :src="'../../static/main/bannerBack' + pixelRatio" />
     </view>
     <view class="content">
       <view class="buy">
-        <img src="../../static/homePage/main/组件-线上买药背景.png" alt="" />
+        <img :src="'../../static/main/lineBuyMedicine' + pixelRatio" alt="" />
         <view class="text_info">
           <view class="buy_online">线上买药</view>
           <view @click="goShopping" class="buy_confirm">
@@ -16,23 +16,23 @@
       <view class="group_module">
         <view class="module">
           <img
-            :src="'../../static/homePage/main/' + '组件-团购买药背景.png'"
+            :src="'../../static/main/groupBuyMedicine' + pixelRatio"
             alt=""
           />
           <view>团购买药</view>
         </view>
         <view class="module">
-          <img src="../../static/homePage/main/组件-就医指引背景.png" alt="" />
+          <img :src="'../../static/main/medicalGuide' + pixelRatio" alt="" />
           <view>就医指引</view>
         </view>
       </view>
       <view class="group_module">
         <view class="module">
-          <img src="../../static/homePage/main/组件-咨询医生背景.png" alt="" />
+          <img :src="'../../static/main/consultDoctor' + pixelRatio" alt="" />
           <view>咨询医生</view>
         </view>
         <view class="module">
-          <img src="../../static/homePage/main/组件-附近药店背景.png" alt="" />
+          <img :src="'../../static/main/nearPharmacy' + pixelRatio" alt="" />
           <view>附近药店</view>
         </view>
       </view>
@@ -43,6 +43,11 @@
 export default {
   onLoad () {
     console.log('this.pixelRatio_', this.pixelRatio)
+  },
+  data () {
+    return {
+      pixelRatio: this.$pixelRatio
+    }
   },
   methods: {
     goShopping () {

@@ -1,5 +1,15 @@
 {
   "pages": [{
+      "path": "pages/homepage/main",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    }, {
+      "path": "pages/orderForm/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    }, {
       "path": "pages/mine/index",
       "style": {
         "navigationStyle": "custom"
@@ -35,23 +45,12 @@
       "style": {
         "navigationStyle": "custom"
       }
-    }, {
-      "path": "pages/orderForm/index",
-      "style": {
-        "navigationStyle": "custom"
-      }
     },
     {
       "path": "pages/login/login"
     },
     {
       "path": "pages/homepage/onlineShopping/index",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/homepage/main",
       "style": {
         "navigationStyle": "custom"
       }

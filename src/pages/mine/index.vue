@@ -8,7 +8,7 @@
       font-color="#fff"
     ></topBar>
     <view class="header">
-      <img src="../../static/homePage/main/组件-banner背景.png" />
+      <img :src="'../../static/main/headPortrait' + pixelRatio" />
       <view class="userInfo">
         <img />
         <view class="name">
@@ -110,6 +110,11 @@ import topBar from '../../components/topNavigation/index'
 export default {
   components: {
     topBar,
+  },
+  data () {
+    return {
+      pixelRatio: this.$pixelRatio
+    }
   },
   methods: {
     goShopping () {

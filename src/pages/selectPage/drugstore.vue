@@ -2,7 +2,7 @@
   <view class="wrap">
     <topBar page-title="选取药店"></topBar>
     <view class="location_select" @click="selectArea = !selectArea">
-      <img :src="'../../static/homePage/icon/dingwei' + pixelRatio" alt="" />
+      <img :src="'../../static/main/dingwei' + pixelRatio" alt="" />
       <span>上海</span>
       <view v-if="!selectArea">
         <uni-icon
@@ -285,9 +285,6 @@ export default {
       return areaHeight
     }
   },
-  onLoad () {
-    console.log('this.pixelRatio_drug_', this.pixelRatio);
-  }
 }
 </script>
 <style  lang='scss' scoped>

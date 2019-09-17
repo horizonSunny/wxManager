@@ -71,7 +71,7 @@
         <view class="coupon space_between">
           <!-- 优惠券如果没有的话要隐藏 -->
           <view>
-            <img src="../../static/homePage/orderForm/优惠券@3x.png" alt="" />
+            <img :src="'../../static/main/coupon' + pixelRatio" alt="" />
             <span> 优惠券</span>
           </view>
           <view>
@@ -116,6 +116,7 @@ export default {
   },
   data () {
     return {
+      pixelRatio: this.$pixelRatio,
       active: true,
       shoppingCart: null,
       shoppingPrice: null,
@@ -246,7 +247,7 @@ export default {
         align-items: center;
         img {
           position: relative;
-          top: px2rpx(5);
+          top: px2rpx(4);
           height: px2rpx(20);
           width: px2rpx(20);
         }
