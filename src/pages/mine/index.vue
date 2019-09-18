@@ -10,7 +10,7 @@
     <view class="header">
       <img :src="'../../static/main/bannerBack' + pixelRatio" />
       <view class="userInfo">
-        <img :src="'../../static/main/headPortrait' + pixelRatio" />
+        <img :src="'' || avatorDefault" />
         <view class="name">
           <view>王弥茗</view>
           <view>13689076890</view>
@@ -113,7 +113,9 @@ export default {
   },
   data () {
     return {
-      pixelRatio: this.$pixelRatio
+      pixelRatio: this.$pixelRatio,
+      userInfo: this.$store.getters.getUserInfo,
+      avatorDefault: '../../static/main/headPortrait' + this.$pixelRatio
     }
   },
   methods: {
@@ -142,7 +144,8 @@ export default {
         }
       });
     }
-  }
+  },
+
 }
 </script>
 <style lang="scss" scoped>
