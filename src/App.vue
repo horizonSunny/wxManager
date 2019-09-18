@@ -12,6 +12,13 @@ export default {
     storage.set('access_token', '456').then((value) => {
 
     })
+    // 这边获取用户信息
+    this.$http.get('patient/patient').then((res) => {
+      // 用户信息放入store中
+      this.$store.dispatch('setUserInfo', res.data).then((res) => {
+        console.log('userInfo_', this.$store.getters.getUserInfo);
+      })
+    })
     wx.checkSession({
       success () {
         console.log('微信登陆态成功');

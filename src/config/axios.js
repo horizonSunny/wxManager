@@ -27,8 +27,9 @@ const http = axios.create({
   withCredentials: true,
   // #endif
   headers: {
-    'Content-Type': 'application/json'
-    //'X-Requested-With': 'XMLHttpRequest',
+    'Content-Type': 'application/json',
+    authorization:
+      'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnRfaWQiOjAsImxpY2Vuc2UiOiJtYWRlIGJ5IGF1dGgiLCJ1c2VyX2lkIjoxLCJ1c2VyX25hbWUiOiIxMzI2NTc0Njc4OCIsInNjb3BlIjpbInNlcnZlciJdLCJleHAiOjE1Njg3OTUzMjIsImRlcHRfaWQiOjAsImF1dGhvcml0aWVzIjpbIlJPTEVfIl0sImp0aSI6IjJmMDU2NDZjLTQxNjMtNGUxMC1hNTc2LTg5YThhNjY5ZTM1NyIsImNsaWVudF9pZCI6InBhdGllbnQiLCJ1c2VybmFtZSI6IjEzMjY1NzQ2Nzg4In0.geswwySOILJ7LqctHdyyReFUAPUdnXZW6fMGbkTtNxU'
   }
 })
 
