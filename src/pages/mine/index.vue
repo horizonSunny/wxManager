@@ -54,7 +54,7 @@
           <view>已接单</view>
         </view>
       </view>
-      <view class="myOperate">
+      <view class="myOperate" @click="goCoupon">
         <view>
           <uni-icon
             type=""
@@ -78,7 +78,7 @@
           <uni-icon type="" class="iconfont icon-more icon_style"></uni-icon>
         </view>
       </view>
-      <view class="myOperate">
+      <view class="myOperate" @click="contactService">
         <view>
           <uni-icon
             type=""
@@ -90,7 +90,7 @@
           <uni-icon type="" class="iconfont icon-more icon_style"></uni-icon>
         </view>
       </view>
-      <view class="myOperate">
+      <view class="myOperate" @click="goAboutUs">
         <view>
           <uni-icon
             type=""
@@ -117,16 +117,35 @@ export default {
     }
   },
   methods: {
-    goShopping (info) {
-      uni.navigateTo({
-        url: 'onlineShopping/index',
-        animationType: 'none'
-      });
-    },
     goOrder (info) {
       let url = '/pages/myOrder/index?currentMenu=' + info
       uni.navigateTo({
         url: url
+      });
+    },
+    goCoupon () {
+      uni.navigateTo({
+        url: '/pages/mine/myCoupon/index'
+      });
+    },
+    goAboutUs () {
+      uni.navigateTo({
+        url: '/pages/mine/aboutUs/index'
+      });
+    },
+    contactService () {
+      uni.showModal({
+        title: '提醒',
+        content: '17717918677',
+        cancelText: ' 取消',
+        confirmText: '呼叫',
+        success: function (res) {
+          if (res.confirm) {
+            console.log('用户确定退出登陆');
+          } else if (res.cancel) {
+            console.log('用户确定不退出登陆');
+          }
+        }
       });
     }
   }
