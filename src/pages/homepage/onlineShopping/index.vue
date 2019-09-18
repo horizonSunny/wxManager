@@ -13,24 +13,29 @@
       >
     </view>
     <view class="swiperContent">
-      <swiper class="swiper" :current="currentList" @change="swiperList">
+      <swiper class="swiper" :current="currentDrugType" @change="swiperList">
         <swiper-item
           v-for="(item, index) in menuList"
           :key="index"
           style="width:100%;height:100%;background:#fff"
         >
-          <scroll-view scroll-y class="scrollView">
+          <scroll-view
+            scroll-y
+            class="scrollView"
+            @scrolltolower="scrolltolower"
+          >
             <view
               class="itemMessage"
               v-for="(itemInList, indexInList) in item"
               :key="indexInList"
             >
               <view class="itemImg">
-                <img src="../../../static/main/bannerBack@3x.png" alt="" />
+                <!-- <img src="../../../static/main/bannerBack@3x.png" alt="" /> -->
+                <img :src="item['image']" alt="" />
               </view>
               <view class="itemInfo">
                 <view class="name">
-                  {{ itemInList["name"] }}
+                  {{ itemInList["productName"] }}
                 </view>
                 <view class="specification">
                   规格: {{ itemInList["specification"] }}
@@ -79,8 +84,11 @@ export default {
         prescription: [],
         otc: []
       },
-      currentList: 0
-      // new 
+      currentDrugType: 0,
+      // 分页，滑动再增加
+      prePageNumber: 0,
+      otcPageNumber: 0,
+      pageSize: 10,
     }
   },
   computed: {
@@ -89,33 +97,14 @@ export default {
     }
   },
   onLoad () {
-    // 这边是从后台数据拿到商品列表，两次分开操作，解藕
-    this.$http.get('wxManager/getItemsList').then((res) => {
-      for (let item = 0; item < res.data.length; item++) {
-        res.data[item]['amount'] = 0
-        switch (res.data[item]['type']) {
-          case 0:
-            this.menuList['prescription'].push(res.data[item])
-            break;
-          case 1:
-            this.menuList['otc'].push(res.data[item])
-            break;
-        }
-      }
-      console.log('this.menuList_', this.menuList)
-    }).then(() => {
-      // 初始页面的时候这边要和购物车做一个比对，如果命名相同的话，将amount替换为购物车的数量
-      const shoppingCart = this.$store.getters.shoppingInfo
-      this.compareShopping(this.menuList['prescription'], shoppingCart)
-      this.compareShopping(this.menuList['otc'], shoppingCart)
-    })
+    this.getShoppingList(this.currentDrugType)
   },
   methods: {
     selectMenu (item) {
       this.currentMenu = item
       const current = this.meunOptions.indexOf(item)
       console.log('current_', current);
-      this.currentList = current
+      this.currentDrugType = current
     },
     swiperList (e) {
       console.log('event_', e);
@@ -140,11 +129,47 @@ export default {
     compareShopping (allCommodity, shoppingCart) {
       for (let item = 0; item < allCommodity.length; item++) {
         for (let commodity = 0; commodity < shoppingCart.length; commodity++) {
-          if (allCommodity[item]['name'] === shoppingCart[commodity]['name']) {
+          if (allCommodity[item]['id'] === shoppingCart[commodity]['id']) {
             allCommodity.splice(item, 1, shoppingCart[commodity])
           }
         }
       }
+    },
+    // 滚动触到底部时候触发
+    scrolltolower () {
+      console.log('scrolltolower_滚动触底了')
+      console.log('this.currentDrugType_', this.currentDrugType)
+      this.getShoppingList(this.currentDrugType)
+    },
+    // 这边是从后台数据拿到商品列表，两次分开操作，解藕
+    getShoppingList (drugType) {
+      let params = {
+        pageNumber: drugType === 0 ? this.prePageNumber : this.otcPageNumber,
+        pageSize: this.pageSize,
+        productType: this.productType,
+      }
+      console.log('drugType_____', drugType)
+      this.$http.get('admin/product', { params }).then((res) => {
+        for (let item = 0; item < res.data.pageList.length; item++) {
+          res.data.pageList[item]['amount'] = 0
+        }
+        switch (drugType) {
+          case 0:
+            this.menuList['prescription'] = this.menuList['prescription'].concat(res.data.pageList)
+            this.prePageNumber++
+            break;
+          case 1:
+            this.menuList['otc'] = this.menuList['otc'].concat(res.data.pageList)
+            this.otcPageNumber++
+            break;
+        }
+      }).then(() => {
+        // 初始页面的时候这边要和购物车做一个比对，如果命名相同的话，将amount替换为购物车的数量
+        console.log('this.menuList_', this.menuList)
+        const shoppingCart = this.$store.getters.shoppingInfo
+        this.compareShopping(this.menuList['prescription'], shoppingCart)
+        this.compareShopping(this.menuList['otc'], shoppingCart)
+      })
     }
   }
 }
@@ -202,6 +227,7 @@ export default {
               background-size: cover;
               width: 100%;
               height: 100%;
+              border: px2rpx(1) solid #f3f3f3;
             }
           }
           .itemInfo {

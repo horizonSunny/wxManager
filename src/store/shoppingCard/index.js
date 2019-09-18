@@ -16,7 +16,7 @@ const shoppingCard = {
     SET_COMMODITY: (state, commodity) => {
       commodity['amount'] += 1
       let contain = state.commodityInfo.some(item => {
-        if (item['name'] === commodity['name']) {
+        if (item['id'] === commodity['id']) {
           return true
         }
       })
@@ -28,7 +28,7 @@ const shoppingCard = {
     },
     DEL_COMMODITY: (state, commodity) => {
       state.commodityInfo.forEach((item, index) => {
-        if (item['name'] === commodity['name'] && item['amount'] > 0) {
+        if (item['id'] === commodity['id'] && item['amount'] > 0) {
           item['amount'] -= 1
         }
       })
