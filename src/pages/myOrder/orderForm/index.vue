@@ -133,16 +133,10 @@ export default {
   },
   methods: {
     selectDrug () {
-      uni.navigateTo({
-        url: '/pages/myOrder/selectPage/drugstore',
-        animationType: 'none'
-      });
+      this.$navTo.togo('/pages/myOrder/selectPage/drugstore')
     },
     operateAddress () {
-      uni.navigateTo({
-        url: '/pages/myOrder/selectPage/userAddress',
-        animationType: 'none'
-      });
+      this.$navTo.togo('/pages/mine/myAddress/index')
     }
   }
 }

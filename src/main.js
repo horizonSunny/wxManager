@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import http from './config/axios'
 import store from './store/index'
+import * as navTo from './config/navTo'
 
 Vue.config.productionTip = false
 // 共享数据Vue
@@ -12,6 +13,7 @@ uni.getSystemInfo({
 })
 Vue.prototype.$http = http
 Vue.prototype.$store = store
+Vue.prototype.$navTo = navTo
 
 App.mpType = 'app'
 

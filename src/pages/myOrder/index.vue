@@ -47,12 +47,6 @@
                     <view> ¥ {{ itemInList["price"] }} </view>
                     <view> X3 </view>
                   </view>
-                  <!-- <view class="priceOperate">
-                  <view class="price">¥ {{ itemInList["price"] }}</view>
-                  <view class="operate">
-                    X3
-                  </view>
-                </view> -->
                 </view>
               </view>
               <view class="orderInfoFoot">

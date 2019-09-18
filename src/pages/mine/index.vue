@@ -119,19 +119,13 @@ export default {
   methods: {
     goOrder (info) {
       let url = '/pages/myOrder/index?currentMenu=' + info
-      uni.navigateTo({
-        url: url
-      });
+      this.$navTo.togo(url)
     },
     goCoupon () {
-      uni.navigateTo({
-        url: '/pages/mine/myCoupon/index'
-      });
+      this.$navTo.togo('/pages/mine/myCoupon/index')
     },
     goAboutUs () {
-      uni.navigateTo({
-        url: '/pages/mine/aboutUs/index'
-      });
+      this.$navTo.togo('/pages/mine/aboutUs/index')
     },
     contactService () {
       uni.showModal({

@@ -62,10 +62,7 @@ export default {
   },
   methods: {
     goShopping () {
-      uni.navigateTo({
-        url: 'onlineShopping/index',
-        animationType: 'none'
-      });
+      this.$navTo.togo('onlineShopping/index')
     }
   }
 }

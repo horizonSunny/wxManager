@@ -9,7 +9,7 @@
               <span>郭小美</span>
               <span>13789602345</span>
             </view>
-            <view class="userInfoItem">
+            <view class="userInfoItem" @click="gotoDetail('edit')">
               <uni-icon
                 type=""
                 class="iconfont icon-edit icon_style"
@@ -21,7 +21,7 @@
       </scroll-view>
     </view>
     <view class="footer">
-      <button>新增收货地址</button>
+      <button @click="gotoDetail('add')">新增收货地址</button>
     </view>
   </view>
 </template>
@@ -30,6 +30,11 @@ import topBar from '../../../components/topNavigation/index'
 export default {
   components: {
     topBar,
+  },
+  methods: {
+    gotoDetail (operate) {
+      this.$navTo.togo('/pages/myOrder/selectPage/userAddress')
+    }
   }
 }
 </script>
