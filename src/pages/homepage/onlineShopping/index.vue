@@ -38,7 +38,7 @@
                   {{ itemInList["productName"] }}
                 </view>
                 <view class="specification">
-                  规格: {{ itemInList["specification"] }}
+                  规格: {{ itemInList["productSpecif"] }}
                 </view>
                 <view class="priceOperate">
                   <view class="price">¥ {{ itemInList["price"] }}</view>
