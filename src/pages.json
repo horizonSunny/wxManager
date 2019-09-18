@@ -1,5 +1,10 @@
 {
   "pages": [{
+      "path": "pages/homepage/main",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    }, {
       "path": "pages/mine/index",
       "style": {
         "navigationStyle": "custom"
@@ -12,11 +17,6 @@
       }
     }, {
       "path": "pages/mine/setting/index",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    }, {
-      "path": "pages/homepage/main",
       "style": {
         "navigationStyle": "custom"
       }

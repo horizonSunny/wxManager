@@ -10,10 +10,10 @@
     <view class="header">
       <img :src="'../../static/main/bannerBack' + pixelRatio" />
       <view class="userInfo">
-        <img :src="'' || avatorDefault" />
+        <img :src="userAvatar" @error="avatorError" />
         <view class="name">
-          <view>王弥茗</view>
-          <view>13689076890</view>
+          <view>{{ userInfo["username"] || "无名" }}</view>
+          <view>{{ userInfo["phone"] || "无电话" }}</view>
         </view>
       </view>
     </view>
@@ -66,7 +66,7 @@
           <uni-icon type="" class="iconfont icon-more icon_style"></uni-icon>
         </view>
       </view>
-      <view class="myOperate">
+      <view class="myOperate" @click="logOut">
         <view>
           <uni-icon
             type=""
@@ -115,10 +115,16 @@ export default {
     return {
       pixelRatio: this.$pixelRatio,
       userInfo: this.$store.getters.getUserInfo,
+      userAvatar: this.$store.getters.getUserInfo.avatar,
       avatorDefault: '../../static/main/headPortrait' + this.$pixelRatio
     }
   },
   methods: {
+    // 如果加载图片出错，设置默认图片
+    avatorError () {
+      console.log('avatorError')
+      this.userAvatar = this.avatorDefault
+    },
     goOrder (info) {
       let url = '/pages/myOrder/index?currentMenu=' + info
       this.$navTo.togo(url)
@@ -128,6 +134,9 @@ export default {
     },
     goAboutUs () {
       this.$navTo.togo('/pages/mine/aboutUs/index')
+    },
+    logOut () {
+      this.$navTo.togo('/pages/mine/setting/index')
     },
     contactService () {
       uni.showModal({
@@ -145,7 +154,9 @@ export default {
       });
     }
   },
-
+  onLoad () {
+    console.log('this.userInfo_', this.$store.getters.getUserInfo)
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -175,7 +186,6 @@ export default {
       height: px2rpx(66);
       width: px2rpx(66);
       border-radius: px2rpx(33);
-      background: #ffda39;
     }
     .name {
       margin-left: px2rpx(16);
