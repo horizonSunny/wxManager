@@ -3,6 +3,7 @@
  * 目前还不能使用路径别名
  */
 import { deepCopy } from '../../utils/index'
+import http from '../../config/axios'
 const shoppingCard = {
   state: {
     commodityInfo: [],
@@ -45,25 +46,21 @@ const shoppingCard = {
   actions: {
     setCommodityInfo({ commit, state }, commodity) {
       if (state.commodityInfo.length < 1) {
-        this.$http
+        http
           .post('order/shopCart', {
-            createShop: {
-              cartNum: commodity['amount'] + 1,
-              productId: commodity['id']
-            }
+            cartNum: commodity['amount'] + 1,
+            productId: commodity['id']
           })
           .then(res => {
             state.shoppingCartId = res.data.id
             commit('SET_COMMODITY', commodity)
           })
       } else {
-        this.$http
+        http
           .put('order/shopCart', {
-            createShop: {
-              cartNum: commodity['amount'] + 1,
-              productId: commodity['id'],
-              id: state.shoppingCartId
-            }
+            cartNum: commodity['amount'] + 1,
+            productId: commodity['id'],
+            id: state.shoppingCartId
           })
           .then(res => {
             state.shoppingCartId = res.data.id
@@ -73,13 +70,11 @@ const shoppingCard = {
     },
     delCommodityInfo({ commit, state }, commodity) {
       // commit('DEL_COMMODITY', commodity)
-      this.$http
+      http
         .put('order/shopCart', {
-          createShop: {
-            cartNum: commodity['amount'] - 1,
-            productId: commodity['id'],
-            id: state.shoppingCartId
-          }
+          cartNum: commodity['amount'] - 1,
+          productId: commodity['id'],
+          id: state.shoppingCartId
         })
         .then(res => {
           state.shoppingCartId = res.data.id
@@ -87,7 +82,7 @@ const shoppingCard = {
         })
     },
     getShoppingCart({ commit }) {
-      this.$http.get('order/shopCart/info').then(res => {
+      http.get('order/shopCart/info').then(res => {
         commit('RESET_SHOPPING', res.data)
       })
     }
