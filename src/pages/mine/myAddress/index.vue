@@ -51,10 +51,11 @@ export default {
       } else {
         this.$navTo.togo('/pages/myOrder/selectPage/userAddress', addressInfo)
       }
-    },
-    onLoad () {
-      console.log('getCustAddress_', this.$store.getters.getCustAddress);
     }
+  },
+  onShow () {
+    console.log('getCustAddress_', this.$store.getters.getCustAddress);
+    this.custAddress = this.$store.getters.getCustAddress
   }
 }
 </script>

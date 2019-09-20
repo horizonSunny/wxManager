@@ -25,16 +25,26 @@ const address = {
   },
   actions: {
     getCustAdd({ commit }) {
-      http.get('patient/address').then(res => {
+      return http.get('patient/address').then(res => {
         commit('GET_CUSTADD', res.data)
       })
     },
     // 包括更新和新建用户地址
-    // setCustAdd({ commit, state }, commodity) {
-    //   http.post('patient/address').then(res => {
-    //     commit('SET_CUSTADD', res.data)
-    //   })
-    // },
+    setCustAdd({ dispatch }, commodity) {
+      if (commodity.operate === 'add') {
+        http.post('patient/address', commodity['addressInfo']).then(res => {
+          dispatch('getCustAdd').then(res => {
+            uni.navigateBack()
+          })
+        })
+      } else if (commodity.operate === 'reset') {
+        http.put('patient/address', commodity['addressInfo']).then(res => {
+          dispatch('getCustAdd').then(res => {
+            uni.navigateBack()
+          })
+        })
+      }
+    },
     setDrugAdd({ commit }, commodity) {
       commit('SET_COMMODITY', commodity)
     },

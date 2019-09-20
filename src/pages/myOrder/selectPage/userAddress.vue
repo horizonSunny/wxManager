@@ -5,19 +5,19 @@
       <view class="labelInfo">
         <span>收货人</span>
         <input
-          name="userName"
+          name="fullName"
           type="text"
           placeholder="请填写真实姓名"
-          v-model="userInfo['userName']"
+          v-model="userInfo['fullName']"
         />
       </view>
       <view class="labelInfo">
         <span>手机号码</span>
         <input
-          name="userPhone"
+          name="phone"
           type="text"
           placeholder="请填写手机号码"
-          v-model="userInfo['userPhone']"
+          v-model="userInfo['phone']"
         />
       </view>
       <view class="labelInfo">
@@ -36,11 +36,11 @@
         <span class="textarea_span">详细地址</span>
         <textarea
           type="text"
-          name="addressDetail"
+          name="detailAddress"
           placeholder="如道路、门牌号、小区"
           rows="3"
           cols="4"
-          :value="userInfo['addressDetail']"
+          :value="userInfo['detailAddress']"
           @input="inputAreaDetail"
         />
       </view>
@@ -56,13 +56,17 @@
     </form>
     <view class="confirm">
       <button type="primary" class="save" @click="submit">保存收货信息</button>
-      <button type="primary" class="delete" @click="submit">
+      <button
+        type="primary"
+        :class="deleteActive ? 'deleteActive' : 'delete'"
+        @click="deleteAddress"
+      >
         删除收货信息
       </button>
     </view>
     <w-picker
       mode="region"
-      :defaultVal="['浙江省', '杭州市', '滨江区']"
+      :defaultVal="pickerDefault"
       @confirm="onConfirmArea"
       ref="region"
       themeColor="#f00"
@@ -82,23 +86,30 @@ export default {
   data () {
     return {
       userInfo: {
-        userName: '',
-        userPhone: '',
+        fullName: '',
+        phone: '',
         userAddress: '',
-        addressDetail: '',
-        defaultInfo: false
-      }
+        detailAddress: '',
+        province: '',
+        city: '',
+        area: '',
+        defaultInfo: false,
+      },
+      pickerDefault: ['浙江省', '杭州市', '滨江区'],
+      //是新增还是更新
+      operate: 'add',
+      deleteActive: false
     }
   },
   computed: {},
   methods: {
     submit () {
-      console.log('addressDetail_', this.userInfo.addressDetail);
+      console.log('detailAddress_', this.userInfo.detailAddress);
       let formRules = [
-        { name: 'userName', type: 'required', errmsg: '请填写用户名' },
-        { name: 'userPhone', required: true, type: 'phone', errmsg: '请输入正确的手机号' },
+        { name: 'fullName', type: 'required', errmsg: '请填写用户名' },
+        { name: 'phone', required: true, type: 'phone', errmsg: '请输入正确的手机号' },
         { name: 'userAddress', type: 'required', errmsg: '请选择地址' },
-        { name: 'addressDetail', type: 'required', errmsg: '请填写详细地址信息' }
+        { name: 'detailAddress', type: 'required', errmsg: '请填写详细地址信息' }
 
       ]
       let valLoginRes = validate.validate(this.userInfo, formRules)
@@ -109,18 +120,32 @@ export default {
         })
         return false
       }
+      const info = {
+        operate: this.operate,
+        addressInfo: this.userInfo
+      }
+      info['addressInfo']['isDefault'] = info['addressInfo']['defaultInfo'] ? 1 : 0
+      if (info['addressInfo']['addressId']) {
+        info['addressInfo']['addressId'] = parseInt(info['addressInfo']['addressId'])
+      }
+      console.log('addressInfo____', info);
+      this.$store.dispatch('setCustAdd', info).then((res) => { })
     },
-    delete () {
-
+    // 删除收获地址
+    deleteAddress () {
+      this.$http.delete('patient/address/1')
     },
     selectArea () {
       this.$refs['region'].show();
     },
     inputAreaDetail (event) {
-      setTimeout(() => { this.userInfo.addressDetail = event.detail.value }, 0)
+      setTimeout(() => { this.userInfo.detailAddress = event.detail.value }, 0)
     },
     onConfirmArea (val) {
       this.userInfo.userAddress = val.result
+      this.userInfo.province = val.checkArr[0]
+      this.userInfo.city = val.checkArr[1]
+      this.userInfo.area = val.checkArr[2]
       console.log('val_', val);
     },
     changeDefaultInfo (event) {
@@ -130,8 +155,21 @@ export default {
   },
   onLoad: function (option) {
     console.log('option_', option)
-    if (option) {
+    if (JSON.stringify(option) !== '{}') {
+      this.operate = 'reset'
+      //赋值
+      this.userInfo['fullName'] = option['fullName']
+      this.userInfo['phone'] = option['phone']
+      this.userInfo['userAddress'] = option['province'] + option['city'] + option['area']
+      this.userInfo['detailAddress'] = option['detailAddress']
+      this.userInfo['defaultInfo'] = option['isDefault'] == 0 ? false : true
+      this.userInfo['province'] = option['province']
+      this.userInfo['city'] = option['city']
+      this.userInfo['area'] = option['area']
 
+      this.pickerDefault = [option['province'], option['city'], option['area']]
+      this.$set(this.userInfo, 'addressId', option['addressId'])
+      this.deleteActive = true
     }
   }
 }
@@ -164,6 +202,7 @@ export default {
       input {
         height: px2rpx(57);
         line-height: px2rpx(57);
+        text-overflow: ellipsis;
       }
       .placeholder-class {
         font-size: 18px;
@@ -216,6 +255,10 @@ export default {
     .delete {
       margin-top: px2rpx(13);
       background: #c0c0c0;
+    }
+    .deleteActive {
+      margin-top: px2rpx(13);
+      background: #e90a0a;
     }
   }
 }
