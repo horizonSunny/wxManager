@@ -12,9 +12,17 @@
             ></uni-icon>
             <span>快递配送</span>
             <view class="addrresInfo" @click="operateAddress">
-              <view>张晓丽 13697804589</view>
+              <view
+                >{{ defaultCustAddress["fullName"] }}
+                {{ defaultCustAddress["phone"] }}</view
+              >
               <view class="space_between">
-                <view>上海市浦东新区长泰广场E座 10楼</view>
+                <view
+                  >{{ defaultCustAddress["province"]
+                  }}{{ defaultCustAddress["city"]
+                  }}{{ defaultCustAddress["area"]
+                  }}{{ defaultCustAddress["detailAddress"] }}</view
+                >
                 <view>
                   <uni-icon type="" class="iconfont  icon-more"></uni-icon>
                 </view>
@@ -51,10 +59,10 @@
             </view>
             <view class="itemInfo">
               <view class="name">
-                {{ itemInList["name"] }}
+                {{ itemInList["productName"] }}
               </view>
               <view class="specification">
-                规格: {{ itemInList["specification"] }}
+                规格: {{ itemInList["productSpecif"] }}
               </view>
               <view class="priceOperate">
                 <view class="price">¥ {{ itemInList["price"] }}</view>
@@ -118,11 +126,12 @@ export default {
       shoppingCart: null,
       shoppingPrice: null,
       couponPrice: 50,
+      defaultCustAddress: this.$store.getters.getCustAddress
     }
   },
   onLoad () {
     this.shoppingCart = this.$store.getters.shoppingInfo;
-    this.shoppingPrice = this.$store.getters.shoppingPrice
+    this.shoppingPrice = this.$store.getters.shoppingPrice;
   },
   computed: {
     totalPrice () {

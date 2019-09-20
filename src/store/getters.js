@@ -22,7 +22,10 @@ const getters = {
   },
   // 获取用户默认地址
   getCustAddress: state => {
-    return state.address.customerAddress
+    let dafaultAddress = state.address.customerAddress.find(item => {
+      return item['isDefault'] === 1
+    })
+    return dafaultAddress
   },
   getDrugAddress: state => {
     return state.address.drugstoreAddress

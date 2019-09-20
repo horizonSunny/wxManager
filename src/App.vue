@@ -18,6 +18,10 @@ export default {
       this.$store.dispatch('setUserInfo', res.data).then((res) => {
         // console.log('userInfo_', this.$store.getters.getUserInfo);
       })
+      // 获取用户取货地址
+      this.$store.dispatch('getCustAdd', res.data).then((res) => {
+        // console.log('userInfo_', this.$store.getters.getUserInfo);
+      })
     })
     wx.checkSession({
       success () {
