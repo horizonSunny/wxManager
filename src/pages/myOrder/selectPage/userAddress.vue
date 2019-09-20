@@ -127,6 +127,12 @@ export default {
       console.log('event.detail.value_', event.detail.value);
       this.userInfo.defaultInfo = event.detail.value
     }
+  },
+  onLoad: function (option) {
+    console.log('option_', option)
+    if (option) {
+
+    }
   }
 }
 </script>

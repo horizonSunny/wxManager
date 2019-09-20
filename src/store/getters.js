@@ -20,8 +20,11 @@ const getters = {
     })
     return totalPrice
   },
-  // 获取用户默认地址
+  // 获取用户地址和默认地址
   getCustAddress: state => {
+    return state.address.customerAddress
+  },
+  getCustDefaultAddress: state => {
     let dafaultAddress = state.address.customerAddress.find(item => {
       return item['isDefault'] === 1
     })

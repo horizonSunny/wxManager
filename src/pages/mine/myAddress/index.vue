@@ -3,20 +3,27 @@
     <topBar page-title="我的收货地址"></topBar>
     <view class="content">
       <scroll-view scroll-y class="scrollView">
-        <view class="addressItem">
+        <view
+          class="addressItem"
+          v-for="(item, index) in custAddress"
+          :key="index"
+        >
           <view class="userInfo">
             <view class="userInfoItem">
-              <span>郭小美</span>
-              <span>13789602345</span>
+              <span>{{ item["fullName"] }}</span>
+              <span>{{ item["phone"] }}</span>
             </view>
-            <view class="userInfoItem" @click="gotoDetail('edit')">
+            <view class="userInfoItem" @click="gotoDetail('edit', item)">
               <uni-icon
                 type=""
                 class="iconfont icon-edit icon_style"
               ></uni-icon>
             </view>
           </view>
-          <view class="userAddress">上海市浦东新区长泰广场E座十楼 1205室</view>
+          <view class="userAddress"
+            >{{ item["province"] }}{{ item["city"] }}{{ item["area"]
+            }}{{ item["detailAddress"] }}</view
+          >
         </view>
       </scroll-view>
     </view>
@@ -28,12 +35,25 @@
 <script>
 import topBar from '../../../components/topNavigation/index'
 export default {
+  data () {
+    return {
+      custAddress: this.$store.getters.getCustAddress
+    }
+  },
   components: {
-    topBar,
+    topBar
   },
   methods: {
-    gotoDetail (operate) {
-      this.$navTo.togo('/pages/myOrder/selectPage/userAddress')
+    gotoDetail (operate, addressInfo = null) {
+      console.log('addressInfo_', addressInfo);
+      if (!addressInfo) {
+        this.$navTo.togo('/pages/myOrder/selectPage/userAddress')
+      } else {
+        this.$navTo.togo('/pages/myOrder/selectPage/userAddress', addressInfo)
+      }
+    },
+    onLoad () {
+      console.log('getCustAddress_', this.$store.getters.getCustAddress);
     }
   }
 }

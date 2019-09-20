@@ -126,7 +126,7 @@ export default {
       shoppingCart: null,
       shoppingPrice: null,
       couponPrice: 50,
-      defaultCustAddress: this.$store.getters.getCustAddress
+      defaultCustAddress: this.$store.getters.getCustDefaultAddress
     }
   },
   onLoad () {
