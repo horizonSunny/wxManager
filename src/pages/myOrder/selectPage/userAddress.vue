@@ -133,6 +133,9 @@ export default {
     },
     // 删除收获地址
     deleteAddress () {
+      if (!deleteActive) {
+        return
+      }
       let url = 'patient/address/' + this.userInfo.addressId
       this.$http.delete(url).then((res) => {
         this.$store.dispatch('getCustAdd').then((res) => {
