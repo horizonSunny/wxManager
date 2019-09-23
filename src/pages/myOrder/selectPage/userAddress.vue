@@ -133,7 +133,7 @@ export default {
     },
     // 删除收获地址
     deleteAddress () {
-      if (!deleteActive) {
+      if (!this.deleteActive) {
         return
       }
       let url = 'patient/address/' + this.userInfo.addressId
