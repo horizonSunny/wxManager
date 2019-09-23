@@ -18,9 +18,11 @@ const address = {
     SET_CUSTADD: (state, commodity) => {
       // state.customerAddress = commodity
     },
+    // 获取药店地址
     SET_DRUGADD: (state, commodity) => {
       state.drugstoreAddress = commodity
     },
+    // 获取全中国省市地址
     SET_LOCATADD: (state, commodity) => {
       state.locationAddress = commodity
     },
@@ -56,8 +58,14 @@ const address = {
     setDrugAdd({ commit }, commodity) {
       commit('SET_COMMODITY', commodity)
     },
-    setLocatAdd({ commit }, commodity) {
-      commit('SET_COMMODITY', commodity)
+    // 设置全中国设置地址保存
+    setLocatAdd({ commit }) {
+      const params = {
+        status: 0
+      }
+      http.get('admin/province/city', { params }).then(res => {
+        commit('SET_LOCATADD', res.data)
+      })
     },
     // 设置用户选中地址
     setSelectedAdd({ commit }, commodity) {

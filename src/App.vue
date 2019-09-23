@@ -22,6 +22,10 @@ export default {
       this.$store.dispatch('getCustAdd', res.data).then((res) => {
         // console.log('userInfo_', this.$store.getters.getUserInfo);
       })
+      // 设置全国直至
+      this.$store.dispatch('setLocatAdd', res.data).then((res) => {
+        // console.log('userInfo_', this.$store.getters.getUserInfo);
+      })
     })
     wx.checkSession({
       success () {
