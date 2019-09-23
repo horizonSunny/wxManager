@@ -11,7 +11,8 @@
               :class="[true ? 'icon_sel' : 'icon_unsel']"
             ></uni-icon>
             <span>快递配送</span>
-            <view class="addrresInfo" @click="operateAddress">
+            <!-- 有默认地址时候 -->
+            <view v-if="missShow" class="addrresInfo" @click="operateAddress">
               <view
                 >{{ defaultCustAddress["fullName"] }}
                 {{ defaultCustAddress["phone"] }}</view
@@ -27,6 +28,14 @@
                   <uni-icon type="" class="iconfont  icon-more"></uni-icon>
                 </view>
               </view>
+            </view>
+            <!-- 无默认地址时候 -->
+            <view v-else class="addrresMissInfo" @click="operateAddress">
+              <uni-icon
+                type=""
+                class="iconfont icon-orderAdd icon_order_style"
+              ></uni-icon>
+              <span>添加收货地址</span>
             </view>
           </view>
           <view class="drugstore" @click="selectDrug">
@@ -126,7 +135,7 @@ export default {
       shoppingCart: null,
       shoppingPrice: null,
       couponPrice: 50,
-      defaultCustAddress: this.$store.getters.getCustDefaultAddress
+      defaultCustAddress: null
     }
   },
   onLoad () {
@@ -138,6 +147,14 @@ export default {
       const totalPrice = this.shoppingPrice - this.couponPrice
       console.log('totalPrice_', totalPrice)
       return totalPrice
+    },
+    missShow () {
+      console.log('this.defaultCustAddress_', this.defaultCustAddress)
+      if (!this.defaultCustAddress) {
+        return false
+      } else {
+        return true
+      }
     }
   },
   methods: {
@@ -147,6 +164,9 @@ export default {
     operateAddress () {
       this.$navTo.togo('/pages/mine/myAddress/index')
     }
+  },
+  onShow () {
+    this.defaultCustAddress = this.$store.getters.getCustSelectedAddress
   }
 }
 </script>
@@ -182,11 +202,20 @@ export default {
         }
         .addrresInfo {
           margin-left: px2rpx(27);
-        }
-        .addrresInfo {
           margin-top: px2rpx(10);
           height: px2rpx(48);
           line-height: px2rpx(24);
+        }
+        .addrresMissInfo {
+          margin-left: px2rpx(27);
+          margin-top: px2rpx(10);
+          height: px2rpx(48);
+          line-height: px2rpx(24);
+          text-align: center;
+          .orderMiss {
+            font-size: px2rpx(18);
+            color: #4da08a;
+          }
         }
       }
       .shoppingInfo {
@@ -301,6 +330,12 @@ export default {
   font-size: px2rpx(20);
   margin-top: px2rpx(5);
   margin-right: px2rpx(8);
+}
+.icon_order_style {
+  font-size: px2rpx(18);
+  margin-top: px2rpx(5);
+  margin-right: px2rpx(8);
+  color: #4da08a;
 }
 .icon_sel {
   color: #f5b11c;

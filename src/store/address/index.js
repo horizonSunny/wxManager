@@ -5,7 +5,9 @@ const address = {
     customerAddress: [],
     drugstoreAddress: [],
     // 用于保存请求到到全国各地的地址
-    locationAddress: []
+    locationAddress: [],
+    // 获取用户选中地址
+    custSelectedAddress: null
   },
   mutations: {
     //  获取用户全部取货地址
@@ -21,6 +23,9 @@ const address = {
     },
     SET_LOCATADD: (state, commodity) => {
       state.locationAddress = commodity
+    },
+    SET_SELECTCUST: (state, commodity) => {
+      state.custSelectedAddress = commodity
     }
   },
   actions: {
@@ -50,6 +55,10 @@ const address = {
     },
     setLocatAdd({ commit }, commodity) {
       commit('SET_COMMODITY', commodity)
+    },
+    // 设置用户选中地址
+    setSelectedAdd({ commit }, commodity) {
+      commit('SET_SELECTCUST', commodity)
     }
   }
 }

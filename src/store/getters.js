@@ -25,6 +25,7 @@ const getters = {
     return state.address.customerAddress
   },
   getCustDefaultAddress: state => {
+    console.log('getCustDefaultAddress')
     let dafaultAddress = state.address.customerAddress.find(item => {
       return item['isDefault'] === 1
     })
@@ -32,6 +33,19 @@ const getters = {
   },
   getDrugAddress: state => {
     return state.address.drugstoreAddress
+  },
+  // 获取用户选中地址
+  getCustSelectedAddress: (state, getters) => {
+    if (state.address.custSelectedAddress) {
+      return state.address.custSelectedAddress
+    } else if (getters.getCustDefaultAddress) {
+      return getters.getCustDefaultAddress
+    } else if (getters.getCustAddress) {
+      return getters.getCustAddress[0]
+    } else {
+      return false
+    }
+    // return state.address.drugstoreAddress
   },
   //获取用户信息
   getUserInfo: state => {
