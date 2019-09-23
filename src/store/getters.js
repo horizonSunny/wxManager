@@ -1,3 +1,6 @@
+function sortByNum(a, b) {
+  return a.couponPrice - b.couponPrice
+}
 const getters = {
   /**
    * 用于获取购物车信息，当小程序退出的时候，需要将购物车
@@ -46,6 +49,28 @@ const getters = {
       return false
     }
     // return state.address.drugstoreAddress
+  },
+  // 获取activeCoupon 优惠券,mode代表active还是unactive
+  getCouponMode: state => modePrice => {
+    let activeCoupon = []
+    let deactiveCoupon = []
+    let couponList = state.coupon.couponList
+    for (let item = 0; item < couponList.length; item++) {
+      if (
+        couponList[item]['couponType'] === 0 ||
+        modePrice >= couponList[item]['useMinPrice']
+      ) {
+        activeCoupon.push(couponList[item])
+      } else {
+        deactiveCoupon.push(couponList[item])
+      }
+    }
+    activeCoupon.sort(sortByNum)
+    deactiveCoupon.sort(sortByNum)
+    return {
+      activeCoupon,
+      deactiveCoupon
+    }
   },
   //获取用户信息
   getUserInfo: state => {

@@ -4,11 +4,11 @@
     <scroll-view scroll-y class="scrollView">
       <view class="wrapContent">
         <view class="address">
-          <view class="personal">
+          <view class="personal" @click="selectorMode = !selectorMode">
             <uni-icon
               type=""
-              class="iconfont icon-selected icon_style"
-              :class="[true ? 'icon_sel' : 'icon_unsel']"
+              class="iconfont icon-unselected icon_style"
+              :class="[selectorMode ? 'icon_sel' : 'icon_unsel']"
             ></uni-icon>
             <span>快递配送</span>
             <!-- 有默认地址时候 -->
@@ -38,14 +38,21 @@
               <span>添加收货地址</span>
             </view>
           </view>
-          <view class="drugstore" @click="selectDrug">
+          <view class="drugstore" @click="selectorMode = !selectorMode">
             <uni-icon
               type=""
               class="iconfont icon-unselected icon_style"
-              :class="[true ? 'icon_unsel' : 'icon_sel']"
+              :class="[selectorMode ? 'icon_unsel' : 'icon_sel']"
             ></uni-icon>
             <span>药店取药</span>
-            <view class="addrresInfo">
+            <view class="addrresMissInfo" @click="selectDrug">
+              <uni-icon
+                type=""
+                class="iconfont icon-orderLocation icon_order_style"
+              ></uni-icon>
+              <span>查找附近药店</span>
+            </view>
+            <!-- <view class="addrresInfo" @click="selectDrug">
               <view>上海众协药店有限公司浦东店</view>
               <view class="space_between">
                 <view>上海市徐汇区东安路270号</view>
@@ -54,7 +61,7 @@
                   <uni-icon type="" class="iconfont  icon-more"></uni-icon>
                 </view>
               </view>
-            </view>
+            </view> -->
           </view>
         </view>
         <view class="shoppingInfo">
@@ -89,7 +96,10 @@
             <span> 优惠券</span>
           </view>
           <view>
-            <span class="icon_sel">¥50</span>
+            <span v-if="activeCoupon" class="icon_sel"
+              >¥{{ activeCoupon[0]["couponPrice"] }}</span
+            >
+            <span v-else>暂无可使用</span>
             <uni-icon
               type=""
               class="iconfont  icon-more"
@@ -134,8 +144,10 @@ export default {
       active: true,
       shoppingCart: null,
       shoppingPrice: null,
-      couponPrice: 50,
-      defaultCustAddress: null
+      couponPrice: 0,
+      defaultCustAddress: null,
+      selectorMode: true,
+      activeCoupon: null
     }
   },
   onLoad () {
@@ -167,6 +179,11 @@ export default {
   },
   onShow () {
     this.defaultCustAddress = this.$store.getters.getCustSelectedAddress
+    this.$store.dispatch('getCouponList').then(() => {
+      const activeCoupon = this.$store.getters.getCouponMode(this.shoppingPrice).activeCoupon
+      this.activeCoupon = activeCoupon.length !== 0 ? activeCoupon : false
+      this.couponPrice = this.activeCoupon[0] ? this.activeCoupon[0]['couponPrice'] : 0
+    })
   }
 }
 </script>

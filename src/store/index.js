@@ -5,6 +5,7 @@ import user from './user'
 import app from './app'
 import shoppingCard from './shoppingCard'
 import address from './address'
+import coupon from './coupon'
 import getters from './getters'
 
 Vue.use(Vuex)
@@ -14,7 +15,8 @@ const store = new Vuex.Store({
     user,
     app,
     shoppingCard,
-    address
+    address,
+    coupon
   },
   getters,
   state: {},
