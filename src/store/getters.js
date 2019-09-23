@@ -73,7 +73,7 @@ const getters = {
       deactiveCoupon
     }
   },
-  getSelectedCoupon: (state, getters, commit) => modePrice => {
+  getSelectedCoupon: (state, getters) => modePrice => {
     let activeCouponList = getters.getCouponMode(modePrice).activeCoupon
     let isContain = activeCouponList.some(item => {
       return item.id === state.coupon.selectedCoupon.id
