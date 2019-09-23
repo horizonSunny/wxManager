@@ -97,7 +97,7 @@
           </view>
           <view @click="gotoCoupon">
             <span v-if="activeCoupon" class="icon_sel"
-              >¥{{ activeCoupon[0]["couponPrice"] }}</span
+              >¥{{ activeCoupon["couponPrice"] }}</span
             >
             <span v-else>暂无可使用</span>
             <uni-icon
@@ -184,9 +184,9 @@ export default {
   onShow () {
     this.defaultCustAddress = this.$store.getters.getCustSelectedAddress
     this.$store.dispatch('getCouponList').then(() => {
-      const activeCoupon = this.$store.getters.getCouponMode(this.shoppingPrice).activeCoupon
-      this.activeCoupon = activeCoupon.length !== 0 ? activeCoupon : false
-      this.couponPrice = this.activeCoupon[0] ? this.activeCoupon[0]['couponPrice'] : 0
+      const selectedCoupon = this.$store.getters.getSelectedCoupon(this.shoppingPrice)
+      this.activeCoupon = selectedCoupon ? selectedCoupon : null
+      this.couponPrice = this.activeCoupon ? this.activeCoupon['couponPrice'] : 0
     })
   }
 }

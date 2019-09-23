@@ -7,7 +7,8 @@
         <view
           class="addressItem"
           v-for="(item, index) in activeCoupon"
-          :key="'active_' + index"
+          :key="index"
+          @click="gotoOrder(index)"
         >
           <view class="couponPrice" :class="['activeBack', 'activeLabel']">
             <view class="price"
@@ -34,7 +35,7 @@
         <view
           class="addressItem"
           v-for="(item, index) in deactiveCoupon"
-          :key="'unactive_' + index"
+          :key="index"
         >
           <view class="couponPrice" :class="['deactiveBack', 'deactiveLabel']">
             <view class="price"
@@ -71,19 +72,35 @@ export default {
     return {
       activeCoupon: null,
       deactiveCoupon: null,
-      shoppingPrice: 0
+      shoppingPrice: Infinity
+    }
+  },
+  methods: {
+    gotoOrder (index) {
+      const coupon = this.activeCoupon[index]
+      let pages = getCurrentPages();  //获取所有页面栈实例列表
+      const prvPage = pages[pages.length - 2]
+      console.log('prvPage_', prvPage)
+      if (prvPage.route === "pages/myOrder/orderForm/index") {
+        this.$store.commit('SET_COUPONLIST', coupon)
+      }
+      uni.navigateBack()
     }
   },
   onShow () {
     this.defaultCustAddress = this.$store.getters.getCustSelectedAddress
     this.$store.dispatch('getCouponList').then(() => {
-      // console.log('myCoupon_', this.$store.getters.getCouponMode(this.shoppingPrice));
+      console.log('this.$store.getters.getCouponMode(this.shoppingPrice)', this.$store.getters.getCouponMode(this.shoppingPrice));
       this.activeCoupon = this.$store.getters.getCouponMode(this.shoppingPrice).activeCoupon
       this.deactiveCoupon = this.$store.getters.getCouponMode(this.shoppingPrice).deactiveCoupon
     })
   },
   onLoad: function (option) {
-    this.shoppingPrice = option.shoppingPrice
+    console.log('option_', option.shoppingPrice)
+    if (option.shoppingPrice) {
+      this.shoppingPrice = option.shoppingPrice
+    }
+    console.log('this.shoppingPrice_', this.shoppingPrice)
   }
 }
 </script>

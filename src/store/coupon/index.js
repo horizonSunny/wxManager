@@ -6,15 +6,20 @@ import { deepCopy } from '../../utils/index'
 import http from '../../config/axios'
 const coupon = {
   state: {
-    couponList: []
+    couponList: [],
+    selectedCoupon: null
   },
   mutations: {
     /**
      *
      * */
-    GET_COUPONLIST: (state, coupon) => {
-      state.couponList = coupon
+    GET_COUPONLIST: (state, couponList) => {
+      state.couponList = couponList
       console.log('couponList___', state.couponList)
+    },
+    SET_COUPONLIST: (state, coupon) => {
+      state.selectedCoupon = coupon
+      console.log('state.selectedCoupon___', state.selectedCoupon)
     }
   },
   actions: {

@@ -73,6 +73,18 @@ const getters = {
       deactiveCoupon
     }
   },
+  getSelectedCoupon: (state, getters, commit) => modePrice => {
+    let activeCouponList = getters.getCouponMode(modePrice).activeCoupon
+    let isContain = activeCouponList.some(item => {
+      return item.id === state.coupon.selectedCoupon.id
+    })
+    // 看优惠券是否还是可用优惠权中
+    if (state.coupon.selectedCoupon && isContain) {
+      return state.coupon.selectedCoupon
+    } else {
+      return activeCouponList[0]
+    }
+  },
   //获取用户信息
   getUserInfo: state => {
     return state.user.userInfo
