@@ -107,56 +107,19 @@ export default {
   data () {
     return {
       pixelRatio: this.$pixelRatio,
-      items: [
-        {
-          // 导航名称
-          text: '所有城市',
-          id: 1,
-          // 禁用选项
-          // 该导航下所有的可选项
-          children: [
-            {
-              // 名称
-              text: '温州1',
-              // id，作为匹配选中状态的标识
-              id: 1,
-              message: 'dadad'
-              // 禁用选项
-            },
-            {
-              text: '杭州1',
-              id: 2,
-              message: 'dadad'
-            }
-          ]
-        },
-        {
-          // 导航名称
-          text: '城市',
-          id: 2,
-          // 禁用选项
-          // 该导航下所有的可选项
-          children: [
-            {
-              // 名称
-              text: '温州',
-              // id，作为匹配选中状态的标识
-              id: 1,
-              // 禁用选项
-            },
-            {
-              text: '杭州',
-              id: 2
-            }
-          ]
-        }
-      ],
+      items: [],
       mainActiveIndex: 0,
       activeId: null,
       selectArea: false,
       query: {
         pageNumber: 0,
         pageSize: 10
+      },
+      // location
+      locationText: '',
+      query: {
+        lat: '',
+        lng: ''
       }
     }
   },
@@ -174,101 +137,58 @@ export default {
       console.log('detail_onClickItem_', detail)
     },
     // 获取位置权限
-    getPermission () {
-      let vm = this
-      wx.getSetting({
-        success (res) {
-          // scope.userLocation 为真， 代表用户已经授权
-          if (res.authSetting['scope.userLocation']) {
-            vm.getLocation()
-          } else {
-            // 未授权时先自动请求权限
-            wx.authorize({
-              scope: 'scope.userLocation',
-              success (res) {
-                vm.getLocation()
-              },
-              fail (res) {
-                // 用户未授权时引导授权
-                wx.showModal({
-                  title: '是否授权当前位置',
-                  content: '需要获取您的地理位置，请确认授权，否则地图功能将无法使用',
-                  success: function (tip) {
-                    if (tip.confirm) {
-                      wx.openSetting({
-                        success: function (data) {
-                          if (data.authSetting["scope.userLocation"] === true) {
-                            wx.showToast({
-                              title: '授权成功',
-                              icon: 'success',
-                              duration: 1000
-                            })
-                            vm.getLocation()
-                          } else {
-                            wx.showToast({
-                              title: '授权失败',
-                              icon: 'success',
-                              duration: 1000
-                            })
-                            vm.locationText = '全国'
-                          }
-
-                        }
-                      })
-                    }
-                    if (tip.cancel) {
-                      console.log("run fail", tip)
-                      vm.locationText = '全国'
-                    }
-                  }
-                })
-              }
-            })
-
-          }
-        }
-      })
-    },
-    // 使用 getlocation 获取用户 经纬度位置
-    getLocation () {
-      let vm = this
-      vm.locationText = '正在定位..'
-      wx.getLocation({
-        success (res) {
-          vm.query.lat = res.latitude
-          vm.query.lng = res.longitude
-          vm.getAddress(res.latitude, res.longitude)
-        }
-      })
-    },
-    // 获取列表数据
-    getList () {
-      this.isLoadData = true
-      request({
-        // url: `/wx/drugstore/${this.query.cityId}`,
-        url: `/wx/drugstore`,
-        type: "GET",
-        data: {
-          cityId: this.activeId,
-          provinceId: this.items ? this.items[this.mainActiveIndex].id : 0,
-          ...this.query
-        }
-      }).then(
-        (res) => {
-          this.isLoadData = false
-          console.log('res:', res)
-          if (res && res.status == "1") {
-            this.isLastPage = res.body.lastPage
-            this.hospitalList.push(...res.body.pageList)
-            this.query.pageNumber = this.query.pageNumber + 1
-            wx.stopPullDownRefresh()
-          }
+    getAuthorizeInfo (a = "scope.userLocation") {  //1. uniapp弹窗弹出获取授权（地理，个人微信信息等授权信息）弹窗
+      var _this = this;
+      uni.authorize({
+        scope: a,
+        success () { //1.1 允许授权
+          _this.getLocationInfo();
         },
-        (err) => {
-          this.isLoadData = false
-          console.log("请求错误:", err)
+        fail () {    //1.2 拒绝授权
+          console.log("你拒绝了授权，无法获得周边信息")
         }
-      )
+      })
+    },
+    getLocationInfo () {  //2. 获取地理位置
+      var _this = this;
+      uni.getLocation({
+        type: 'wgs84',
+        success (res) {
+          console.log("你当前经纬度是：")
+          console.log(res)
+          let latitude, longitude;
+          latitude = res.latitude.toString();
+          longitude = res.longitude.toString();
+          uni.request({
+            header: {
+              "Content-Type": "application/text"
+            },
+            url: 'http://apis.map.qq.com/ws/geocoder/v1/?location=' + latitude + ',' + longitude + '&key=MVGBZ-R2U3U-W5CVY-2PQID-AT4VZ-PDF35',
+            success (re) {
+              console.log("中文位置")
+              console.log(re)
+              if (re.statusCode === 200) {
+                console.log("获取中文街道地理位置成功")
+              } else {
+                console.log("获取信息失败，请重试！")
+              }
+            }
+          });
+        }
+      });
+    },
+    // 获取位置信息
+    isGetLocation (a = "scope.userLocation") { // 3. 检查当前是否已经授权访问scope属性，参考下截图
+      var _this = this;
+      uni.getSetting({
+        success (res) {
+          if (!res.authSetting[a]) {  //3.1 每次进入程序判断当前是否获得授权，如果没有就去获得授权，如果获得授权，就直接获取当前地理位置
+            _this.getAuthorizeInfo()
+          } else {
+            _this.getLocationInfo()
+          }
+        }
+      });
     }
   },
   computed: {
@@ -279,6 +199,13 @@ export default {
       return areaHeight
     }
   },
+  onLoad () {
+    this.items = this.$store.getters.getLocationAdd
+    // this.getPermission()
+  },
+  onReady () {
+    this.isGetLocation();
+  }
 }
 </script>
 <style  lang='scss' scoped>
@@ -378,7 +305,8 @@ export default {
   .areaShow {
     position: fixed;
     top: px2rpx(1);
-    height: px2rpx(150);
+    height: 100%;
+    width: "100%";
     overflow: scroll;
   }
   .activeLabel {

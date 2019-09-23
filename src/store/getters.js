@@ -2,10 +2,6 @@ function sortByNum(a, b) {
   return a.couponPrice - b.couponPrice
 }
 const getters = {
-  /**
-   * 用于获取购物车信息，当小程序退出的时候，需要将购物车
-   * 信息传给后台服务器
-   */
   shoppingInfo: state => state.shoppingCard.commodityInfo,
   // 获取商品总数量
   shoppingMount: state => {
@@ -34,9 +30,6 @@ const getters = {
     })
     return dafaultAddress
   },
-  getDrugAddress: state => {
-    return state.address.drugstoreAddress
-  },
   // 获取用户选中地址
   getCustSelectedAddress: (state, getters) => {
     if (state.address.custSelectedAddress) {
@@ -49,6 +42,14 @@ const getters = {
       return false
     }
     // return state.address.drugstoreAddress
+  },
+  // 获取全国地址
+  getLocationAdd: state => {
+    return state.address.locationAddress
+  },
+  // 获取药店地址
+  getDrugAddress: state => {
+    return state.address.drugstoreAddress
   },
   // 获取activeCoupon 优惠券,mode代表active还是unactive
   getCouponMode: state => modePrice => {
