@@ -3,34 +3,56 @@
     <topBar page-title="我的优惠券"></topBar>
     <view class="content">
       <scroll-view scroll-y class="scrollView">
-        <view class="addressItem">
-          <view
-            class="couponPrice"
-            :class="
-              false
-                ? ['activeBack', 'activeLabel']
-                : ['deactiveBack', 'deactiveLabel']
-            "
-          >
-            <view class="price">¥ <span>50</span></view>
-            <view class="status">满0.01使用</view>
+        <!-- 不能给数据合并打上标签，因为在我的Coupon里面，modelPrice应该是0 -->
+        <view
+          class="addressItem"
+          v-for="(item, index) in activeCoupon"
+          :key="'active_' + index"
+        >
+          <view class="couponPrice" :class="['activeBack', 'activeLabel']">
+            <view class="price"
+              >¥ <span>{{ item["couponPrice"] }}</span></view
+            >
+            <view class="status">满{{ item["useMinPrice"] }}使用</view>
           </view>
-          <view
-            :class="false ? ['couponLineActive'] : ['couponLineDeactive']"
-          ></view>
-          <view
-            class="couponLimit"
-            :class="false ? ['activeBack'] : ['deactiveBack']"
-          >
+          <view :class="['couponLineActive']"></view>
+          <view class="couponLimit" :class="['activeBack']">
             <view class="time">
               <view>有效日期:</view>
-              <view>2019.09.02-2019.09.30</view>
+              <view>{{ item["startTime"] }}-{{ item["endTime"] }}</view>
             </view>
             <view class="couponSelected">
               <uni-icon
                 type=""
                 class="iconfont icon-couponSelected icon_style"
-                :class="false ? ['activeLabel'] : ['deactiveLabel']"
+                :class="['activeLabel']"
+              ></uni-icon>
+            </view>
+          </view>
+        </view>
+        <!-- 这里是不能使用的进行选择 -->
+        <view
+          class="addressItem"
+          v-for="(item, index) in deactiveCoupon"
+          :key="'unactive_' + index"
+        >
+          <view class="couponPrice" :class="['deactiveBack', 'deactiveLabel']">
+            <view class="price"
+              >¥ <span>{{ item["couponPrice"] }}</span></view
+            >
+            <view class="status">满{{ item["useMinPrice"] }}使用</view>
+          </view>
+          <view :class="['couponLineDeactive']"></view>
+          <view class="couponLimit" :class="['deactiveBack']">
+            <view class="time">
+              <view>有效日期:</view>
+              <view>{{ item["startTime"] }}-{{ item["endTime"] }}</view>
+            </view>
+            <view class="couponSelected">
+              <uni-icon
+                type=""
+                class="iconfont icon-couponSelected icon_style"
+                :class="['deactiveLabel']"
               ></uni-icon>
             </view>
           </view>
@@ -47,17 +69,21 @@ export default {
   },
   data () {
     return {
-      // activeCoupon:
-      //   deactiveCoupon:
+      activeCoupon: null,
+      deactiveCoupon: null,
+      shoppingPrice: 0
     }
   },
   onShow () {
     this.defaultCustAddress = this.$store.getters.getCustSelectedAddress
     this.$store.dispatch('getCouponList').then(() => {
-      const activeCoupon = this.$store.getters.getCouponMode(this.shoppingPrice).activeCoupon
-      this.activeCoupon = activeCoupon.length !== 0 ? activeCoupon : false
-      this.couponPrice = this.activeCoupon[0] ? this.activeCoupon[0]['couponPrice'] : 0
+      // console.log('myCoupon_', this.$store.getters.getCouponMode(this.shoppingPrice));
+      this.activeCoupon = this.$store.getters.getCouponMode(this.shoppingPrice).activeCoupon
+      this.deactiveCoupon = this.$store.getters.getCouponMode(this.shoppingPrice).deactiveCoupon
     })
+  },
+  onLoad: function (option) {
+    this.shoppingPrice = option.shoppingPrice
   }
 }
 </script>

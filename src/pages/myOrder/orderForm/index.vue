@@ -178,7 +178,7 @@ export default {
     },
     gotoCoupon () {
       const url = '/pages/mine/myCoupon/index'
-      wx.navigateTo({ url })
+      this.$navTo.togo(url, { shoppingPrice: this.shoppingPrice })
     }
   },
   onShow () {
