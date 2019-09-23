@@ -44,6 +44,20 @@ import topBar from '../../../components/topNavigation/index'
 export default {
   components: {
     topBar,
+  },
+  data () {
+    return {
+      // activeCoupon:
+      //   deactiveCoupon:
+    }
+  },
+  onShow () {
+    this.defaultCustAddress = this.$store.getters.getCustSelectedAddress
+    this.$store.dispatch('getCouponList').then(() => {
+      const activeCoupon = this.$store.getters.getCouponMode(this.shoppingPrice).activeCoupon
+      this.activeCoupon = activeCoupon.length !== 0 ? activeCoupon : false
+      this.couponPrice = this.activeCoupon[0] ? this.activeCoupon[0]['couponPrice'] : 0
+    })
   }
 }
 </script>

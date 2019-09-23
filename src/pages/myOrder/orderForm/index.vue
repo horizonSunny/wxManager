@@ -95,7 +95,7 @@
             <img :src="'../../../static/main/coupon' + pixelRatio" alt="" />
             <span> 优惠券</span>
           </view>
-          <view>
+          <view @click="gotoCoupon">
             <span v-if="activeCoupon" class="icon_sel"
               >¥{{ activeCoupon[0]["couponPrice"] }}</span
             >
@@ -175,6 +175,10 @@ export default {
     },
     operateAddress () {
       this.$navTo.togo('/pages/mine/myAddress/index')
+    },
+    gotoCoupon () {
+      const url = '/pages/mine/myCoupon/index'
+      wx.navigateTo({ url })
     }
   },
   onShow () {
