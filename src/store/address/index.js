@@ -26,6 +26,9 @@ const address = {
     },
     SET_SELECTCUST: (state, commodity) => {
       state.custSelectedAddress = commodity
+    },
+    DELETE_SELECTCUST: state => {
+      state.custSelectedAddress = null
     }
   },
   actions: {

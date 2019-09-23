@@ -136,6 +136,14 @@ export default {
       let url = 'patient/address/' + this.userInfo.addressId
       this.$http.delete(url).then((res) => {
         this.$store.dispatch('getCustAdd').then((res) => {
+          // 如果删除的是选中地址，store要清空
+          if (this.$store.getters.getCustSelectedAddress) {
+            const hasSelected = this.$store.getters.getCustSelectedAddress
+            if (parseInt(this.userInfo.addressId) === parseInt(hasSelected.addressId)) {
+              console.log('this.userInfo.addressId === hasSelected.addressId')
+              this.$store.commit('DELETE_SELECTCUST')
+            }
+          }
           uni.navigateBack()
         })
       })

@@ -7,13 +7,14 @@
           class="addressItem"
           v-for="(item, index) in custAddress"
           :key="index"
+          @click="selectAddress(item)"
         >
           <view class="userInfo">
             <view class="userInfoItem">
               <span>{{ item["fullName"] }}</span>
               <span>{{ item["phone"] }}</span>
             </view>
-            <view class="userInfoItem" @click="gotoDetail('edit', item)">
+            <view class="userInfoItem" @click.stop="gotoDetail('edit', item)">
               <uni-icon
                 type=""
                 class="iconfont icon-edit icon_style"
@@ -51,6 +52,11 @@ export default {
       } else {
         this.$navTo.togo('/pages/myOrder/selectPage/userAddress', addressInfo)
       }
+    },
+    selectAddress (item) {
+      this.$store.dispatch('setSelectedAdd', item).then(() => {
+        uni.navigateBack()
+      })
     }
   },
   onShow () {
