@@ -100,6 +100,7 @@
 // van-tree-select只能用在app和小程序中
 import topBar from '../../../components/topNavigation/index'
 import * as storage from '../../../config/storage'
+const municipality = ['上海市', '重庆市', '北京市', '天津市']
 export default {
   components: {
     topBar,
@@ -107,6 +108,7 @@ export default {
   data () {
     return {
       pixelRatio: this.$pixelRatio,
+      // 全国地址，放省市区的
       items: [],
       mainActiveIndex: 0,
       activeId: null,
@@ -117,17 +119,24 @@ export default {
       },
       // location
       locationText: '',
-      query: {
+      queryLaction: {
         lat: '',
-        lng: ''
-      }
+        lng: '',
+      },
+      // provinceId: 110000,
+      provinceId: '',
+      cityId: '',
+      provinceName: '',
+      cityName: '',
+      drugLocationList: []
     }
   },
   methods: {
     // 点击首选项
     onClickNav ({ detail = {} }) {
       this.mainActiveIndex = detail.index || 0
-      console.log('detail_onClickNav_', detail)
+      this.provinceId = this.items[this.mainActiveIndex]['id']
+      console.log('dthis.provinceId_', this.provinceId)
     },
     // 点击城市选项
     onClickItem ({ detail = {} }) {
@@ -154,24 +163,32 @@ export default {
       uni.getLocation({
         type: 'wgs84',
         success (res) {
-          console.log("你当前经纬度是：")
-          console.log(res)
           let latitude, longitude;
           latitude = res.latitude.toString();
           longitude = res.longitude.toString();
+          _this.queryLaction.lat = latitude
+          _this.queryLaction.lng = longitude
           uni.request({
             header: {
               "Content-Type": "application/text"
             },
             url: 'http://apis.map.qq.com/ws/geocoder/v1/?location=' + latitude + ',' + longitude + '&key=MVGBZ-R2U3U-W5CVY-2PQID-AT4VZ-PDF35',
             success (re) {
-              console.log("中文位置")
               console.log(re)
-              if (re.statusCode === 200) {
-                console.log("获取中文街道地理位置成功")
-              } else {
-                console.log("获取信息失败，请重试！")
-              }
+              _this.provinceName = re.data.result.address_component.province
+              _this.cityName = municipality.indexOf(_this.provinceName) > -1 ?
+                re.data.result.address_component.district :
+                re.data.result.address_component.city
+              const locationProvinceAdd = _this.items.find((item) => {
+                return item.text === _this.provinceName
+              })
+              _this.provinceId = locationProvinceAdd.id
+              const locationCityAdd = locationProvinceAdd.children.find((item) => {
+                return item.text === _this.cityName
+              })
+              _this.cityId = locationCityAdd.id
+              console.log('_this.provinceId_', _this.provinceId, '_this.cityId_', _this.cityId)
+              _this.isGetDrugList()
             }
           });
         }
@@ -189,6 +206,25 @@ export default {
           }
         }
       });
+    },
+    // 依据位置信息，目的地信息获取dtp药房列表
+    isGetDrugList (operate) {
+      if (operate !== 'putdown') {
+        this.drugLocationList = []
+        this.pageNumber = 0
+      }
+      const params = {
+        pageNumber: this.query.pageNumber,
+        pageSize: this.query.pageSize,
+        cityId: this.cityId,
+        provinceId: this.provinceId,
+        lat: this.queryLaction.lat,
+        lng: this.queryLaction.lng,
+      }
+      this.$http.get('admin/drugstore/drugstore', { params }).then((res) => {
+        console.log('admin/drugstore/drugstore_', res.data);
+        this.drugLocationList = this.drugLocationList.concat(res.data.pageList)
+      })
     }
   },
   computed: {
@@ -201,7 +237,7 @@ export default {
   },
   onLoad () {
     this.items = this.$store.getters.getLocationAdd
-    // this.getPermission()
+    console.log('this.items_location_', this.items);
   },
   onReady () {
     this.isGetLocation();

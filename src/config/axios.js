@@ -37,7 +37,10 @@ const http = axios.create({
 http.interceptors.request.use(config => {
   // code...
   let accsess_token = storage.getSync('access_token')
-  config.headers.authorization = accsess_token
+  console.log('accsess_token_', accsess_token)
+  if (accsess_token) {
+    config.headers.authorization = accsess_token
+  }
   _reqlog(config)
   return config
 })
@@ -45,7 +48,6 @@ http.interceptors.request.use(config => {
 // 拦截器 在请求之后拦截
 http.interceptors.response.use(
   response => {
-    console.log('http.interceptors.response_', response)
     return response.data
     // code...
   },
@@ -53,9 +55,9 @@ http.interceptors.response.use(
     // 如果token值无效，让跳转登陆页面
     if (error.response.status === 401) {
       storage.setSync('access_token', channelNo)
-      uni.reLaunch({
-        url: '/pages/login/index'
-      })
+      // uni.reLaunch({
+      //   url: '/pages/login/index'
+      // })
     }
   }
 )
