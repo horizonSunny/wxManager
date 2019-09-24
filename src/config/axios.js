@@ -54,10 +54,9 @@ http.interceptors.response.use(
     if (error.response.status === 401) {
       storage.setSync('access_token', channelNo)
       uni.reLaunch({
-        url: '/pages/index'
+        url: '/pages/login/index'
       })
     }
-    // _reslog(error)
   }
 )
 

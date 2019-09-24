@@ -5,8 +5,6 @@
         "navigationStyle": "custom"
       }
     }, {
-      "path": "pages/index"
-    }, {
       "path": "pages/mine/index",
       "style": {
         "navigationStyle": "custom"
@@ -53,7 +51,7 @@
       }
     },
     {
-      "path": "pages/login/login"
+      "path": "pages/login/index"
     },
     {
       "path": "pages/homepage/onlineShopping/index",
