@@ -1,9 +1,9 @@
 <template>
   <view class="wrap">
     <topBar page-title="选取药店"></topBar>
-    <view class="location_select" @click="selectArea = !selectArea">
+    <view class="location_select" @click="operate">
       <img :src="'../../../static/main/dingwei' + pixelRatio" alt="" />
-      <span>上海</span>
+      <span>{{ provinceName }}{{ cityName }}</span>
       <view v-if="!selectArea">
         <uni-icon
           type=""
@@ -18,10 +18,19 @@
       </view>
     </view>
     <view class="location_list">
-      <scroll-view scroll-y class="scrollView">
-        <view class="itemMessage">
+      <scroll-view
+        scroll-y="true"
+        class="scrollView scroll-Y"
+        @scrolltolower="scroll"
+      >
+        <!-- <view class="scrollViewIn"> -->
+        <view
+          class="itemMessage"
+          v-for="(item, index) in drugLocationList"
+          :key="index"
+        >
           <view class="orderInfoHeader">
-            <view>上海重协药店有限公司浦东店</view>
+            <view>{{ item["name"] }}</view>
             <view>
               <uni-icon
                 type=""
@@ -36,43 +45,21 @@
             </view>
             <view class="itemInfo">
               <view class="name">
-                <view>营业时间：8:00-18:00</view>
-                <view>电话：024-3527654</view>
+                <view
+                  >营业时间：{{ item.serviceStartTime }}-{{
+                    item.serviceEndTime
+                  }}</view
+                >
+                <view>电话：{{ item.phoneList }}</view>
               </view>
               <view class="specification">
-                <view> 上海市徐汇区东安路270号</view>
-                <view> 500m </view>
+                <view> {{ item.address }}</view>
+                <view> {{ item.distance }} </view>
               </view>
             </view>
           </view>
         </view>
-        <view class="itemMessage">
-          <view class="orderInfoHeader">
-            <view>上海重协药店有限公司浦东店</view>
-            <view>
-              <uni-icon
-                type=""
-                class="iconfont icon-couponSelected icon_style"
-                :class="false ? 'activeLabel' : 'deactiveLabel'"
-              ></uni-icon
-            ></view>
-          </view>
-          <view class="orderInfoContent">
-            <view class="itemImg">
-              <img src="../../../static/main/bannerBack@3x.png" alt="" />
-            </view>
-            <view class="itemInfo">
-              <view class="name">
-                <view>营业时间：8:00-18:00</view>
-                <view>电话：024-3527654</view>
-              </view>
-              <view class="specification">
-                <view> 上海市徐汇区东安路270号</view>
-                <view> 500m </view>
-              </view>
-            </view>
-          </view>
-        </view>
+        <!-- </view> -->
       </scroll-view>
     </view>
     <view
@@ -123,7 +110,6 @@ export default {
         lat: '',
         lng: '',
       },
-      // provinceId: 110000,
       provinceId: '',
       cityId: '',
       provinceName: '',
@@ -136,14 +122,16 @@ export default {
     onClickNav ({ detail = {} }) {
       this.mainActiveIndex = detail.index || 0
       this.provinceId = this.items[this.mainActiveIndex]['id']
+      this.provinceName = this.items[this.mainActiveIndex]['text']
       console.log('dthis.provinceId_', this.provinceId)
     },
     // 点击城市选项
     onClickItem ({ detail = {} }) {
       const activeId = this.activeId === detail.id ? null : detail.id;
-      console.log('detail_', detail)
+      this.cityName = detail.text
       this.activeId = activeId;
-      console.log('detail_onClickItem_', detail)
+      this.cityId = activeId
+      this.isGetDrugList()
     },
     // 获取位置权限
     getAuthorizeInfo (a = "scope.userLocation") {  //1. uniapp弹窗弹出获取授权（地理，个人微信信息等授权信息）弹窗
@@ -221,9 +209,26 @@ export default {
         lat: this.queryLaction.lat,
         lng: this.queryLaction.lng,
       }
-      this.$http.get('admin/drugstore/drugstore', { params }).then((res) => {
+      return this.$http.get('admin/drugstore/drugstore', { params }).then((res) => {
         console.log('admin/drugstore/drugstore_', res.data);
         this.drugLocationList = this.drugLocationList.concat(res.data.pageList)
+        this.selectArea = false
+      })
+    },
+    operate () {
+      this.selectArea = !this.selectArea
+      if (this.selectArea) {
+        // 默认选中北京
+        this.provinceName = '北京市'
+        this.provinceId = 110000
+      }
+    },
+    // 滚动到底部
+    scroll () {
+      this.query.pageNumber++
+      console.log('refresh');
+      this.isGetDrugList('putdown').then(() => {
+        uni.stopPullDownRefresh();
       })
     }
   },
@@ -275,15 +280,17 @@ export default {
     }
   }
   .location_list {
-    flex: 1;
     padding-top: px2rpx(5);
+    flex: 1;
+    overflow: scroll;
     background: #f3f3f3;
     .scrollView {
+      height: 99%;
       .itemMessage {
         display: flex;
         flex-direction: column;
         height: px2rpx(171);
-        margin-top: px2rpx(5);
+        margin-bottom: px2rpx(5);
         background: #ffffff;
         padding: px2rpx(0) px2rpx(10);
         .orderInfoHeader {
