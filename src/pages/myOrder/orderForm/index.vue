@@ -45,23 +45,29 @@
               :class="[selectorMode ? 'icon_unsel' : 'icon_sel']"
             ></uni-icon>
             <span>药店取药</span>
-            <view class="addrresMissInfo" @click="selectDrug">
+            <view
+              v-if="defaultDrugAddress"
+              class="addrresInfo"
+              @click="selectDrug"
+            >
+              <view>{{ defaultDrugAddress["name"] }}</view>
+              <view class="space_between">
+                <view class="drugAddress">{{
+                  defaultDrugAddress["address"]
+                }}</view>
+                <view>{{ defaultDrugAddress["distance"] }}</view>
+                <view>
+                  <uni-icon type="" class="iconfont  icon-more"></uni-icon>
+                </view>
+              </view>
+            </view>
+            <view class="addrresMissInfo" @click="selectDrug" v-else>
               <uni-icon
                 type=""
                 class="iconfont icon-orderLocation icon_order_style"
               ></uni-icon>
               <span>查找附近药店</span>
             </view>
-            <!-- <view class="addrresInfo" @click="selectDrug">
-              <view>上海众协药店有限公司浦东店</view>
-              <view class="space_between">
-                <view>上海市徐汇区东安路270号</view>
-                <view>500m</view>
-                <view>
-                  <uni-icon type="" class="iconfont  icon-more"></uni-icon>
-                </view>
-              </view>
-            </view> -->
           </view>
         </view>
         <view class="shoppingInfo">
@@ -146,6 +152,7 @@ export default {
       shoppingPrice: null,
       couponPrice: 0,
       defaultCustAddress: null,
+      defaultDrugAddress: null,
       selectorMode: true,
       activeCoupon: null
     }
@@ -183,6 +190,8 @@ export default {
   },
   onShow () {
     this.defaultCustAddress = this.$store.getters.getCustSelectedAddress
+    this.defaultDrugAddress = this.$store.getters.getSelectedDrug
+    console.log(' this.$store.getters.getSelectedDrug_', this.$store.getters.getSelectedDrug);
     this.$store.dispatch('getCouponList').then(() => {
       const selectedCoupon = this.$store.getters.getSelectedCoupon(this.shoppingPrice)
       this.activeCoupon = selectedCoupon ? selectedCoupon : null
@@ -367,5 +376,13 @@ export default {
 .space_between {
   display: flex;
   justify-content: space-between;
+  .drugAddress {
+    width: 70%;
+    height: px2rpx(24);
+    line-height: px2rpx(24);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 </style>

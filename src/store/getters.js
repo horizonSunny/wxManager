@@ -93,6 +93,10 @@ const getters = {
   //获取用户信息
   getUserInfo: state => {
     return state.user.userInfo
+  },
+  // 获取选中药房
+  getSelectedDrug: state => {
+    return state.address.drugSelectedAddress
   }
 }
 export default getters

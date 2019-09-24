@@ -7,7 +7,8 @@ const address = {
     // 用于保存请求到到全国各地的地址
     locationAddress: [],
     // 获取用户选中地址
-    custSelectedAddress: null
+    custSelectedAddress: null,
+    drugSelectedAddress: null
   },
   mutations: {
     //  获取用户全部取货地址
@@ -31,6 +32,10 @@ const address = {
     },
     DELETE_SELECTCUST: state => {
       state.custSelectedAddress = null
+    },
+    // 选中的药房地址
+    SELETE_DRUG: (state, commodity) => {
+      state.drugSelectedAddress = commodity
     }
   },
   actions: {

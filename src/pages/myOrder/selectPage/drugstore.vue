@@ -28,6 +28,7 @@
           class="itemMessage"
           v-for="(item, index) in drugLocationList"
           :key="index"
+          @click="selectedDrug(item)"
         >
           <view class="orderInfoHeader">
             <view>{{ item["name"] }}</view>
@@ -230,6 +231,12 @@ export default {
       this.isGetDrugList('putdown').then(() => {
         uni.stopPullDownRefresh();
       })
+    },
+    //选中药房
+    selectedDrug (item) {
+      console.log('selectedDrug_', item)
+      this.$store.commit('SELETE_DRUG', item)
+      uni.navigateBack()
     }
   },
   computed: {
