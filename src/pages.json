@@ -1,5 +1,7 @@
 {
   "pages": [{
+      "path": "pages/index"
+    }, {
       "path": "pages/homepage/main",
       "style": {
         "navigationStyle": "custom"
@@ -28,8 +30,6 @@
           "van-tree-select": "/wxcomponents/vant/tree-select/index"
         }
       }
-    }, {
-      "path": "pages/index"
     }, {
       "path": "pages/myOrder/index",
       "style": {
