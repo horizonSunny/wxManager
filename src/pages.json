@@ -1,11 +1,11 @@
 {
   "pages": [{
-      "path": "pages/index"
-    }, {
       "path": "pages/homepage/main",
       "style": {
         "navigationStyle": "custom"
       }
+    }, {
+      "path": "pages/index"
     }, {
       "path": "pages/mine/index",
       "style": {

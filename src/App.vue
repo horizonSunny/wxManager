@@ -52,10 +52,10 @@ export default {
         console.log('微信登陆态成功');
         wx.getUserInfo({
           success: function (res) {
-            console.log('wx.getUserInfo_', res)
+            // console.log('wx.getUserInfo_', res)
           },
           fail: function (res) {
-            console.log('wx.getUserInfo_fail', res)
+            // console.log('wx.getUserInfo_fail', res)
           }
         })
         //session_key 未过期，并且在本生命周期一直有效
@@ -70,10 +70,10 @@ export default {
               console.log('微信登陆态失效后再请求成功');
               wx.getUserInfo({
                 success: function (res) {
-                  console.log('wx.getUserInfo_', res)
+                  // console.log('wx.getUserInfo_', res)
                 },
                 fail: function (res) {
-                  console.log('wx.getUserInfo_fail', res)
+                  // console.log('wx.getUserInfo_fail', res)
                 }
               })
               // 发起网络请求

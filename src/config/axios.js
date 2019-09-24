@@ -1,5 +1,6 @@
 import axios from 'uni-axios'
 import { baseUrl } from './global'
+import * as navTo from './navTo'
 /**
  * 请求接口日志记录
  */
@@ -20,6 +21,7 @@ function _reslog(res) {
 }
 
 // 创建自定义接口服务实例
+// Authorization Basic cGF0aWVudDpwYXRpZW50
 const http = axios.create({
   baseURL: baseUrl,
   timeout: 6000,
@@ -28,14 +30,16 @@ const http = axios.create({
   // #endif
   headers: {
     'Content-Type': 'application/json',
-    authorization:
-      'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnRfaWQiOjAsImxpY2Vuc2UiOiJtYWRlIGJ5IGF1dGgiLCJ1c2VyX2lkIjoxLCJ1c2VyX25hbWUiOiIxMzI2NTc0Njc4OCIsInNjb3BlIjpbInNlcnZlciJdLCJleHAiOjE1NzkyODYzOTQsImRlcHRfaWQiOjAsImF1dGhvcml0aWVzIjpbIlJPTEVfIl0sImp0aSI6ImRhNjQwNDRiLTBhMDUtNDBmMy04YmU3LTBkNmRkMDVhNWEyMiIsImNsaWVudF9pZCI6InBhdGllbnQiLCJ1c2VybmFtZSI6IjEzMjY1NzQ2Nzg4In0.RpPcF-EjLtaCMAb_3yLzDUjstAwRbzyO9QxdWb_TJf4'
+    authorization: 'Basic cGF0aWVudDpwYXRpZW50'
   }
 })
 
 // 拦截器 在请求之前拦截
 http.interceptors.request.use(config => {
   // code...
+  if (config.headers.authorization.indexOf('Basic') > -1) {
+    uni.redirectTo({ url: '/pages/index' })
+  }
   _reqlog(config)
   return config
 })
