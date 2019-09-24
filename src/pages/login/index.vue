@@ -17,45 +17,35 @@
     >
       获取手机号
     </button>
+    <view class="modal" v-show="showModal" @click="showModal = false">
+      <button
+        class="phone_btn"
+        open-type="getPhoneNumber"
+        @click.stop
+        @getphonenumber="getPhoneNumber"
+      >
+        绑定手机号
+      </button>
+    </view>
   </view>
 </template>
 <script>
 export default {
   data () {
     return {
-      avatarUrl: ''
+      showModal: false
     }
   },
-  onLoad () {
-    uni.getLocation({
-      type: 'wgs84',
-      success: function (res) {
-        console.log('当前位置的经度：' + res.longitude);
-        console.log('当前位置的纬度：' + res.latitude);
-      }
-    });
-    wx.getUserInfo({
-      success: function (res) {
-        console.log(res);
-        var avatarUrl = 'userInfo.avatarUrl';
-        var nickName = 'userInfo.nickName';
-        that.setData({
-          [avatarUrl]: res.userInfo.avatarUrl,
-          [nickName]: res.userInfo.nickName,
-        })
-      }
-    })
-  },
   methods: {
-    sss () {
-      console.log('213')
-    },
     getUserInfo (e) {
       console.log('e.detail.userInfo.avatarUrl_', e.detail.userInfo)
-      this.avatarUrl = e.detail.userInfo.avatarUrl
+      this.showModal = true
     },
     getPhoneNumber (e) {
-      console.log('res', e);
+      console.log('res', e.detail.encryptedData);
+    },
+    bindUserInfo (e) {
+      console.log('res', e.detail.encryptedData);
     }
   }
 }
@@ -93,6 +83,16 @@ export default {
     background: #fff;
     margin-top: px2rpx(31);
     color: #4da08a;
+  }
+  .modal {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    line-height: 100%;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    background: rgba(105, 105, 105, 0.5);
   }
 }
 </style>
