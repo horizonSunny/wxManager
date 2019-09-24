@@ -53,6 +53,7 @@ let getSync = function(key, value) {
     }
   } catch (e) {
     // error
+    console.log('未定义getSync_', e)
   }
 }
 export { set, get, setSync, getSync }

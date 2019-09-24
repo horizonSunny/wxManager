@@ -1,6 +1,6 @@
 import axios from 'uni-axios'
-import { baseUrl } from './global'
-import * as navTo from './navTo'
+import { baseUrl, channelNo } from './global'
+import * as storage from './storage'
 /**
  * 请求接口日志记录
  */
@@ -21,7 +21,6 @@ function _reslog(res) {
 }
 
 // 创建自定义接口服务实例
-// Authorization Basic cGF0aWVudDpwYXRpZW50
 const http = axios.create({
   baseURL: baseUrl,
   timeout: 6000,
@@ -30,25 +29,36 @@ const http = axios.create({
   // #endif
   headers: {
     'Content-Type': 'application/json',
-    authorization: 'Basic cGF0aWVudDpwYXRpZW50'
+    authorization: channelNo
   }
 })
 
 // 拦截器 在请求之前拦截
 http.interceptors.request.use(config => {
   // code...
-  if (config.headers.authorization.indexOf('Basic') > -1) {
-    uni.redirectTo({ url: '/pages/index' })
-  }
+  let accsess_token = storage.getSync('access_token')
+  config.headers.authorization = accsess_token
   _reqlog(config)
   return config
 })
 
 // 拦截器 在请求之后拦截
-http.interceptors.response.use(response => {
-  // _reslog(response)
-  return response.data
-  // code...
-})
+http.interceptors.response.use(
+  response => {
+    console.log('http.interceptors.response_', response)
+    return response.data
+    // code...
+  },
+  error => {
+    // 如果token值无效，让跳转登陆页面
+    if (error.response.status === 401) {
+      storage.setSync('access_token', channelNo)
+      uni.reLaunch({
+        url: '/pages/index'
+      })
+    }
+    // _reslog(error)
+  }
+)
 
 export default http

@@ -9,9 +9,7 @@ export default {
     const reduce = capsuleInfo.top - statusBarHeight
     const allHeight = reduce + capsuleInfo.top
     storage.setSync('capsuleInfo', allHeight)
-    storage.set('access_token', '456').then((value) => {
-
-    })
+    storage.setSync('access_token', '456')
     // 这边获取用户信息
     this.$http.get('patient/patient').then((res) => {
       // 用户信息放入store中
