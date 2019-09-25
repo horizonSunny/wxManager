@@ -18,11 +18,7 @@
       </view>
     </view>
     <view class="location_list">
-      <scroll-view
-        scroll-y="true"
-        class="scrollView scroll-Y"
-        @scrolltolower="scroll"
-      >
+      <scroll-view scroll-y="true" class="scrollView" @scrolltolower="scroll">
         <!-- <view class="scrollViewIn"> -->
         <view
           class="itemMessage"

@@ -25,7 +25,7 @@
           :key="index"
           style="width:100%;height:100%;background:#fff"
         >
-          <scroll-view scroll-y class="scrollView">
+          <scroll-view scroll-y class="scrollView" @scrolltolower="scroll">
             <view
               class="itemMessage"
               v-for="(itemInList, indexInList) in item"
@@ -148,12 +148,18 @@ export default {
       this.currentIndex = current
     },
     swiperList (e) {
-      console.log('event_', e);
       const index = e.detail.current
-      console.log('index_', index);
+      this.currentIndex = index
+      // 获取对应属性名
+      const menuList = Object.keys(this.menuList)
+      const name = menuList[index]
+      console.log('this.currentIndex_', this.currentIndex);
+      // 假如跳过去不为空就跳，跳过去为空就不跳
+      if (this.menuList[name].length === 0) {
+        this.getListInfo()
+      }
       const seletcName = this.meunOptions[index]
       this.currentMenu = seletcName
-
     },
     cancelOrder () {
       uni.showModal({
@@ -233,8 +239,11 @@ export default {
             break;
         }
       })
-    }
-
+    },
+    scroll () {
+      console.log('refresh');
+      this.getListInfo()
+    },
   },
   filters: {
     timeFilter: function (value) {
