@@ -71,7 +71,33 @@
           </view>
         </view>
         <view class="shoppingInfo">
-          <view
+          <swiper>
+            <swiper-item
+              v-for="(itemInList, indexInList) in shoppingCart"
+              :key="indexInList"
+            >
+              <view class="itemMessage">
+                <view class="itemImg">
+                  <img src="../../../static/main/bannerBack@3x.png" alt="" />
+                </view>
+                <view class="itemInfo">
+                  <view class="name">
+                    {{ itemInList["productName"] }}
+                  </view>
+                  <view class="specification">
+                    规格: {{ itemInList["productSpecif"] }}
+                  </view>
+                  <view class="priceOperate">
+                    <view class="price">¥ {{ itemInList["price"] }}</view>
+                    <view class="operate">
+                      购买数量：{{ itemInList["amount"] }}
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </swiper-item>
+          </swiper>
+          <!-- <view
             class="itemMessage"
             v-for="(itemInList, indexInList) in shoppingCart"
             :key="indexInList"
@@ -93,7 +119,7 @@
                 </view>
               </view>
             </view>
-          </view>
+          </view> -->
         </view>
         <view class="coupon space_between">
           <!-- 优惠券如果没有的话要隐藏 -->
