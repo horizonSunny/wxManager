@@ -9,7 +9,7 @@ export default {
     const reduce = capsuleInfo.top - statusBarHeight
     const allHeight = reduce + capsuleInfo.top
     storage.setSync('capsuleInfo', allHeight)
-    storage.setSync('access_token', 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnRfaWQiOjAsInVzZXJfaWQiOjEsInVzZXJfbmFtZSI6IjEzMjY1NzQ2Nzg4Iiwic2NvcGUiOlsic2VydmVyIl0sInVzZXJUeXBlIjoiMiIsImV4cCI6MTU3MDM3ODIyNCwiZGVwdF9pZCI6MCwiYXV0aG9yaXRpZXMiOlsiUk9MRV8iXSwianRpIjoiZTEwNTkxNDAtNTA4Mi00MDc2LWFlNGItOGFmYTM3YWY4OWM3IiwiY2xpZW50X2lkIjoicGF0aWVudCIsInVzZXJuYW1lIjoiMTMyNjU3NDY3ODgifQ.R0yb5rOvG5IHi_RrVtqGk5VrVsEPHq5-yoWxu6WuMZU')
+    storage.setSync('access_token', 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnRfaWQiOjAsInVzZXJfaWQiOjEsInVzZXJfbmFtZSI6IjEzMjY1NzQ2Nzg4Iiwic2NvcGUiOlsic2VydmVyIl0sInVzZXJUeXBlIjoiMiIsImV4cCI6MTU3OTMxODg1MiwiZGVwdF9pZCI6MCwiYXV0aG9yaXRpZXMiOlsiUk9MRV8iXSwianRpIjoiZTQzYjg3NzUtNzAxMy00NGNiLTkxZGItNWQ0ZDQ4MTczNmU0IiwiY2xpZW50X2lkIjoicGF0aWVudCIsInVzZXJuYW1lIjoiMTMyNjU3NDY3ODgifQ.oFdjjJ1tW9LFYeDFi-suwp7bEUznsa4wWqw1ARWdSS8')
     // 每次一进入程序就会检测
     wx.checkSession({
       success () {

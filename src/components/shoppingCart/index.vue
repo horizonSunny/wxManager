@@ -33,6 +33,7 @@ export default {
   },
   methods: {
     goOrderForm () {
+      console.log('this.$store.getters.shoppingInfo_', this.$store.getters.shoppingInfo);
       this.$navTo.togo('/pages/myOrder/orderForm/index')
     }
   },

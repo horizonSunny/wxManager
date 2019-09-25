@@ -13,7 +13,7 @@
       }"
     ></view>
     <view class="titleMessage">
-      <view @click="rollback" v-if="backShow">
+      <view @click="rollback" v-if="backShow" class="titleIcon">
         <uni-icon type="" class="iconfont icon-rollback icon_style"></uni-icon>
       </view>
       <span
@@ -70,6 +70,12 @@ export default {
 .titleMessage {
   text-align: center;
   position: relative;
+  height: px2rpx(25);
+  .titleIcon {
+    position: absolute;
+    height: px2rpx(25);
+    width: px2rpx(50);
+  }
   .icon_style {
     position: absolute;
     left: px2rpx(16);

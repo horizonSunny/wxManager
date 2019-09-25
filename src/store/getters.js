@@ -2,8 +2,10 @@ function sortByNum(a, b) {
   return a.couponPrice - b.couponPrice
 }
 const getters = {
+  // 获取购物车
   shoppingInfo: state => state.shoppingCard.commodityInfo,
-  // 获取商品总数量
+  shoppingCartIdInfo: state => state.shoppingCard.shoppingCartId,
+  // 获取购物车商品总数量
   shoppingMount: state => {
     let mount = 0
     state.shoppingCard.commodityInfo.forEach(item => {
@@ -11,7 +13,8 @@ const getters = {
     })
     return mount
   },
-  // 获取商品总价格
+
+  // 获取购物车商品总价格
   shoppingPrice: state => {
     let totalPrice = 0
     state.shoppingCard.commodityInfo.forEach(item => {

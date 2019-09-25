@@ -71,7 +71,7 @@
           </view>
         </view>
         <view class="shoppingInfo">
-          <swiper>
+          <swiper class="swiper">
             <swiper-item
               v-for="(itemInList, indexInList) in shoppingCart"
               :key="indexInList"
@@ -121,13 +121,13 @@
             </view>
           </view> -->
         </view>
-        <view class="coupon space_between">
+        <view class="coupon space_between" @click="gotoCoupon">
           <!-- 优惠券如果没有的话要隐藏 -->
           <view>
             <img :src="'../../../static/main/coupon' + pixelRatio" alt="" />
             <span> 优惠券</span>
           </view>
-          <view @click="gotoCoupon">
+          <view>
             <span v-if="activeCoupon" class="icon_sel"
               >¥{{ activeCoupon["couponPrice"] }}</span
             >
@@ -159,7 +159,40 @@
       <view class="payInfo"
         >支付：<span>¥{{ totalPrice }}</span></view
       >
-      <view class="confirm">确认下单</view>
+      <view class="confirm" @click="confirmOrder">确认下单</view>
+    </view>
+    <view class="modal" v-if="showModal" @click="showModal = false">
+      <form class="form" @click.stop>
+        <view class="labelInfo">
+          <span style="width:100%;text-align:center">请填写用户信息</span>
+        </view>
+        <view class="labelInfo">
+          <span>姓名</span>
+          <input
+            name="fullName"
+            type="text"
+            placeholder="请填写真实姓名"
+            v-model="drugUserName"
+          />
+        </view>
+        <view class="labelInfo">
+          <span>手机号码</span>
+          <input
+            name="phone"
+            type="text"
+            placeholder="请填写手机号码"
+            v-model="drugUserPhone"
+          />
+        </view>
+        <view class="confirm">
+          <button type="primary" class="save" @click="submitDrugInfo">
+            保存
+          </button>
+          <button type="primary" class="delete" @click="showModal = false">
+            取消
+          </button>
+        </view>
+      </form>
     </view>
   </view>
 </template>
@@ -180,7 +213,11 @@ export default {
       defaultCustAddress: null,
       defaultDrugAddress: null,
       selectorMode: true,
-      activeCoupon: null
+      activeCoupon: null,
+      showModal: false,
+      // 这边是如果选择药店取药需要绑定的userInfo
+      drugUserName: null,
+      drugUserPhone: null,
     }
   },
   onLoad () {
@@ -212,6 +249,61 @@ export default {
     gotoCoupon () {
       const url = '/pages/mine/myCoupon/index'
       this.$navTo.togo(url, { shoppingPrice: this.shoppingPrice })
+    },
+    confirmOrder () {
+      if (!this.selectorMode) {
+        if (this.drugUserName === null && this.drugUserPhone === null) {
+          this.showModal = true;
+          return
+        }
+      }
+      const shoppingInfo = this.$store.getters.shoppingInfo.map((item) => {
+        let createObj = {
+          cartId: this.$store.getters.shoppingCartIdInfo,
+          productId: item['id'],
+          productName: item['productName'],
+          productPrice: item['price'] * item['amount'],
+          productNum: item['amount']
+        }
+        return createObj
+      })
+      let common = {
+        payPrice: this.totalPrice,
+        totalNum: this.$store.getters.shoppingMount,
+        totalPrice: this.$store.getters.shoppingPrice,
+        couponId: this.activeCoupon ? this.activeCoupon['id'] : '',
+        deductionPrice: this.activeCoupon ? this.activeCoupon['couponPrice'] : 0,
+        orderShopRequest: shoppingInfo
+      }
+      let params = new Object()
+      if (this.selectorMode) {
+        let distribution = {
+          userAddress: this.defaultCustAddress["province"]
+            + this.defaultCustAddress["city"]
+            + this.defaultCustAddress["area"]
+            + this.defaultCustAddress["detailAddress"],
+          userName: this.defaultCustAddress["fullName"],
+          userPhone: this.defaultCustAddress["phone"],
+          type: 1
+        }
+        Object.assign(params, common, distribution);
+      } else {
+        let drugInvite = {
+          userName: this.drugUserName,
+          userPhone: this.drugUserPhone,
+          tenantId: this.defaultDrugAddress['id'],
+          type: 0
+        }
+        Object.assign(params, common, drugInvite);
+      }
+      this.$http.post('order/order', params).then((res) => {
+        console.log('确认订单成功');
+        this.showModal = false
+      })
+    },
+    // 提交drug自提用户信息
+    submitDrugInfo () {
+      this.confirmOrder()
     }
   },
   onShow () {
@@ -280,6 +372,9 @@ export default {
         background: #fff;
         width: auto;
         padding: px2rpx(17) px2rpx(11);
+        .swiper {
+          height: px2rpx(96);
+        }
         .itemMessage {
           display: flex;
           width: 100%;
@@ -379,6 +474,69 @@ export default {
       color: #fff;
       text-align: center;
       width: px2rpx(120);
+    }
+  }
+  .modal {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    line-height: 100%;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: rgba(105, 105, 105, 0.5);
+    .form {
+      height: px2rpx(380);
+      widows: 80%;
+      border: px2rpx(1) solid #f3f3f3;
+      border-style: solid none;
+      background: #fff;
+      padding: px2rpx(0) px2rpx(10);
+      .labelInfo {
+        width: auto;
+        height: px2rpx(57);
+        line-height: px2rpx(57);
+        border-bottom: px2rpx(1) solid #f3f3f3;
+        display: flex;
+        span {
+          width: px2rpx(105);
+          font-size: 18px;
+          color: #282828;
+          letter-spacing: 0;
+        }
+        input {
+          height: px2rpx(57);
+          line-height: px2rpx(57);
+          text-overflow: ellipsis;
+        }
+        .placeholder-class {
+          font-size: 18px;
+          color: #dbdbdb;
+        }
+      }
+      .confirm {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1;
+        button {
+          margin-top: px2rpx(50);
+          height: px2rpx(47);
+          width: 90%;
+        }
+        .save {
+          background: #4da08a;
+        }
+        .delete {
+          margin-top: px2rpx(13);
+          background: #c0c0c0;
+        }
+        .deleteActive {
+          margin-top: px2rpx(13);
+          background: #e90a0a;
+        }
+      }
     }
   }
 }
