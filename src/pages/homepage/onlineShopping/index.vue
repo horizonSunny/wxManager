@@ -88,7 +88,7 @@ export default {
       // 分页，滑动再增加
       prePageNumber: 0,
       otcPageNumber: 0,
-      pageSize: 10,
+      pageSize: 10
     }
   },
   computed: {
@@ -112,7 +112,13 @@ export default {
       console.log('index_', index);
       const seletcName = this.meunOptions[index]
       this.currentMenu = seletcName
-
+      this.currentDrugType = index
+      // 获取属性名
+      const menuList = Object.keys(this.menuList)
+      const name = menuList[index]
+      if (this.menuList[name].length === 0) {
+        this.getShoppingList(this.currentDrugType)
+      }
     },
     // 下面就是操作购物车,所以列表中的数量就是购物车中的数据，数量值只保存到购物车中
     operateShopping (operate, itemInfo) {
@@ -146,7 +152,7 @@ export default {
       let params = {
         pageNumber: drugType === 0 ? this.prePageNumber : this.otcPageNumber,
         pageSize: this.pageSize,
-        productType: this.productType,
+        productType: this.currentDrugType,
       }
       console.log('drugType_____', drugType)
       this.$http.get('admin/product', { params }).then((res) => {

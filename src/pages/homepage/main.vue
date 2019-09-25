@@ -54,6 +54,7 @@ export default {
   },
   onLoad () {
     console.log('this.pixelRatio_', this.pixelRatio)
+    this.$store.dispatch('getShoppingCart')
   },
   data () {
     return {

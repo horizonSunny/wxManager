@@ -4,10 +4,17 @@
  */
 import { deepCopy } from '../../utils/index'
 import http from '../../config/axios'
+// 这边通过productId比对是否有购物车单条信息存在的id,第一个参数是产品id,第二个是已经存在的购物车信息
+function comparison(productId, shopCartId) {
+  let item = shopCartId.find(item => {
+    return item.productId === productId
+  })
+  return item
+}
 const shoppingCard = {
   state: {
     commodityInfo: [],
-    shoppingCartId: ''
+    shoppingCartId: []
   },
   mutations: {
     /**
@@ -16,7 +23,6 @@ const shoppingCard = {
      * */
     RESET_SHOPPING: (state, shopping) => {
       state.commodityInfo = state.commodityInfo.concat(shopping)
-      state.shoppingCartId = shopping[0]['id']
     },
     SET_COMMODITY: (state, commodity) => {
       commodity['amount'] += 1
@@ -44,46 +50,78 @@ const shoppingCard = {
     }
   },
   actions: {
+    // 这边是购物车数量变化，增加操作
     setCommodityInfo({ commit, state }, commodity) {
-      if (state.commodityInfo.length < 1) {
+      const comparisonItem = comparison(commodity['id'], state.shoppingCartId)
+      debugger
+      console.log('comparisonItem_', comparisonItem)
+      if (comparisonItem) {
+        http
+          .put('order/shopCart', {
+            cartNum: commodity['amount'] + 1,
+            productId: commodity['id'],
+            id: comparisonItem['id']
+          })
+          .then(res => {
+            commit('SET_COMMODITY', commodity)
+          })
+      } else {
         http
           .post('order/shopCart', {
             cartNum: commodity['amount'] + 1,
             productId: commodity['id']
           })
           .then(res => {
-            state.shoppingCartId = res.data.id
-            commit('SET_COMMODITY', commodity)
-          })
-      } else {
-        http
-          .put('order/shopCart', {
-            cartNum: commodity['amount'] + 1,
-            productId: commodity['id'],
-            id: state.shoppingCartId
-          })
-          .then(res => {
-            state.shoppingCartId = res.data.id
+            state.shoppingCartId.push(res.data)
             commit('SET_COMMODITY', commodity)
           })
       }
     },
+    // 这边是购物车数量变化，减少操作
     delCommodityInfo({ commit, state }, commodity) {
-      // commit('DEL_COMMODITY', commodity)
+      const comparisonItem = comparison(commodity['id'], state.shoppingCartId)
       http
         .put('order/shopCart', {
           cartNum: commodity['amount'] - 1,
           productId: commodity['id'],
-          id: state.shoppingCartId
+          id: comparisonItem['id']
         })
         .then(res => {
-          state.shoppingCartId = res.data.id
+          // if (commodity['amount'] - 1 === 0) {
+          //   const index = state.shoppingCartId.findIndex(item => {
+          //     return item['productId'] === commodity['id']
+          //   })
+          //   state.shoppingCartId.splice(index, 1)
+          // }
           commit('DEL_COMMODITY', commodity)
+          console.log('state.shoppingCartId_', state.shoppingCartId)
         })
     },
-    getShoppingCart({ commit }) {
+    // 这是进应用的时候就拿到的数据比对
+    getShoppingCart({ commit, state }) {
       http.get('order/shopCart/info').then(res => {
-        commit('RESET_SHOPPING', res.data)
+        const params = {
+          pageNumber: 0,
+          pageSize: 999
+        }
+        // 这是获取购物车返回的数据
+        state.shoppingCartId = res.data
+        http.get('admin/product', { params }).then(resp => {
+          // 获取到产品信息和购物车信息，做比对添加
+          const product = resp.data.pageList
+          const shopping = res.data
+          let productShopping = product.filter(productItem => {
+            const shoppingCratId = []
+            for (let item = 0; item < shopping.length; item++) {
+              if (productItem['id'] === shopping[item]['productId']) {
+                productItem['amount'] = shopping[item]['cartNum']
+                return productItem
+              }
+            }
+          })
+          commit('RESET_SHOPPING', productShopping)
+          console.log('productShopping_', productShopping)
+        })
       })
     }
   }
