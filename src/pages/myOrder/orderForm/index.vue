@@ -263,7 +263,8 @@ export default {
           productId: item['id'],
           productName: item['productName'],
           productPrice: item['price'] * item['amount'],
-          productNum: item['amount']
+          productNum: item['amount'],
+          unitPrice: item['price']
         }
         return createObj
       })
