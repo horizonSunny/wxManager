@@ -37,7 +37,6 @@ const http = axios.create({
 http.interceptors.request.use(config => {
   // code...
   let accsess_token = storage.getSync('access_token')
-  console.log('accsess_token_', accsess_token)
   if (accsess_token) {
     config.headers.authorization = accsess_token
   }

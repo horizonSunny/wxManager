@@ -32,7 +32,7 @@
               :key="indexInList"
             >
               <view class="orderInfoHeader">
-                <view>思派大药房</view>
+                <view>{{ item[""] }}</view>
                 <view>待取药</view>
               </view>
               <view class="orderInfoContent">
@@ -84,10 +84,15 @@ export default {
       meunOptions: ['全部', '已接单', '待取药', '待配送'],
       menuList: {
         allList: [],
-        medicineList: [],
         orderList: [],
-        unfinishedList: []
+        medicineList: [],
+        distributionList: []
       },
+      allPageNumber: 0,
+      orderPageNumber: 0,
+      medicinePageNumber: 0,
+      distributionPageNumber: 0,
+      pageSize: 10,
       // new 
       currentIndex: '',
       swiperShow: false
@@ -103,44 +108,24 @@ export default {
   },
   onLoad (option) {
     // 这边是从后台数据拿到商品列表，两次分开操作，解藕
-    this.$http.get('wxManager/getItemsList').then((res) => {
-      for (let item = 0; item < res.data.length; item++) {
-        res.data[item]['amount'] = 0
-        switch (res.data[item]['type']) {
-          case 0:
-            this.menuList['allList'].push(res.data[item])
-            break;
-          case 1:
-            this.menuList['medicineList'].push(res.data[item])
-            break;
-        }
-      }
-      console.log('this.menuList_', this.menuList)
-    }).then(() => {
-      // 初始页面的时候这边要和购物车做一个比对，如果命名相同的话，将amount替换为购物车的数量
-      const shoppingCart = this.$store.getters.shoppingInfo
-      // 这边进行跳转操作
-      console.log('option.currentMenu_', option.currentMenu);
-      this.currentMenu = option.currentMenu
-      switch (this.currentMenu) {
-        case '全部':
-          this.currentIndex = 0
-          break;
-        case '已接单':
-          this.currentIndex = 1
-          break;
-        case '待取药':
-          this.currentIndex = 2
-          break;
-        case '待配送':
-          this.currentIndex = 3
-          break;
-
-        default:
-          break;
-      }
-      this.swiperShow = true
-    })
+    switch (this.currentMenu) {
+      case '全部':
+        this.currentIndex = 0
+        break;
+      case '已接单':
+        this.currentIndex = 1
+        break;
+      case '待取药':
+        this.currentIndex = 2
+        break;
+      case '待配送':
+        this.currentIndex = 3
+        break;
+      default:
+        this.currentIndex = 1
+        break;
+    }
+    this.getListInfo()
   },
   onShow () {
     console.log('onShow_');
@@ -175,6 +160,68 @@ export default {
         }
       });
 
+    },
+    getListInfo () {
+      let pageNumber
+      switch (this.currentIndex) {
+        case 0:
+          pageNumber = this.allPageNumber
+          break;
+        case 1:
+          pageNumber = this.orderPageNumber
+          break;
+        case 2:
+          pageNumber = this.medicinePageNumber
+          break;
+        case 3:
+          pageNumber = this.distributionPageNumber
+          break;
+        default:
+          break;
+      }
+      console.log('pageNumber_', pageNumber);
+      const params = {
+        pageNumber: pageNumber,
+        pageSize: this.pageSize,
+        orderStatus: this.currentIndex
+      }
+      this.$http.get('order/order/getOrders', { params }).then((res) => {
+        const listInfo = res.data.pageList
+        for (let item = 0; item < listInfo.length; item++) {
+          switch (listInfo[item]['type']) {
+            case 0:
+              this.menuList['allList'].push(listInfo[item])
+              break;
+            case 1:
+              this.menuList['orderList'].push(listInfo[item])
+              break;
+            case 2:
+              this.menuList['medicineList'].push(listInfo[item])
+              break;
+            case 3:
+              this.menuList['distributionList'].push(listInfo[item])
+              break;
+          }
+        }
+        console.log('this.menuList_', this.menuList)
+      }).then(() => {
+        switch (this.currentIndex) {
+          case 0:
+            this.allPageNumber += 1
+            break;
+          case 1:
+            this.orderPageNumber += 1
+            break;
+          case 2:
+            this.medicinePageNumber += 1
+            break;
+          case 3:
+            this.distributionPageNumber += 1
+            break;
+          default:
+            break;
+        }
+      })
     }
 
   }
