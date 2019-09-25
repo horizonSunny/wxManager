@@ -32,25 +32,31 @@
               :key="indexInList"
             >
               <view class="orderInfoHeader">
-                <view>{{ item[""] }}</view>
-                <view>待取药</view>
+                <view>{{ itemInList["drugName"] }}</view>
+                <view>{{ itemInList["status"] | orderStatus }}</view>
               </view>
-              <view class="orderInfoContent">
+              <view
+                class="orderInfoContent"
+                v-for="(itemPro, indexPro) in itemInList['orderShops']"
+                :key="indexPro"
+              >
                 <view class="itemImg">
                   <img src="../../static/main/bannerBack@3x.png" alt="" />
                 </view>
                 <view class="itemInfo">
                   <view class="name">
-                    {{ itemInList["name"] }}
+                    {{ itemPro["productName"] }}
                   </view>
                   <view class="specification">
-                    <view> ¥ {{ itemInList["price"] }} </view>
-                    <view> X3 </view>
+                    <view> ¥ {{ itemPro["unitPrice"] }} </view>
+                    <view> X{{ itemPro["productNum"] }}</view>
                   </view>
                 </view>
               </view>
               <view class="orderInfoFoot">
-                <view>2019-09-05</view>
+                <view class="orderInfoFootTime">{{
+                  itemInList["createTime"] | timeFilter
+                }}</view>
                 <view @click="cancelOrder"> <button>取消订单</button></view>
                 <view
                   ><button class="drugstore">
@@ -108,6 +114,7 @@ export default {
   },
   onLoad (option) {
     // 这边是从后台数据拿到商品列表，两次分开操作，解藕
+    this.currentMenu = option.currentMenu
     switch (this.currentMenu) {
       case '全部':
         this.currentIndex = 0
@@ -122,10 +129,13 @@ export default {
         this.currentIndex = 3
         break;
       default:
-        this.currentIndex = 1
+        this.currentIndex = 0
         break;
     }
-    this.getListInfo()
+    console.log('this.currentIndex_onLoad_', this.currentIndex)
+    this.getListInfo().then(() => {
+      this.swiperShow = true
+    })
   },
   onShow () {
     console.log('onShow_');
@@ -179,30 +189,31 @@ export default {
         default:
           break;
       }
-      console.log('pageNumber_', pageNumber);
       const params = {
         pageNumber: pageNumber,
         pageSize: this.pageSize,
-        orderStatus: this.currentIndex
+        // 假如为0，就传空值
+        orderStatus: this.currentIndex === 0 ? '' : this.currentIndex
       }
-      this.$http.get('order/order/getOrders', { params }).then((res) => {
+      return this.$http.get('order/order/getPatientOrders', { params }).then((res) => {
         const listInfo = res.data.pageList
-        for (let item = 0; item < listInfo.length; item++) {
-          switch (listInfo[item]['type']) {
-            case 0:
-              this.menuList['allList'].push(listInfo[item])
-              break;
-            case 1:
-              this.menuList['orderList'].push(listInfo[item])
-              break;
-            case 2:
-              this.menuList['medicineList'].push(listInfo[item])
-              break;
-            case 3:
-              this.menuList['distributionList'].push(listInfo[item])
-              break;
-          }
+        console.log('listInfo_', listInfo)
+        // for (let item = 0; item < listInfo.length; item++) {
+        switch (params['orderStatus']) {
+          case '':
+            this.menuList['allList'] = this.menuList['allList'].concat(listInfo)
+            break;
+          case 1:
+            this.menuList['orderList'] = this.menuList['orderList'].concat(listInfo)
+            break;
+          case 2:
+            this.menuList['medicineList'] = this.menuList['medicineList'].concat(listInfo)
+            break;
+          case 3:
+            this.menuList['distributionList'] = this.menuList['distributionList'].concat(listInfo)
+            break;
         }
+        // }
         console.log('this.menuList_', this.menuList)
       }).then(() => {
         switch (this.currentIndex) {
@@ -224,6 +235,30 @@ export default {
       })
     }
 
+  },
+  filters: {
+    timeFilter: function (value) {
+      const time = value.slice(0, 10)
+      return time
+    },
+    orderStatus: function (value) {
+      switch (value) {
+        case 1:
+          return '已接单'
+          break;
+        case 2:
+          return '待取药'
+          break;
+        case 3:
+          return '待配送'
+          break;
+        case 4:
+          return '已取消'
+          break;
+        default:
+          break;
+      }
+    }
   }
 }
 </script>
@@ -267,7 +302,7 @@ export default {
         .itemMessage {
           display: flex;
           flex-direction: column;
-          height: px2rpx(192);
+          // height: px2rpx(192);
           margin-bottom: px2rpx(5);
           background: #ffffff;
           padding: px2rpx(0) px2rpx(15);
@@ -323,12 +358,18 @@ export default {
             font-size: 15px;
             color: #6c6c6c;
             align-items: center;
+            .orderInfoFootTime {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              width: px2rpx(150);
+            }
             button {
               font-size: px2rpx(15);
               height: px2rpx(28);
               line-height: px2rpx(28);
               width: px2rpx(90);
-              margin-left: px2rpx(33);
+              margin-left: px2rpx(10);
             }
             .drugstore {
               background: #4da08a;
