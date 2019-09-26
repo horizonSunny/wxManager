@@ -42,7 +42,13 @@ export default {
       this.showModal = true
     },
     getPhoneNumber (e) {
-      console.log('res', e.detail.encryptedData);
+      // storage.get('encryptKey', response.data).then((value) => {}
+      console.log('res_getPhoneNumber_', e.detail.encryptedData);
+      console.log('res_getPhoneNumber_iv_', e.detail.iv);
+      let params = {
+        encryptedData: e.detail.encryptedData,
+
+      }
     },
     bindUserInfo (e) {
       console.log('res', e.detail.encryptedData);

@@ -47,6 +47,13 @@ http.interceptors.request.use(config => {
 // 拦截器 在请求之后拦截
 http.interceptors.response.use(
   response => {
+    // response.code代表token失效
+    console.log('response.code_', response.data.code)
+    if (response.data.code === 2) {
+      uni.reLaunch({
+        url: '/pages/login/index'
+      })
+    }
     return response.data
     // code...
   },
