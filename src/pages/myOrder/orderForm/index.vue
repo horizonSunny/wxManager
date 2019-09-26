@@ -303,6 +303,8 @@ export default {
       this.$http.post('order/order', params).then((res) => {
         console.log('确认订单成功');
         this.showModal = false
+        let url = '/pages/myOrder/index?currentMenu=' + '全部'
+        this.$navTo.togo(url)
       })
     },
     // 提交drug自提用户信息

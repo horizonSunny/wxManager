@@ -32,7 +32,9 @@
               :key="indexInList"
             >
               <view class="orderInfoHeader">
-                <view class="overFlow">{{ itemInList["drugName"] }}</view>
+                <view class="overFlow">{{
+                  itemInList["drugName"] ? itemInList["drugName"] : ""
+                }}</view>
                 <view style="width:20%">{{
                   itemInList["status"] | orderStatus
                 }}</view>

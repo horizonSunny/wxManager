@@ -61,7 +61,17 @@ export default {
   },
   methods: {
     rollback () {
-      uni.navigateBack()
+      let pages = getCurrentPages();  //获取所有页面栈实例列表
+      const currentPage = pages[pages.length - 1]
+      console.log('currentPage_', currentPage.route);
+      if (currentPage.route === 'pages/myOrder/index') {
+        uni.switchTab({
+          url: '/pages/mine/index'
+        })
+      } else {
+        uni.navigateBack()
+      }
+
     }
   }
 }
