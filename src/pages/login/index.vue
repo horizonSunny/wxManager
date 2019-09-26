@@ -48,7 +48,10 @@ export default {
     // 秘文解析手机号
     getPhoneNumber (e) {
       this.showModal = false
-      console.log('res_getPhoneNumber_', e.detail.encryptedData);
+      if (e.detail.errMsg === 'getPhoneNumber:fail:user deny') {
+        return
+      }
+      console.log('res_getPhoneNumber_', e);
       console.log('res_getPhoneNumber_iv_', e.detail.iv);
       let params = {
         encryptedData: e.detail.encryptedData,
@@ -63,6 +66,10 @@ export default {
     },
     getUserInfo (e) {
       console.log('e_getUserInfo_', e);
+      // 用户拒绝授权
+      if (e.detail.errMsg === 'getUserInfo:fail auth deny') {
+        return
+      }
       let url = 'patient/wx/checkPhone?key=' + this.keyInfo
       this.$http.get(url).then((res) => {
         console.log('res_data_', res.data);
@@ -79,11 +86,10 @@ export default {
       const url = 'auth/oauth/token?mobilePhone=' + phone + '&grant_type=minapp' + '&key=' + this.keyInfo + '&scope=server'
       this.$http.post(url).then((res) => {
         console.log('res_data_', res.data);
-        // storage.setSync('access_token', res.data)
-        // res.data['decode']假如为false,代表未绑定，弹窗绑定页面
-        // if (!res.data['decode']) {
-        //   this.showModal = true
-        // }
+        storage.setSync('access_token', 'bearer ' + res.data.access_token)
+        uni.switchTab({
+          url: '/pages/homepage/main'
+        })
       })
     }
   }
@@ -157,6 +163,7 @@ export default {
         button {
           width: px2rpx(150);
           height: px2rpx(42);
+          line-height: px2rpx(42);
           font-size: px2rpx(20);
           border-radius: px2rpx(4);
           text-align: center;

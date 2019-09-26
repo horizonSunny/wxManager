@@ -53,7 +53,6 @@ const shoppingCard = {
     // 这边是购物车数量变化，增加操作
     setCommodityInfo({ commit, state }, commodity) {
       const comparisonItem = comparison(commodity['id'], state.shoppingCartId)
-      debugger
       console.log('comparisonItem_', comparisonItem)
       if (comparisonItem) {
         http

@@ -62,20 +62,6 @@ export default {
         }
       })
     }
-    this.$http.get('patient/patient').then((res) => {
-      // 用户信息放入store中
-      this.$store.dispatch('setUserInfo', res.data).then((res) => {
-        // console.log('userInfo_', this.$store.getters.getUserInfo);
-      })
-      // 获取用户取货地址
-      this.$store.dispatch('getCustAdd', res.data).then((res) => {
-        // console.log('userInfo_', this.$store.getters.getUserInfo);
-      })
-      // 设置全国直至
-      this.$store.dispatch('setLocatAdd', res.data).then((res) => {
-        // console.log('userInfo_', this.$store.getters.getUserInfo);
-      })
-    })
   },
   // 从后台进入前台显示
   onShow: function () {
