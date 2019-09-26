@@ -14,9 +14,6 @@ export default {
     wx.checkSession({
       success () {
         console.log('微信登陆态成功')
-        console.log(storage.get('encryptKey').then((value) => {
-          console.log('encryptKey_', value);
-        }));
       },
       fail () {
         // session_key 已经失效，需要重新执行登录流程，这边是获取微信登陆态，code传给后段接口
@@ -31,8 +28,7 @@ export default {
               _that.$http.get(url)
                 .then(function (response) {
                   console.log('patient/wx?code=1233_', response);
-                  storage.set('encryptKey', response.data).then((value) => {
-                  })
+                  storage.setSync('encryptKey', response.data)
                 })
                 .catch(function (error) {
                   console.log(error);
@@ -44,36 +40,42 @@ export default {
         })
       }
     })
-    // 测试，后面要删除
-    // this.$http.get('patient/patient').then((res) => {
-    //   // 用户信息放入store中
-    //   this.$store.dispatch('setUserInfo', res.data).then((res) => {
-    //     // console.log('userInfo_', this.$store.getters.getUserInfo);
-    //   })
-    //   // 获取用户取货地址
-    //   this.$store.dispatch('getCustAdd', res.data).then((res) => {
-    //     // console.log('userInfo_', this.$store.getters.getUserInfo);
-    //   })
-    //   // 设置全国直至
-    //   this.$store.dispatch('setLocatAdd', res.data).then((res) => {
-    //     // console.log('userInfo_', this.$store.getters.getUserInfo);
-    //   })
-    // }).then(() => {
-    //   this.$http.get('patient/patient').then((res) => {
-    //     // 用户信息放入store中
-    //     this.$store.dispatch('setUserInfo', res.data).then((res) => {
-    //       // console.log('userInfo_', this.$store.getters.getUserInfo);
-    //     })
-    //     // 获取用户取货地址
-    //     this.$store.dispatch('getCustAdd', res.data).then((res) => {
-    //       // console.log('userInfo_', this.$store.getters.getUserInfo);
-    //     })
-    //     // 设置全国直至
-    //     this.$store.dispatch('setLocatAdd', res.data).then((res) => {
-    //       // console.log('userInfo_', this.$store.getters.getUserInfo);
-    //     })
-    //   })
-    // })
+    if (!storage.getSync('encryptKey')) {
+      wx.login({
+        success (res) {
+          if (res.code) {
+            console.log('微信登陆态失效后再请求成功', res.code);
+            // 这边要发送一个code值，进行后段appid+secret的保存就行，生成openID进行保存
+            // 登陆的时候拿到这个openId和手机号进行传参数，获取token
+            const url = 'patient/wx' + '?code=' + res.code
+            _that.$http.get(url)
+              .then(function (response) {
+                console.log('patient/wx?code=1233_', response);
+                storage.setSync('encryptKey', response.data)
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+          } else {
+            console.log('登录失败！')
+          }
+        }
+      })
+    }
+    this.$http.get('patient/patient').then((res) => {
+      // 用户信息放入store中
+      this.$store.dispatch('setUserInfo', res.data).then((res) => {
+        // console.log('userInfo_', this.$store.getters.getUserInfo);
+      })
+      // 获取用户取货地址
+      this.$store.dispatch('getCustAdd', res.data).then((res) => {
+        // console.log('userInfo_', this.$store.getters.getUserInfo);
+      })
+      // 设置全国直至
+      this.$store.dispatch('setLocatAdd', res.data).then((res) => {
+        // console.log('userInfo_', this.$store.getters.getUserInfo);
+      })
+    })
   },
   // 从后台进入前台显示
   onShow: function () {

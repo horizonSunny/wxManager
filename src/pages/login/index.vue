@@ -17,41 +17,74 @@
     >
       获取手机号
     </button>
-    <view class="modal" v-show="showModal" @click="showModal = false">
-      <button
-        class="phone_btn"
-        open-type="getPhoneNumber"
-        @click.stop
-        @getphonenumber="getPhoneNumber"
-      >
-        绑定手机号
-      </button>
+    <view class="modal" v-if="showModal" @click="showModal = false">
+      <view @click.stop class="bindPhone">
+        <view class="title">你的手机号</view>
+        <view class="contentInfo">还未绑定微信，确定绑定嚒？</view>
+        <view class="operate">
+          <button class="refuse" @click="showModal = false">拒绝</button>
+          <button
+            open-type="getPhoneNumber"
+            @getphonenumber="getPhoneNumber"
+            class="allow"
+          >
+            允许
+          </button>
+        </view>
+      </view>
     </view>
   </view>
 </template>
 <script>
+import * as storage from '../../config/storage'
 export default {
   data () {
     return {
-      showModal: false
+      showModal: false,
+      keyInfo: storage.getSync('encryptKey')
     }
   },
   methods: {
-    getUserInfo (e) {
-      console.log('e.detail.userInfo.avatarUrl_', e.detail.userInfo)
-      this.showModal = true
-    },
+    // 秘文解析手机号
     getPhoneNumber (e) {
-      // storage.get('encryptKey', response.data).then((value) => {}
+      this.showModal = false
       console.log('res_getPhoneNumber_', e.detail.encryptedData);
       console.log('res_getPhoneNumber_iv_', e.detail.iv);
       let params = {
         encryptedData: e.detail.encryptedData,
-
+        iv: e.detail.iv,
+        key: this.keyInfo
       }
+      this.$http.get('patient/wx/phone', { params }).then((res) => {
+        console.log('res_data_', res.data);
+        this.phoneLogin(res.data.phone)
+      })
+
     },
-    bindUserInfo (e) {
-      console.log('res', e.detail.encryptedData);
+    getUserInfo (e) {
+      console.log('e_getUserInfo_', e);
+      let url = 'patient/wx/checkPhone?key=' + this.keyInfo
+      this.$http.get(url).then((res) => {
+        console.log('res_data_', res.data);
+        // res.data['decode']假如为false,代表未绑定，弹窗绑定页面
+        if (!res.data['decode']) {
+          this.showModal = true
+        } else {
+          this.phoneLogin(res.data.phone)
+        }
+      })
+    },
+    // 明文手机号登陆
+    phoneLogin (phone) {
+      const url = 'auth/oauth/token?mobilePhone=' + phone + '&grant_type=minapp' + '&key=' + this.keyInfo + '&scope=server'
+      this.$http.post(url).then((res) => {
+        console.log('res_data_', res.data);
+        // storage.setSync('access_token', res.data)
+        // res.data['decode']假如为false,代表未绑定，弹窗绑定页面
+        // if (!res.data['decode']) {
+        //   this.showModal = true
+        // }
+      })
     }
   }
 }
@@ -98,7 +131,46 @@ export default {
     z-index: 999;
     display: flex;
     align-items: center;
+    justify-content: center;
     background: rgba(105, 105, 105, 0.5);
+    .bindPhone {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      width: px2rpx(350);
+      height: px2rpx(190);
+      background: #fff;
+      text-align: center;
+      border-radius: px2rpx(8);
+      .title {
+        margin-top: px2rpx(26);
+        font-size: px2rpx(23);
+      }
+      .contentInfo {
+        margin-top: px2rpx(12);
+        font-size: px2rpx(18);
+      }
+      .operate {
+        margin-top: px2rpx(20);
+        display: flex;
+        justify-content: center;
+        button {
+          width: px2rpx(150);
+          height: px2rpx(42);
+          font-size: px2rpx(20);
+          border-radius: px2rpx(4);
+          text-align: center;
+        }
+        .refuse {
+          background: #ededed;
+          color: #4da08a;
+        }
+        .allow {
+          color: #ededed;
+          background: #4da08a;
+        }
+      }
+    }
   }
 }
 </style>

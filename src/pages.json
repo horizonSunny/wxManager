@@ -1,5 +1,7 @@
 {
   "pages": [{
+      "path": "pages/login/index"
+    }, {
       "path": "pages/homepage/main",
       "style": {
         "navigationStyle": "custom"
@@ -49,9 +51,6 @@
       "style": {
         "navigationStyle": "custom"
       }
-    },
-    {
-      "path": "pages/login/index"
     },
     {
       "path": "pages/homepage/onlineShopping/index",
