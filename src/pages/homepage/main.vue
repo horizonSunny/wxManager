@@ -53,6 +53,22 @@ export default {
     topBar
   },
   onLoad () {
+    this.$http.get('patient/patient').then((res) => {
+      // 用户信息放入store中
+      this.$store.dispatch('setUserInfo', res.data).then((res) => {
+        // console.log('userInfo_', this.$store.getters.getUserInfo);
+      })
+      // 获取用户取货地址
+      this.$store.dispatch('getCustAdd', res.data).then((res) => {
+        // console.log('userInfo_', this.$store.getters.getUserInfo);
+      })
+      // 设置全国直至
+      this.$store.dispatch('setLocatAdd', res.data).then((res) => {
+        // console.log('userInfo_', this.$store.getters.getUserInfo);
+      })
+      // 获取
+      this.$store.dispatch('getShoppingCart')
+    })
     console.log('this.pixelRatio_', this.pixelRatio)
   },
   data () {
@@ -62,22 +78,6 @@ export default {
   },
   methods: {
     goShopping () {
-      this.$http.get('patient/patient').then((res) => {
-        // 用户信息放入store中
-        this.$store.dispatch('setUserInfo', res.data).then((res) => {
-          // console.log('userInfo_', this.$store.getters.getUserInfo);
-        })
-        // 获取用户取货地址
-        this.$store.dispatch('getCustAdd', res.data).then((res) => {
-          // console.log('userInfo_', this.$store.getters.getUserInfo);
-        })
-        // 设置全国直至
-        this.$store.dispatch('setLocatAdd', res.data).then((res) => {
-          // console.log('userInfo_', this.$store.getters.getUserInfo);
-        })
-        // 获取
-        this.$store.dispatch('getShoppingCart')
-      })
       this.$navTo.togo('onlineShopping/index')
     }
   }
