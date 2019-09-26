@@ -5,7 +5,9 @@
     <view class="swiperMenu">
       <view
         class="viewItem"
-        :class="currentMenu === item ? 'viewItemActive' : 'viewItemDeactive'"
+        :class="
+          currentDrugType === index ? 'viewItemActive' : 'viewItemDeactive'
+        "
         v-for="(item, index) in meunOptions"
         :key="index"
         @click="selectMenu(item)"
@@ -103,16 +105,13 @@ export default {
     selectMenu (item) {
       this.currentMenu = item
       const current = this.meunOptions.indexOf(item)
-      console.log('current_', current);
       this.currentDrugType = current
     },
     swiperList (e) {
-      console.log('event_', e);
       const index = e.detail.current
-      console.log('index_', index);
+      this.currentDrugType = index
       const seletcName = this.meunOptions[index]
       this.currentMenu = seletcName
-      this.currentDrugType = index
       // 获取属性名
       const menuList = Object.keys(this.menuList)
       const name = menuList[index]
