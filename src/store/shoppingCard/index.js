@@ -87,12 +87,12 @@ const shoppingCard = {
           id: comparisonItem['id']
         })
         .then(res => {
-          // if (commodity['amount'] - 1 === 0) {
-          //   const index = state.shoppingCartId.findIndex(item => {
-          //     return item['productId'] === commodity['id']
-          //   })
-          //   state.shoppingCartId.splice(index, 1)
-          // }
+          if (commodity['amount'] - 1 === 0) {
+            const index = state.shoppingCartId.findIndex(item => {
+              return item['productId'] === commodity['id']
+            })
+            state.shoppingCartId.splice(index, 1)
+          }
           commit('DEL_COMMODITY', commodity)
           console.log('state.shoppingCartId_', state.shoppingCartId)
         })

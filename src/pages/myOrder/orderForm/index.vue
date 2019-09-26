@@ -258,8 +258,11 @@ export default {
         }
       }
       const shoppingInfo = this.$store.getters.shoppingInfo.map((item) => {
+        const shoppingCardId = this.$store.getters.shoppingCartIdInfo.find((shoppingCard) => {
+          return shoppingCard['productId'] === item['id']
+        })
         let createObj = {
-          cartId: this.$store.getters.shoppingCartIdInfo,
+          cartId: shoppingCardId['id'],
           productId: item['id'],
           productName: item['productName'],
           productPrice: item['price'] * item['amount'],

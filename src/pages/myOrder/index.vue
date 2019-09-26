@@ -1,6 +1,6 @@
 <template>
   <view class="wrap">
-    <topBar page-title="线上买药"></topBar>
+    <topBar page-title="我的订单"></topBar>
     <!-- 头部导航 -->
     <view class="swiperMenu">
       <view
@@ -32,8 +32,10 @@
               :key="indexInList"
             >
               <view class="orderInfoHeader">
-                <view>{{ itemInList["drugName"] }}</view>
-                <view>{{ itemInList["status"] | orderStatus }}</view>
+                <view class="overFlow">{{ itemInList["drugName"] }}</view>
+                <view style="width:20%">{{
+                  itemInList["status"] | orderStatus
+                }}</view>
               </view>
               <view
                 class="orderInfoContent"
@@ -57,7 +59,12 @@
                 <view class="orderInfoFootTime">{{
                   itemInList["createTime"] | timeFilter
                 }}</view>
-                <view @click="cancelOrder"> <button>取消订单</button></view>
+                <view
+                  @click="cancelOrder(itemInList)"
+                  v-if="itemInList['status'] == 2 || itemInList['status'] == 3"
+                >
+                  <button>取消订单</button></view
+                >
                 <view
                   ><button class="drugstore">
                     <uni-icon
@@ -161,7 +168,8 @@ export default {
       const seletcName = this.meunOptions[index]
       this.currentMenu = seletcName
     },
-    cancelOrder () {
+    cancelOrder (item) {
+      let _that = this
       uni.showModal({
         title: '',
         content: '确定取消订单',
@@ -171,11 +179,36 @@ export default {
           if (res.confirm) {
             console.log('用户点击不取消订单');
           } else if (res.cancel) {
-            console.log('用户点击取消订单');
+            let url = 'order/order/cancel/' + item.orderNo
+            let currentList
+            _that.$http.put(url).then((res) => {
+              switch (_that.currentIndex) {
+                case 0:
+                  currentList = _that.menuList.allList
+                  break;
+                case 1:
+                  currentList = _that.menuList.orderList
+                  break;
+                case 2:
+                  currentList = _that.menuList.medicineList
+                  break;
+                case 3:
+                  currentList = _that.menuList.distributionList
+                  break;
+              }
+              if (_that.currentIndex === 0) {
+                item.status = 4
+              } else {
+                const index = currentList.findIndex(itemList => {
+                  return itemList['id'] === item['id']
+                })
+                currentList.splice(index, 1)
+              }
+            })
           }
         }
       });
-
+      console.log('item_', item)
     },
     getListInfo () {
       let pageNumber
@@ -364,6 +397,7 @@ export default {
             height: px2rpx(55);
             line-height: px2rpx(55);
             display: flex;
+            justify-content: space-between;
             font-size: 15px;
             color: #6c6c6c;
             align-items: center;
@@ -392,6 +426,11 @@ export default {
         }
       }
     }
+  }
+  .overFlow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 </style>
