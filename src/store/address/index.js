@@ -1,4 +1,5 @@
 import http from '../../config/axios'
+import httpNoShow from '../../config/axiosNoShow'
 const address = {
   state: {
     // 存放用户地址和定位请求到的药店地址
@@ -40,7 +41,7 @@ const address = {
   },
   actions: {
     getCustAdd({ commit }) {
-      return http.get('patient/address').then(res => {
+      return httpNoShow.get('patient/address').then(res => {
         commit('GET_CUSTADD', res.data)
       })
     },
@@ -68,7 +69,7 @@ const address = {
       const params = {
         status: 0
       }
-      http.get('admin/province/city', { params }).then(res => {
+      httpNoShow.get('admin/province/city', { params }).then(res => {
         commit('SET_LOCATADD', res.data)
       })
     },

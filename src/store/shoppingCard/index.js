@@ -4,6 +4,7 @@
  */
 import { deepCopy } from '../../utils/index'
 import http from '../../config/axios'
+import httpNoShow from '../../config/axiosNoShow'
 // 这边通过productId比对是否有购物车单条信息存在的id,第一个参数是产品id,第二个是已经存在的购物车信息
 function comparison(productId, shopCartId) {
   let item = shopCartId.find(item => {
@@ -103,14 +104,14 @@ const shoppingCard = {
     },
     // 这是进应用的时候就拿到的数据比对
     getShoppingCart({ commit, state }) {
-      http.get('order/shopCart/info').then(res => {
+      httpNoShow.get('order/shopCart/info').then(res => {
         const params = {
           pageNumber: 0,
           pageSize: 999
         }
         // 这是获取购物车返回的数据
         state.shoppingCartId = res.data
-        http.get('admin/product', { params }).then(resp => {
+        httpNoShow.get('admin/product', { params }).then(resp => {
           // 获取到产品信息和购物车信息，做比对添加
           const product = resp.data.pageList
           const shopping = res.data

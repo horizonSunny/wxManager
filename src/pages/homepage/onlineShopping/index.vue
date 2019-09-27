@@ -100,9 +100,7 @@ export default {
   },
   onLoad () {
     // 获取
-    this.$store.dispatch('getShoppingCart').then(() => {
-      this.getShoppingList(this.currentDrugType)
-    })
+    this.getShoppingList(this.currentDrugType)
   },
   methods: {
     selectMenu (item) {

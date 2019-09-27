@@ -18,7 +18,7 @@ export default {
   },
   onShow () {
     setTimeout(() => {
-      this.$http.get('patient/patient').then((res) => {
+      this.$httpNoShow.get('patient/patient').then((res) => {
         console.log('index_', res);
         if (res.code === 1) {
           uni.switchTab({

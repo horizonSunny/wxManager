@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App'
 import http from './config/axios'
+import httpNoShow from './config/axiosNoShow'
 import store from './store/index'
 import * as navTo from './config/navTo'
 
@@ -12,6 +13,7 @@ uni.getSystemInfo({
   }
 })
 Vue.prototype.$http = http
+Vue.prototype.$httpNoShow = httpNoShow
 Vue.prototype.$store = store
 Vue.prototype.$navTo = navTo
 

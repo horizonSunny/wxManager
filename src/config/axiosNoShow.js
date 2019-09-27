@@ -40,9 +40,6 @@ http.interceptors.request.use(config => {
     config.headers.authorization = accsess_token
   }
   _reqlog(config)
-  uni.showLoading({
-    title: '加载中'
-  })
   return config
 })
 
@@ -57,7 +54,6 @@ http.interceptors.response.use(
         url: '/pages/login/index'
       })
     }
-    uni.hideLoading()
     return response.data
     // code...
   },
