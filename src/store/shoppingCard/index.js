@@ -47,6 +47,11 @@ const shoppingCard = {
       state.commodityInfo = state.commodityInfo.filter(item => {
         return item['amount'] !== 0
       })
+    },
+    // 清空购物车
+    EMPTY_SHOPPING: state => {
+      state.commodityInfo = []
+      state.shoppingCartId = []
     }
   },
   actions: {
@@ -122,6 +127,10 @@ const shoppingCard = {
           console.log('productShopping_', productShopping)
         })
       })
+    },
+    // 清空购物车
+    emptyShopping({ commit }) {
+      commit('EMPTY_SHOPPING')
     }
   }
 }
