@@ -66,8 +66,6 @@ export default {
       this.$store.dispatch('setLocatAdd', res.data).then((res) => {
         // console.log('userInfo_', this.$store.getters.getUserInfo);
       })
-      // 获取
-      this.$store.dispatch('getShoppingCart')
     })
     console.log('this.pixelRatio_', this.pixelRatio)
   },
