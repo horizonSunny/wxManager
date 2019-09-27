@@ -45,7 +45,7 @@
                 :key="indexPro"
               >
                 <view class="itemImg">
-                  <img src="../../static/main/bannerBack@3x.png" alt="" />
+                  <img :src="itemPro['img']" alt="" />
                 </view>
                 <view class="itemInfo">
                   <view class="name">
