@@ -65,9 +65,12 @@ export default {
       const currentPage = pages[pages.length - 1]
       console.log('currentPage_', currentPage.route);
       if (currentPage.route === 'pages/myOrder/index') {
-        uni.switchTab({
+        // uni.switchTab({
+        //   url: '/pages/mine/index'
+        // })
+        wx.switchTab({
           url: '/pages/mine/index'
-        })
+        });
       } else {
         uni.navigateBack()
       }
