@@ -75,7 +75,7 @@ export default {
 
 <style>
 /*全局映入图标库*/
-@import "./static/icon.css";
+@import "./static/alibabaIcon/iconfont.css";
 /*每个页面公共css */
 page {
   width: 100%;
