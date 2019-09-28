@@ -64,7 +64,7 @@ export default {
         iv: e.detail.iv,
         key: this.keyInfo
       }
-      this.$http.get('patient/wx/phone', { params }).then((res) => {
+      this.$httpNoShow.get('patient/wx/phone', { params }).then((res) => {
         console.log('res_data_', res.data);
         if (res.data) {
           this.phoneLogin(res.data.phone)
@@ -76,7 +76,7 @@ export default {
                 // 这边要发送一个code值，进行后段appid+secret的保存就行，生成openID进行保存
                 // 登陆的时候拿到这个openId和手机号进行传参数，获取token
                 const url = 'patient/wx' + '?code=' + res.code
-                _that.$http.get(url)
+                _that.$httpNoShow.get(url)
                   .then(function (response) {
                     console.log('patient/wx?code=1233_', response);
                     storage.setSync('encryptKey', response.data)
@@ -84,9 +84,9 @@ export default {
                     const paramsNew = {
                       encryptedData: e.detail.encryptedData,
                       iv: e.detail.iv,
-                      key: response.data
+                      key: storage.getSync('encryptKey')
                     }
-                    _that.$http.get('patient/wx/phone', { paramsNew }).then((resp) => {
+                    _that.$httpNoShow.get('patient/wx/phone', { paramsNew }).then((resp) => {
                       this.phoneLogin(resp.data.phone)
                     })
                   })
