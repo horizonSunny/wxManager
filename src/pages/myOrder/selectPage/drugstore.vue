@@ -4,13 +4,13 @@
     <view class="location_select" @click="operate">
       <img :src="'../../../static/main/dingwei' + pixelRatio" alt="" />
       <span>{{ provinceName }}{{ cityName }}</span>
-      <view v-if="!selectArea">
+      <view v-show="!selectArea">
         <uni-icon
           type=""
           class="iconfont icon-subtriangle icon_style"
         ></uni-icon>
       </view>
-      <view v-else>
+      <view v-show="selectArea">
         <uni-icon
           type=""
           class="iconfont icon-righttriangle icon_styleTwo"
@@ -129,6 +129,7 @@ export default {
       this.activeId = activeId;
       this.cityId = activeId
       this.isGetDrugList()
+      this.selectArea = false
     },
     // 获取位置权限
     getAuthorizeInfo (a = "scope.userLocation") {  //1. uniapp弹窗弹出获取授权（地理，个人微信信息等授权信息）弹窗
@@ -209,7 +210,6 @@ export default {
       return this.$http.get('admin/drugstore/drugstore', { params }).then((res) => {
         console.log('admin/drugstore/drugstore_', res.data);
         this.drugLocationList = this.drugLocationList.concat(res.data.pageList)
-        this.selectArea = false
       })
     },
     operate () {
