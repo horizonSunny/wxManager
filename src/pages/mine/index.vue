@@ -12,7 +12,7 @@
       <view class="userInfo">
         <img :src="userAvatar" @error="avatorError" />
         <view class="name">
-          <view>{{ userInfo["username"] || "无名" }}</view>
+          <view>{{ userInfo["nickname"] || "无名" }}</view>
           <view>{{ userInfo["phone"] || "无电话" }}</view>
         </view>
       </view>

@@ -41,7 +41,12 @@ export default {
   data () {
     return {
       showModal: false,
-      keyInfo: storage.getSync('encryptKey')
+      keyInfo: storage.getSync('encryptKey'),
+      //微信信息
+      avatar: '',
+      city: '',
+      nickName: '',
+      province: ''
     }
   },
   methods: {
@@ -104,8 +109,12 @@ export default {
       if (e.detail.errMsg === 'getUserInfo:fail auth deny') {
         return
       }
+      this.avatar = e.detail.userInfo.avatarUrl
+      this.city = e.detail.userInfo.city
+      this.nickName = e.detail.userInfo.nickName
+      this.province = e.detail.userInfo.province
       let url = 'patient/wx/checkPhone?key=' + this.keyInfo
-      this.$http.get(url).then((res) => {
+      this.$httpNoShow.get(url).then((res) => {
         console.log('res_data_', res.data);
         // res.data['decode']假如为false,代表未绑定，弹窗绑定页面
         if (!res.data['decode']) {
@@ -121,6 +130,13 @@ export default {
       this.$http.post(url).then((res) => {
         console.log('res_data_', res.data);
         storage.setSync('access_token', 'bearer ' + res.data.access_token)
+        let params = {
+          avatar: this.avatar,
+          city: this.city,
+          nickname: this.nickName,
+          province: this.province
+        }
+        this.$httpNoShow.put('patient/patient/patientPersonalInfo', params).then(() => { })
         uni.switchTab({
           url: '/pages/homepage/main'
         })
