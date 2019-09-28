@@ -3,7 +3,7 @@
     <topBar page-title="选取药店"></topBar>
     <view class="location_select" @click="operate">
       <img :src="'../../../static/main/dingwei' + pixelRatio" alt="" />
-      <span>{{ provinceName }}{{ cityName }}</span>
+      <span>{{ cityName }}</span>
       <view v-show="!selectArea">
         <uni-icon
           type=""
@@ -110,6 +110,7 @@ export default {
       provinceId: '',
       cityId: '',
       provinceName: '',
+      temporaryProvince: '',
       cityName: '',
       drugLocationList: []
     }
@@ -119,7 +120,7 @@ export default {
     onClickNav ({ detail = {} }) {
       this.mainActiveIndex = detail.index || 0
       this.provinceId = this.items[this.mainActiveIndex]['id']
-      this.provinceName = this.items[this.mainActiveIndex]['text']
+      this.temporaryProvince = this.items[this.mainActiveIndex]['text']
       console.log('dthis.provinceId_', this.provinceId)
     },
     // 点击城市选项
@@ -129,6 +130,7 @@ export default {
       this.activeId = activeId;
       this.cityId = activeId
       this.isGetDrugList()
+      this.provinceName = this.temporaryProvince
       this.selectArea = false
     },
     // 获取位置权限
@@ -214,11 +216,6 @@ export default {
     },
     operate () {
       this.selectArea = !this.selectArea
-      if (this.selectArea) {
-        // 默认选中北京
-        this.provinceName = '北京市'
-        this.provinceId = 110000
-      }
     },
     // 滚动到底部
     scroll () {
@@ -246,6 +243,8 @@ export default {
   onLoad () {
     this.items = this.$store.getters.getLocationAdd
     console.log('this.items_location_', this.items);
+    // this.provinceName = '北京市'
+    // this.provinceId = 110000
   },
   onReady () {
     this.isGetLocation();
