@@ -43,7 +43,7 @@ export default {
 .shopCard {
   width: 100%;
   position: fixed;
-  bottom: px2rpx(0);
+  bottom: px2rpx(1);
   height: px2rpx(52);
   display: flex;
   justify-content: space-between;
@@ -53,6 +53,7 @@ export default {
     position: absolute;
     // bottom: px2rpx(10);
     left: px2rpx(14);
+    top: px2rpx(-14);
     height: px2rpx(52);
     width: px2rpx(52);
     border-radius: px2rpx(26);
