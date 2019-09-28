@@ -21,7 +21,7 @@ export default {
         confirmText: '是',
         success: function (res) {
           if (res.confirm) {
-            uni.clearStorage();
+            uni.removeStorageSync('access_token');
             uni.reLaunch({
               url: '/pages/login/index'
             })
