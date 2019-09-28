@@ -42,16 +42,16 @@ export default {
 <style lang="scss" scoped>
 .shopCard {
   width: 100%;
+  position: fixed;
+  bottom: px2rpx(0);
   height: px2rpx(52);
   display: flex;
-  flex: 1;
   justify-content: space-between;
   background: #fff;
   border-top: 1px solid #f3f3f3;
-  position: relative;
   .shoppingIcon {
     position: absolute;
-    bottom: px2rpx(10);
+    // bottom: px2rpx(10);
     left: px2rpx(14);
     height: px2rpx(52);
     width: px2rpx(52);

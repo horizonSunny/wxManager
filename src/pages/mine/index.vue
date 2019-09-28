@@ -139,19 +139,9 @@ export default {
       this.$navTo.togo('/pages/mine/setting/index')
     },
     contactService () {
-      uni.showModal({
-        title: '提醒',
-        content: '17717918677',
-        cancelText: ' 取消',
-        confirmText: '呼叫',
-        success: function (res) {
-          if (res.confirm) {
-            console.log('用户确定退出登陆');
-          } else if (res.cancel) {
-            console.log('用户确定不退出登陆');
-          }
-        }
-      });
+      uni.makePhoneCall({
+        phoneNumber: '17717918677'
+      })
     }
   },
   onLoad () {

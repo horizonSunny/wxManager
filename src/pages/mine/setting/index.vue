@@ -21,6 +21,10 @@ export default {
         confirmText: '是',
         success: function (res) {
           if (res.confirm) {
+            uni.clearStorage();
+            uni.reLaunch({
+              url: '/pages/login/index'
+            })
             console.log('用户确定退出登陆');
           } else if (res.cancel) {
             console.log('用户确定不退出登陆');
