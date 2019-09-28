@@ -53,7 +53,7 @@ export default {
     position: absolute;
     // bottom: px2rpx(10);
     left: px2rpx(14);
-    top: px2rpx(-14);
+    top: px2rpx(-12);
     height: px2rpx(52);
     width: px2rpx(52);
     border-radius: px2rpx(26);
