@@ -13,11 +13,9 @@
     <view class="content">
       <view class="buy">
         <img :src="'../../static/main/lineBuyMedicine' + pixelRatio" alt="" />
-        <view class="text_info">
+        <view class="text_info" @click="goShopping">
           <view class="buy_online">线上买药</view>
-          <view @click="goShopping" class="buy_confirm">
-            点击购买<i class="arrows"></i>
-          </view>
+          <view class="buy_confirm"> 点击购买<i class="arrows"></i> </view>
         </view>
       </view>
       <view class="group_module">
