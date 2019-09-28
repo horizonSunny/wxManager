@@ -15,7 +15,7 @@
       open-type="getPhoneNumber"
       @getphonenumber="getPhoneNumber"
     >
-      获取手机号
+      手机号登陆
     </button>
     <view class="modal" v-if="showModal" @click="showModal = false">
       <view @click.stop class="bindPhone">
