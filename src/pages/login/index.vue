@@ -57,51 +57,46 @@ export default {
       if (e.detail.errMsg === 'getPhoneNumber:fail:user deny') {
         return
       }
-      console.log('res_getPhoneNumber_', e);
-      console.log('res_getPhoneNumber_iv_', e.detail.iv);
       let params = {
         encryptedData: e.detail.encryptedData,
         iv: e.detail.iv,
         key: this.keyInfo
       }
-      this.$httpNoShow.get('patient/wx/phone', { params }).then((res) => {
-        console.log('res_data_', res.data);
-        if (res.data) {
+      if (params.key) {
+        this.$httpNoShow.get('patient/wx/phone', { params }).then((res) => {
           this.phoneLogin(res.data.phone)
-        } else {
-          wx.login({
-            success (res) {
-              if (res.code) {
-                console.log('微信登陆态失效后再请求成功', res.code);
-                // 这边要发送一个code值，进行后段appid+secret的保存就行，生成openID进行保存
-                // 登陆的时候拿到这个openId和手机号进行传参数，获取token
-                const url = 'patient/wx' + '?code=' + res.code
-                _that.$httpNoShow.get(url)
-                  .then(function (response) {
-                    console.log('patient/wx?code=1233_', response);
-                    storage.setSync('encryptKey', response.data)
-                  }).then(() => {
-                    const paramsNew = {
-                      encryptedData: e.detail.encryptedData,
-                      iv: e.detail.iv,
-                      key: storage.getSync('encryptKey')
-                    }
-                    _that.$httpNoShow.get('patient/wx/phone', { paramsNew }).then((resp) => {
-                      this.phoneLogin(resp.data.phone)
-                    })
+        })
+      } else {
+        wx.login({
+          success (res) {
+            if (res.code) {
+              console.log('微信登陆态失效后再请求成功', res.code);
+              // 这边要发送一个code值，进行后段appid+secret的保存就行，生成openID进行保存
+              // 登陆的时候拿到这个openId和手机号进行传参数，获取token
+              const url = 'patient/wx' + '?code=' + res.code
+              _that.$httpNoShow.get(url)
+                .then(function (response) {
+                  console.log('patient/wx?code=1233_', response);
+                  storage.setSync('encryptKey', response.data)
+                }).then(() => {
+                  const paramsNew = {
+                    encryptedData: e.detail.encryptedData,
+                    iv: e.detail.iv,
+                    key: storage.getSync('encryptKey')
+                  }
+                  _that.$httpNoShow.get('patient/wx/phone', { paramsNew }).then((resp) => {
+                    this.phoneLogin(resp.data.phone)
                   })
-                  .catch(function (error) {
-                    console.log(error);
-                  })
-              } else {
-                console.log('登录失败！')
-              }
+                })
+                .catch(function (error) {
+                  console.log(error);
+                })
+            } else {
+              console.log('登录失败！')
             }
-          })
-        }
-
-      })
-
+          }
+        })
+      }
     },
     getUserInfo (e) {
       console.log('e_getUserInfo_', e);
