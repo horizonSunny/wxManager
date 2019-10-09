@@ -61,7 +61,8 @@ const getters = {
     let couponList = state.coupon.couponList
     for (let item = 0; item < couponList.length; item++) {
       if (
-        (couponList[item]['couponType'] === 0 ||
+        ((couponList[item]['couponType'] === 0 &&
+          modePrice >= couponList[item]['couponPrice']) ||
           modePrice >= couponList[item]['useMinPrice']) &&
         couponList[item]['status'] === 0
       ) {
