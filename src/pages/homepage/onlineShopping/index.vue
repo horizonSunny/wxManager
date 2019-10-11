@@ -40,7 +40,12 @@
                   {{ itemInList["productName"] }}
                 </view>
                 <view class="specification">
-                  规格: {{ itemInList["productSpecif"] }}
+                  规格:
+                  {{
+                    itemInList["productSpecif"]
+                      ? itemInList["productSpecif"]
+                      : "暂无"
+                  }}
                 </view>
                 <view class="priceOperate">
                   <view class="price">¥ {{ itemInList["price"] }}</view>

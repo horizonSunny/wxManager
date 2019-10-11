@@ -4,7 +4,7 @@
     <scroll-view scroll-y class="scrollView">
       <view class="wrapContent">
         <view class="address">
-          <view class="personal" @click="selectorMode = !selectorMode">
+          <view class="personal" @click="selectorMode = true">
             <uni-icon
               type=""
               class="iconfont icon-unselected icon_style"
@@ -38,7 +38,7 @@
               <span>添加收货地址</span>
             </view>
           </view>
-          <view class="drugstore" @click="selectorMode = !selectorMode">
+          <view class="drugstore" @click="selectorMode = false">
             <uni-icon
               type=""
               class="iconfont icon-unselected icon_style"
@@ -85,7 +85,12 @@
                     {{ itemInList["productName"] }}
                   </view>
                   <view class="specification">
-                    规格: {{ itemInList["productSpecif"] }}
+                    规格:
+                    {{
+                      itemInList["productSpecif"]
+                        ? itemInList["productSpecif"]
+                        : "暂无"
+                    }}
                   </view>
                   <view class="priceOperate">
                     <view class="price">¥ {{ itemInList["price"] }}</view>
