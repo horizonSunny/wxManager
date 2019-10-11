@@ -255,7 +255,7 @@ export default {
     },
     gotoCoupon () {
       const url = '/pages/mine/myCoupon/index'
-      this.$navTo.togo(url, { shoppingPrice: this.shoppingPrice })
+      this.$navTo.togo(url, { shoppingPrice: this.shoppingPrice, selectedCoupon: this.activeCoupon['id'] })
     },
     confirmOrder () {
       if (!this.selectorMode) {
@@ -356,6 +356,7 @@ export default {
     this.$store.dispatch('getCouponList').then(() => {
       const selectedCoupon = this.$store.getters.getSelectedCoupon(this.shoppingPrice)
       this.activeCoupon = selectedCoupon ? selectedCoupon : null
+      console.log('this.activeCoupon_', this.activeCoupon);
       this.couponPrice = this.activeCoupon ? this.activeCoupon['couponPrice'] : 0
     })
   }

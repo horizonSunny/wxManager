@@ -24,6 +24,13 @@
             </view>
             <view class="couponSelected">
               <uni-icon
+                v-if="item['id'] === selectedCouponId"
+                type=""
+                class="iconfont icon-couponSelected icon_style"
+                :class="['activeLabel']"
+              ></uni-icon>
+              <uni-icon
+                v-else
                 type=""
                 class="iconfont icon-unselectedCircle icon_style"
                 :class="['deactiveLabel']"
@@ -73,6 +80,7 @@ export default {
     return {
       activeCoupon: null,
       deactiveCoupon: null,
+      selectedCouponId: null,
       shoppingPrice: Infinity,
       pixelRatio: this.$pixelRatio
     }
@@ -92,17 +100,17 @@ export default {
   onShow () {
     this.defaultCustAddress = this.$store.getters.getCustSelectedAddress
     this.$store.dispatch('getCouponList').then(() => {
-      console.log('this.$store.getters.getCouponMode(this.shoppingPrice)', this.$store.getters.getCouponMode(this.shoppingPrice));
       this.activeCoupon = this.$store.getters.getCouponMode(this.shoppingPrice).activeCoupon
       this.deactiveCoupon = this.$store.getters.getCouponMode(this.shoppingPrice).deactiveCoupon
     })
   },
   onLoad: function (option) {
-    console.log('option_', option.shoppingPrice)
     if (option.shoppingPrice) {
       this.shoppingPrice = option.shoppingPrice
     }
-    console.log('this.shoppingPrice_', this.shoppingPrice)
+    if (option.selectedCoupon) {
+      this.selectedCouponId = parseInt(option.selectedCoupon)
+    }
   }
 }
 </script>
