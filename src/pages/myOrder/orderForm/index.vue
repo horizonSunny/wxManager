@@ -18,7 +18,7 @@
                 {{ defaultCustAddress["phone"] }}</view
               >
               <view class="space_between">
-                <view
+                <view class="overFLow"
                   >{{ defaultCustAddress["province"]
                   }}{{ defaultCustAddress["city"]
                   }}{{ defaultCustAddress["area"]
@@ -576,6 +576,11 @@ export default {
     line-height: px2rpx(24);
     white-space: nowrap;
     overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .overFLow {
+    overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
   }
 }

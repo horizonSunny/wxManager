@@ -104,6 +104,9 @@ export default {
         .userAddress {
           height: px2rpx(44);
           line-height: px2rpx(44);
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
         }
       }
       .icon_style {
