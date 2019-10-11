@@ -14,6 +14,7 @@ export default {
   },
   methods: {
     logOut () {
+      const _that = this
       uni.showModal({
         title: '',
         content: '确定退出登陆',
@@ -21,11 +22,13 @@ export default {
         confirmText: '是',
         success: function (res) {
           if (res.confirm) {
-            uni.removeStorageSync('access_token');
-            uni.reLaunch({
-              url: '/pages/login/index'
-            })
             console.log('用户确定退出登陆');
+            _that.$httpNoShow.delete('auth/oauth/logout').then(() => {
+              uni.removeStorageSync('access_token');
+              uni.reLaunch({
+                url: '/pages/login/index'
+              })
+            })
           } else if (res.cancel) {
             console.log('用户确定不退出登陆');
           }

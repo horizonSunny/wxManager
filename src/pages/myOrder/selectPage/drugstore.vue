@@ -160,7 +160,7 @@ export default {
             header: {
               "Content-Type": "application/text"
             },
-            url: 'http://apis.map.qq.com/ws/geocoder/v1/?location=' + latitude + ',' + longitude + '&key=MVGBZ-R2U3U-W5CVY-2PQID-AT4VZ-PDF35',
+            url: 'https://apis.map.qq.com/ws/geocoder/v1/?location=' + latitude + ',' + longitude + '&key=MVGBZ-R2U3U-W5CVY-2PQID-AT4VZ-PDF35',
             success (re) {
               console.log(re)
               _this.provinceName = re.data.result.address_component.province
