@@ -40,6 +40,12 @@
       "style": {
         "navigationStyle": "custom"
       }
+    },
+    {
+      "path": "pages/myOrder/mapShow",
+      "style": {
+        "navigationStyle": "custom"
+      }
     }, {
       "path": "pages/mine/myCoupon/index",
       "style": {

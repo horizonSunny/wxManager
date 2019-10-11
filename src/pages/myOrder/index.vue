@@ -67,7 +67,9 @@
                 >
                   <button>取消订单</button></view
                 >
-                <view v-if="itemInList['status'] == 2"
+                <view
+                  v-if="itemInList['status'] == 2"
+                  @click="openLocation(itemInList)"
                   ><button class="drugstore">
                     <uni-icon
                       type=""
@@ -279,6 +281,22 @@ export default {
       console.log('refresh');
       this.getListInfo()
     },
+    // 打开地图
+    openLocation (item) {
+      console.log('openLocation_', item.lat, item.lng)
+      const location = {
+        lat: parseInt(item.lat),
+        lng: parseInt(item.lng),
+      }
+      uni.openLocation({
+        latitude: location.lat,
+        longitude: location.lng,
+        success: function () {
+          console.log('success');
+        }
+      })
+      // this.$navTo.togo('/pages/myOrder/mapShow', { lat: item.lat, lng: item.lng })
+    }
   },
   filters: {
     timeFilter: function (value) {
