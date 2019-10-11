@@ -67,7 +67,7 @@
                 >
                   <button>取消订单</button></view
                 >
-                <view v-if="itemInList['status'] == 1"
+                <view v-if="itemInList['status'] == 2"
                   ><button class="drugstore">
                     <uni-icon
                       type=""
