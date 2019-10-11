@@ -45,7 +45,7 @@
                 :key="indexPro"
               >
                 <view class="itemImg">
-                  <img :src="itemPro['img']" alt="" />
+                  <img :src="itemPro['productImage']" alt="" />
                 </view>
                 <view class="itemInfo">
                   <view class="name">
@@ -67,7 +67,7 @@
                 >
                   <button>取消订单</button></view
                 >
-                <view
+                <view v-if="itemInList['status'] == 1"
                   ><button class="drugstore">
                     <uni-icon
                       type=""

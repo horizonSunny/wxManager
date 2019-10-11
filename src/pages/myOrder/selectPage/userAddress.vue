@@ -18,6 +18,7 @@
           type="text"
           placeholder="请填写手机号码"
           v-model="userInfo['phone']"
+          maxlength="11"
         />
       </view>
       <view class="labelInfo">
