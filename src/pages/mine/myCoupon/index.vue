@@ -25,8 +25,8 @@
             <view class="couponSelected">
               <uni-icon
                 type=""
-                class="iconfont icon-couponSelected icon_style"
-                :class="['activeLabel']"
+                class="iconfont icon-unselectedCircle icon_style"
+                :class="['deactiveLabel']"
               ></uni-icon>
             </view>
           </view>
@@ -50,11 +50,12 @@
               <view>{{ item["startTime"] }}-{{ item["endTime"] }}</view>
             </view>
             <view class="couponSelected">
-              <uni-icon
+              <!-- <uni-icon
                 type=""
                 class="iconfont icon-couponSelected icon_style"
                 :class="['deactiveLabel']"
-              ></uni-icon>
+              ></uni-icon> -->
+              <img :src="'../../../static/main/bukeyong' + pixelRatio" />
             </view>
           </view>
         </view>
@@ -72,7 +73,8 @@ export default {
     return {
       activeCoupon: null,
       deactiveCoupon: null,
-      shoppingPrice: Infinity
+      shoppingPrice: Infinity,
+      pixelRatio: this.$pixelRatio
     }
   },
   methods: {
@@ -159,6 +161,11 @@ export default {
           }
           .couponSelected {
             margin-left: px2rpx(39);
+            position: relative;
+            img {
+              width: px2rpx(30);
+              height: px2rpx(30);
+            }
           }
         }
       }
@@ -188,7 +195,7 @@ export default {
     background: #f3f3f3;
   }
   .deactiveLabel {
-    color: #6c6c6c;
+    color: rgb(207, 205, 197);
   }
   .couponLineActive {
     width: px2rpx(1);
