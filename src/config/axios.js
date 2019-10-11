@@ -58,10 +58,12 @@ http.interceptors.response.use(
       })
     } else if (response.data.code !== 1) {
       uni.hideLoading()
-      uni.showToast({
-        icon: 'none',
-        title: response.data.msg
-      })
+      setTimeout(() => {
+        uni.showToast({
+          icon: 'none',
+          title: response.data.msg
+        })
+      }, 500)
       return Promise.reject(response.data.msg)
     }
     uni.hideLoading()
