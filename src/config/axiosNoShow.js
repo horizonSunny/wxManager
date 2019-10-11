@@ -53,6 +53,8 @@ http.interceptors.response.use(
       uni.reLaunch({
         url: '/pages/login/index'
       })
+    } else if (response.data.code !== 1) {
+      return Promise.reject(response.msg)
     }
     return response.data
     // code...

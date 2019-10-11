@@ -56,6 +56,13 @@ http.interceptors.response.use(
       uni.reLaunch({
         url: '/pages/login/index'
       })
+    } else if (response.data.code !== 1) {
+      uni.hideLoading()
+      uni.showToast({
+        icon: 'none',
+        title: response.data.msg
+      })
+      return Promise.reject(response.data.msg)
     }
     uni.hideLoading()
     return response.data

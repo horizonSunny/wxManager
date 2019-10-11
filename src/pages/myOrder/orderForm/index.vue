@@ -187,6 +187,7 @@
             type="text"
             placeholder="请填写手机号码"
             v-model="drugUserPhone"
+            maxlength="11"
           />
         </view>
         <view class="confirm">
@@ -203,6 +204,7 @@
 </template>
 <script>
 import * as storage from '../../../config/storage'
+import validate from '../../../utils/validate'
 import topBar from '../../../components/topNavigation/index'
 export default {
   components: {
@@ -257,7 +259,7 @@ export default {
     },
     confirmOrder () {
       if (!this.selectorMode) {
-        if (this.drugUserName === null && this.drugUserPhone === null) {
+        if (!this.showModal) {
           this.showModal = true;
           return
         }
@@ -286,6 +288,13 @@ export default {
       }
       let params = new Object()
       if (this.selectorMode) {
+        if (!this.defaultCustAddress) {
+          uni.showToast({
+            icon: 'none',
+            title: "配送地址不能为空"
+          })
+          return
+        }
         let distribution = {
           userAddress: this.defaultCustAddress["province"]
             + this.defaultCustAddress["city"]
@@ -297,11 +306,31 @@ export default {
         }
         Object.assign(params, common, distribution);
       } else {
+        if (!this.defaultDrugAddress) {
+          uni.showToast({
+            icon: 'none',
+            title: "药店地址不能为空"
+          })
+          return
+        }
         let drugInvite = {
           userName: this.drugUserName,
           userPhone: this.drugUserPhone,
           tenantId: this.defaultDrugAddress['id'],
           type: 0
+        }
+        console.log('userName_drugInvite_', drugInvite)
+        let Rules = [
+          { name: 'userName', type: 'required', errmsg: '请填写用户名' },
+          { name: 'userPhone', required: true, type: 'phone', errmsg: '请输入正确的手机号' }
+        ]
+        let valLoginRes = validate.validate(drugInvite, Rules)
+        if (!valLoginRes.isOk) {
+          uni.showToast({
+            icon: 'none',
+            title: valLoginRes.errmsg
+          })
+          return false
         }
         Object.assign(params, common, drugInvite);
       }
@@ -324,7 +353,6 @@ export default {
   onShow () {
     this.defaultCustAddress = this.$store.getters.getCustSelectedAddress
     this.defaultDrugAddress = this.$store.getters.getSelectedDrug
-    console.log(' this.$store.getters.getSelectedDrug_', this.$store.getters.getSelectedDrug);
     this.$store.dispatch('getCouponList').then(() => {
       const selectedCoupon = this.$store.getters.getSelectedCoupon(this.shoppingPrice)
       this.activeCoupon = selectedCoupon ? selectedCoupon : null
