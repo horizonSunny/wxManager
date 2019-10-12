@@ -536,6 +536,7 @@ export default {
       border: px2rpx(1) solid #f3f3f3;
       border-style: solid none;
       background: #fff;
+      border-radius: px2rpx(10);
       padding: px2rpx(0) px2rpx(10);
       .labelInfo {
         width: auto;
