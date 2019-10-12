@@ -15,7 +15,13 @@
         <img :src="'../../static/main/lineBuyMedicine' + pixelRatio" alt="" />
         <view class="text_info" @click="goShopping">
           <view class="buy_online">线上买药</view>
-          <view class="buy_confirm"> 点击购买<i class="arrows"></i> </view>
+          <view class="buy_confirm">
+            点击购买
+            <uni-icon
+              type=""
+              class="iconfont icon-rightDeltoid icon_style"
+            ></uni-icon>
+          </view>
         </view>
       </view>
       <view class="group_module">
@@ -138,8 +144,10 @@ export default {
         position: relative;
         height: px2rpx(22);
         line-height: px2rpx(22);
-        i {
-          margin-left: px2rpx(5);
+        .icon_style {
+          font-size: px2rpx(22);
+          position: relative;
+          top: px2rpx(-1);
         }
       }
     }

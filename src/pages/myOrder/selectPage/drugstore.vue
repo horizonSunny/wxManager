@@ -111,7 +111,7 @@ export default {
       cityId: '',
       provinceName: '',
       temporaryProvince: '',
-      cityName: '',
+      cityName: '定位中...',
       drugLocationList: []
     }
   },
@@ -142,6 +142,7 @@ export default {
           _this.getLocationInfo();
         },
         fail () {    //1.2 拒绝授权
+          _this.cityName = '未授权定位'
           console.log("你拒绝了授权，无法获得周边信息")
         }
       })
