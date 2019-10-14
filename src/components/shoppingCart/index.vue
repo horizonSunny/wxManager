@@ -42,7 +42,7 @@ export default {
 <style lang="scss" scoped>
 .shopCard {
   width: 100%;
-  position: fixed;
+  position: relative;
   bottom: px2rpx(1);
   height: px2rpx(52);
   display: flex;
