@@ -1,35 +1,34 @@
 // 防抖
+let debounceTime
 export function _debounce(fn, delay) {
-  var delay = delay || 200
-  var timer
-  console.log('hahashdahdahs')
-  return function() {
-    var th = this
-    var args = arguments
-    if (timer) {
-      clearTimeout(timer)
+  let timeOut = delay || 200
+  return (function() {
+    let th = this
+    let args = arguments
+    if (debounceTime) {
+      clearTimeout(debounceTime)
     }
-    timer = setTimeout(function() {
-      timer = null
+    debounceTime = setTimeout(function() {
+      debounceTime = null
       fn.apply(th, args)
-    }, delay)
-  }
+    }, timeOut)
+  })()
 }
 // 节流
 export function _throttle(fn, interval) {
-  var last
-  var timer
-  var interval = interval || 200
+  let last
+  let timer
+  let intervalTime = interval || 200
   return function() {
-    var th = this
-    var args = arguments
-    var now = +new Date()
-    if (last && now - last < interval) {
+    let th = this
+    let args = arguments
+    let now = +new Date()
+    if (last && now - last < intervalTime) {
       clearTimeout(timer)
       timer = setTimeout(function() {
         last = now
         fn.apply(th, args)
-      }, interval)
+      }, intervalTime)
     } else {
       last = now
       fn.apply(th, args)
