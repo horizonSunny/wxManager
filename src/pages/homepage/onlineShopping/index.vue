@@ -103,8 +103,9 @@ export default {
       return (this.$store.getters.shoppingInfo.length !== 0 ? true : false)
     }
   },
-  onLoad () {
+  onShow () {
     // 获取
+    console.log('onShow');
     this.getShoppingList(this.currentDrugType)
   },
   methods: {
